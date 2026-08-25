@@ -11,13 +11,13 @@ import (
 	"os/signal"
 	"path/filepath"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gomessguii/logger"
 	"github.com/joho/godotenv"
-	"go.mau.fi/whatsmeow"
 	"gorm.io/gorm"
 	_ "modernc.org/sqlite"
 
@@ -83,8 +83,11 @@ func init() {
 }
 
 func setupRouter(db *gorm.DB, authDB *sql.DB, sqliteDB *sql.DB, config *config.Config, conn *amqp.Connection, exPath string, runtimeCtx *core.RuntimeContext) *gin.Engine {
-	killChannel := make(map[string](chan bool))
-	clientPointer := make(map[string]*whatsmeow.Client)
+	// *sync.Map: shared by reference across whatsmeow_service, instance_service
+	// and ~9 other services, accessed concurrently — plain maps here already
+	// caused "fatal error: concurrent map read and map write" in production.
+	killChannel := &sync.Map{}   // map[string]chan bool
+	clientPointer := &sync.Map{} // map[string]*whatsmeow.Client
 
 	loggerWrapper := logger_wrapper.NewLoggerManager(config)
 
