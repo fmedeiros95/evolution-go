@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sync"
 	"time"
 
 	instance_model "github.com/evolution-foundation/evolution-go/pkg/instance/model"
@@ -34,7 +35,7 @@ type UserService interface {
 }
 
 type userService struct {
-	clientPointer    map[string]*whatsmeow.Client
+	clientPointer    *sync.Map // map[string]*whatsmeow.Client, shared with whatsmeow_service
 	whatsmeowService whatsmeow_service.WhatsmeowService
 	loggerWrapper    *logger_wrapper.LoggerManager
 }
@@ -120,8 +121,16 @@ type PrivacyStruct struct {
 	Online       types.PrivacySetting `json:"online"`
 }
 
+func (u *userService) getClient(instanceId string) *whatsmeow.Client {
+	v, ok := u.clientPointer.Load(instanceId)
+	if !ok || v == nil {
+		return nil
+	}
+	return v.(*whatsmeow.Client)
+}
+
 func (u *userService) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {
-	client := u.clientPointer[instanceId]
+	client := u.getClient(instanceId)
 	u.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Checking client connection status - Client exists: %v", instanceId, client != nil)
 
 	if client == nil {
@@ -135,7 +144,7 @@ func (u *userService) ensureClientConnected(instanceId string) (*whatsmeow.Clien
 		u.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Instance started, waiting 2 seconds...", instanceId)
 		time.Sleep(2 * time.Second)
 
-		client = u.clientPointer[instanceId]
+		client = u.getClient(instanceId)
 		u.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Checking new client - Exists: %v, Connected: %v",
 			instanceId,
 			client != nil,
@@ -609,7 +618,7 @@ func (u *userService) SetProfileStatus(data *SetProfileStatusStruct, instance *i
 }
 
 func NewUserService(
-	clientPointer map[string]*whatsmeow.Client,
+	clientPointer *sync.Map, // map[string]*whatsmeow.Client
 	whatsmeowService whatsmeow_service.WhatsmeowService,
 	loggerWrapper *logger_wrapper.LoggerManager,
 ) UserService {

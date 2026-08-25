@@ -3,6 +3,7 @@ package newsletter_service
 import (
 	"context"
 	"errors"
+	"sync"
 	"time"
 
 	instance_model "github.com/evolution-foundation/evolution-go/pkg/instance/model"
@@ -22,7 +23,7 @@ type NewsletterService interface {
 }
 
 type newsletterService struct {
-	clientPointer    map[string]*whatsmeow.Client
+	clientPointer    *sync.Map // map[string]*whatsmeow.Client, shared with whatsmeow_service
 	whatsmeowService whatsmeow_service.WhatsmeowService
 	loggerWrapper    *logger_wrapper.LoggerManager
 }
@@ -46,8 +47,16 @@ type GetNewsletterMessagesStruct struct {
 	BeforeID int       `json:"before_id"`
 }
 
+func (n *newsletterService) getClient(instanceId string) *whatsmeow.Client {
+	v, ok := n.clientPointer.Load(instanceId)
+	if !ok || v == nil {
+		return nil
+	}
+	return v.(*whatsmeow.Client)
+}
+
 func (n *newsletterService) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {
-	client := n.clientPointer[instanceId]
+	client := n.getClient(instanceId)
 	n.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Checking client connection status - Client exists: %v", instanceId, client != nil)
 
 	if client == nil {
@@ -61,7 +70,7 @@ func (n *newsletterService) ensureClientConnected(instanceId string) (*whatsmeow
 		n.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Instance started, waiting 2 seconds...", instanceId)
 		time.Sleep(2 * time.Second)
 
-		client = n.clientPointer[instanceId]
+		client = n.getClient(instanceId)
 		n.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Checking new client - Exists: %v, Connected: %v",
 			instanceId,
 			client != nil,
@@ -195,7 +204,7 @@ func (n *newsletterService) GetNewsletterMessages(data *GetNewsletterMessagesStr
 }
 
 func NewNewsletterService(
-	clientPointer map[string]*whatsmeow.Client,
+	clientPointer *sync.Map, // map[string]*whatsmeow.Client
 	whatsmeowService whatsmeow_service.WhatsmeowService,
 	loggerWrapper *logger_wrapper.LoggerManager,
 ) NewsletterService {

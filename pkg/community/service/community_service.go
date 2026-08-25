@@ -3,6 +3,7 @@ package community_service
 import (
 	"context"
 	"errors"
+	"sync"
 	"time"
 
 	instance_model "github.com/evolution-foundation/evolution-go/pkg/instance/model"
@@ -21,7 +22,7 @@ type CommunityService interface {
 }
 
 type communityService struct {
-	clientPointer    map[string]*whatsmeow.Client
+	clientPointer    *sync.Map // map[string]*whatsmeow.Client, shared with whatsmeow_service
 	whatsmeowService whatsmeow_service.WhatsmeowService
 	loggerWrapper    *logger_wrapper.LoggerManager
 }
@@ -35,8 +36,16 @@ type AddParticipantStruct struct {
 	GroupJID     []string `json:"groupJid"`
 }
 
+func (c *communityService) getClient(instanceId string) *whatsmeow.Client {
+	v, ok := c.clientPointer.Load(instanceId)
+	if !ok || v == nil {
+		return nil
+	}
+	return v.(*whatsmeow.Client)
+}
+
 func (c *communityService) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {
-	client := c.clientPointer[instanceId]
+	client := c.getClient(instanceId)
 	c.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Checking client connection status - Client exists: %v", instanceId, client != nil)
 
 	if client == nil {
@@ -50,7 +59,7 @@ func (c *communityService) ensureClientConnected(instanceId string) (*whatsmeow.
 		c.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Instance started, waiting 2 seconds...", instanceId)
 		time.Sleep(2 * time.Second)
 
-		client = c.clientPointer[instanceId]
+		client = c.getClient(instanceId)
 		c.loggerWrapper.GetLogger(instanceId).LogInfo("[%s] Checking new client - Exists: %v, Connected: %v",
 			instanceId,
 			client != nil,
@@ -157,7 +166,7 @@ func (c *communityService) CommunityRemove(data *AddParticipantStruct, instance 
 }
 
 func NewCommunityService(
-	clientPointer map[string]*whatsmeow.Client,
+	clientPointer *sync.Map, // map[string]*whatsmeow.Client
 	whatsmeowService whatsmeow_service.WhatsmeowService,
 	loggerWrapper *logger_wrapper.LoggerManager,
 ) CommunityService {
