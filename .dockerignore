@@ -46,3 +46,9 @@ Makefile
 
 # IMPORTANT: O código-fonte (pkg/, cmd/, etc.) é necessário no stage de build
 # mas NÃO é copiado para a imagem final - apenas o executável compilado vai.
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+compose.local.yaml
