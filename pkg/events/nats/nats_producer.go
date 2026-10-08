@@ -20,6 +20,13 @@ func NewNatsProducer(
 	natsGlobalEvents []string,
 	loggerWrapper *logger_wrapper.LoggerManager,
 ) producer_interfaces.Producer {
+	// An empty URL means NATS is disabled; skip the default localhost connection.
+	if url == "" {
+		return &natsProducer{
+			loggerWrapper: loggerWrapper,
+		}
+	}
+
 	conn, err := nats.Connect(url)
 	if err != nil {
 		logger.LogError("Failed to connect to NATS: %v", err)
