@@ -2074,7 +2074,7 @@ const docTemplate = `{
                         "InstanceApiKey": []
                     }
                 ],
-                "description": "Connect to instance with the provided data",
+                "description": "Connect with partial settings. Empty subscribe and producer strings preserve existing values. MESSAGE is the initial event default. A non-empty subscribe must contain a valid event or ALL.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3337,7 +3337,7 @@ const docTemplate = `{
                         "InstanceApiKey": []
                     }
                 ],
-                "description": "Get advanced settings for a specific instance",
+                "description": "Get advanced settings for the instance authenticated by apikey; the path ID must match that instance.",
                 "produces": [
                     "application/json"
                 ],
@@ -3381,6 +3381,24 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Instance ID does not match authenticated instance",
                         "schema": {
                             "allOf": [
                                 {
@@ -3441,7 +3459,7 @@ const docTemplate = `{
                         "InstanceApiKey": []
                     }
                 ],
-                "description": "Update advanced settings for a specific instance",
+                "description": "Partially update the authenticated instance. Omitted or null fields are unchanged; false disables flags and an empty msgRejectCall clears the message. The path ID must match the authenticated instance.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3497,6 +3515,24 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Instance ID does not match authenticated instance",
                         "schema": {
                             "allOf": [
                                 {

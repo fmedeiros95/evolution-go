@@ -1,6 +1,7 @@
 package instance_handler
 
 import (
+	"errors"
 	"net/http"
 	"time"
 
@@ -110,7 +111,7 @@ func (i *instanceHandler) Create(ctx *gin.Context) {
 
 // Connect to instance
 // @Summary Connect to instance
-// @Description Connect to instance with the provided data
+// @Description Connect with partial settings. Empty subscribe and producer strings preserve existing values. MESSAGE is the initial event default. A non-empty subscribe must contain a valid event or ALL.
 // @Tags Instance
 // @Accept json
 // @Produce json
@@ -130,16 +131,19 @@ func (i *instanceHandler) Connect(ctx *gin.Context) {
 		return
 	}
 
-	var data *instance_service.ConnectStruct
-	err := ctx.ShouldBindBodyWithJSON(&data)
+	var data instance_service.ConnectStruct
+	err := bindInstanceSettingsJSON(ctx, &data)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	instance, jid, eventString, err := i.instanceService.Connect(data, instance)
+	instance, jid, eventString, err := i.instanceService.Connect(&data, instance)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		if errors.Is(err, instance_service.ErrInvalidConnectSettings) {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		} else {
+			writeInstanceSettingsError(ctx, err)
+		}
 		return
 	}
 
@@ -622,28 +626,27 @@ func (h *instanceHandler) GetLogs(c *gin.Context) {
 
 // GetAdvancedSettings retrieves advanced settings for an instance
 // @Summary Get advanced settings
-// @Description Get advanced settings for a specific instance
+// @Description Get advanced settings for the instance authenticated by apikey; the path ID must match that instance.
 // @Tags Instance
 // @Produce json
 // @Param instanceId path string true "Instance ID"
 // @Success 200 {object} instance_model.AdvancedSettings "Advanced settings retrieved successfully"
 // @Failure 400 {object} gin.H{error=string} "Invalid instance ID"
+// @Failure 403 {object} gin.H{error=string} "Instance ID does not match authenticated instance"
 // @Failure 404 {object} gin.H{error=string} "Instance not found"
 // @Failure 500 {object} gin.H{error=string} "Internal server error"
 // @Security InstanceApiKey
 // @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/{instanceId}/advanced-settings [get]
 func (h *instanceHandler) GetAdvancedSettings(c *gin.Context) {
-	instanceId := c.Param("instanceId")
-
-	if instanceId == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "instanceId is required"})
+	instanceId, ok := advancedSettingsInstanceID(c)
+	if !ok {
 		return
 	}
 
 	settings, err := h.instanceService.GetAdvancedSettings(instanceId)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		writeInstanceSettingsError(c, err)
 		return
 	}
 
@@ -652,7 +655,7 @@ func (h *instanceHandler) GetAdvancedSettings(c *gin.Context) {
 
 // UpdateAdvancedSettings updates advanced settings for an instance
 // @Summary Update advanced settings
-// @Description Update advanced settings for a specific instance
+// @Description Partially update the authenticated instance. Omitted or null fields are unchanged; false disables flags and an empty msgRejectCall clears the message. The path ID must match the authenticated instance.
 // @Tags Instance
 // @Accept json
 // @Produce json
@@ -660,34 +663,39 @@ func (h *instanceHandler) GetAdvancedSettings(c *gin.Context) {
 // @Param settings body instance_model.AdvancedSettings true "Advanced settings data"
 // @Success 200 {object} gin.H "Advanced settings updated successfully"
 // @Failure 400 {object} gin.H{error=string} "Invalid request data"
+// @Failure 403 {object} gin.H{error=string} "Instance ID does not match authenticated instance"
 // @Failure 404 {object} gin.H{error=string} "Instance not found"
 // @Failure 500 {object} gin.H{error=string} "Internal server error"
 // @Security InstanceApiKey
 // @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/{instanceId}/advanced-settings [put]
 func (h *instanceHandler) UpdateAdvancedSettings(c *gin.Context) {
-	instanceId := c.Param("instanceId")
-
-	if instanceId == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "instanceId is required"})
+	instanceId, ok := advancedSettingsInstanceID(c)
+	if !ok {
 		return
 	}
 
 	var settings instance_model.AdvancedSettings
-	if err := c.ShouldBindJSON(&settings); err != nil {
+	if err := bindInstanceSettingsJSON(c, &settings); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
 	err := h.instanceService.UpdateAdvancedSettings(instanceId, &settings)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		writeInstanceSettingsError(c, err)
+		return
+	}
+
+	// Return persisted settings (full row) so partial PUT responses stay consistent.
+	persisted, err := h.instanceService.GetAdvancedSettings(instanceId)
+	if err != nil {
+		writeInstanceSettingsError(c, err)
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"message":  "Advanced settings updated successfully",
-		"settings": settings,
+		"settings": persisted,
 	})
 }
 

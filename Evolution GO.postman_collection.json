@@ -338,7 +338,8 @@
                 "instance",
                 "connect"
               ]
-            }
+            },
+            "description": "Omitted or empty subscribe/producer fields preserve saved settings. MESSAGE is only the initial event default. Unknown-only subscriptions and a null root body return 400. Use disabled to explicitly turn off a producer or webhook."
           },
           "response": []
         },
@@ -520,7 +521,8 @@
                   "value": "{{instance}}"
                 }
               ]
-            }
+            },
+            "description": "Requires the token for the UUID in the path. A different instance returns 403. PUT is partial: omitted/null fields preserve stored values; false disables flags and an empty msgRejectCall clears the message. The success response contains all persisted settings."
           },
           "response": []
         },
@@ -554,7 +556,8 @@
                   "value": "{{instance}}"
                 }
               ]
-            }
+            },
+            "description": "Requires the token for the UUID in the path. A different instance returns 403. PUT is partial: omitted/null fields preserve stored values; false disables flags and an empty msgRejectCall clears the message. The success response contains all persisted settings."
           },
           "response": []
         }
