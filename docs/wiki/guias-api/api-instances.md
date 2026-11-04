@@ -869,3 +869,7 @@ curl "http://localhost:4000/instance/status" \
 ---
 
 **Dica**: Use o Swagger em `http://localhost:4000/swagger/index.html` para testar os endpoints interativamente!
+
+## Consulta de QR e sessões existentes
+
+`GET /instance/qr` não reinicia uma sessão autenticada: retorna o erro `session already logged in`. Se o cliente já está conectado e aguardando pareamento, a consulta mantém esse cliente. Somente a ausência de cliente ou um cliente desconectado sem sessão autenticada pode iniciar a geração de QR. Consultar repetidamente o QR após parear não deve derrubar a sessão.
