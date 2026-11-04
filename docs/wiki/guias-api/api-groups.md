@@ -806,3 +806,7 @@ Ao criar grupo, sempre verifique o campo `failed` na resposta:
 ---
 
 **Documentação gerada para Evolution GO v1.0**
+
+## Validação dos participantes
+
+`POST /group/participant` valida `groupJid` separadamente de `participants`. `participants` deve ser um array JSON não vazio de strings, com números ou JIDs válidos. Uma string isolada, elementos numéricos, `null`, strings vazias ou array vazio retornam 400 antes de acessar o WhatsApp. A mesma validação de array é usada na criação de grupos.

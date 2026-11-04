@@ -249,69 +249,45 @@ func (m *JIDValidationMiddleware) ValidateNumberField() gin.HandlerFunc {
 // ValidateMultipleNumbers validates multiple number fields (for arrays or multiple contacts)
 func (m *JIDValidationMiddleware) ValidateMultipleNumbers(fieldName string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Only process JSON requests
-		contentType := c.ContentType()
-		if !strings.Contains(contentType, "application/json") {
+		if !strings.Contains(c.ContentType(), "application/json") {
 			c.Next()
 			return
 		}
-
-		// Read the request body
 		body, err := io.ReadAll(c.Request.Body)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to read request body"})
-			c.Abort()
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Failed to read request body"})
 			return
 		}
-
-		// Restore the request body for downstream handlers
-		c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
-
-		// Parse JSON
 		var requestData map[string]interface{}
-		if err := json.Unmarshal(body, &requestData); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON format"})
-			c.Abort()
+		if err := json.Unmarshal(body, &requestData); err != nil || requestData == nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON object"})
 			return
 		}
-
-		// Validate array of numbers
-		if value, exists := requestData[fieldName]; exists {
-			modified := false
-
-			// Handle array of strings
-			if arrayValue, ok := value.([]interface{}); ok {
-				for i, item := range arrayValue {
-					if strValue, ok := item.(string); ok && strValue != "" {
-						normalizedJID, err := utils.CreateJID(strValue)
-						if err != nil {
-							c.JSON(http.StatusBadRequest, gin.H{
-								"error": fmt.Sprintf("Invalid %s[%d] format: %s", fieldName, i, err.Error()),
-							})
-							c.Abort()
-							return
-						}
-
-						if normalizedJID != strValue {
-							arrayValue[i] = normalizedJID
-							modified = true
-						}
-					}
-				}
-			}
-
-			// If we modified the request, update the body
-			if modified {
-				newBody, err := json.Marshal(requestData)
-				if err != nil {
-					c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to process request"})
-					c.Abort()
-					return
-				}
-				c.Request.Body = io.NopCloser(bytes.NewBuffer(newBody))
-			}
+		values, ok := requestData[fieldName].([]interface{})
+		if !ok || len(values) == 0 {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fieldName + " must be a non-empty array of strings"})
+			return
 		}
-
+		for index, value := range values {
+			str, ok := value.(string)
+			if !ok || strings.TrimSpace(str) == "" {
+				c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("Invalid %s[%d]: expected a non-empty string", fieldName, index)})
+				return
+			}
+			jid, err := utils.CreateJID(str)
+			if err != nil {
+				c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("Invalid %s[%d] format", fieldName, index)})
+				return
+			}
+			values[index] = jid
+		}
+		requestData[fieldName] = values
+		normalized, err := json.Marshal(requestData)
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Failed to process request"})
+			return
+		}
+		c.Request.Body = io.NopCloser(bytes.NewReader(normalized))
 		c.Next()
 	}
 }
