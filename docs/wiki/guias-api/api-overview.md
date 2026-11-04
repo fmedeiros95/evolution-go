@@ -347,3 +347,14 @@ Certifique-se de que criou a instância primeiro
 ---
 
 **Dica**: Use o Swagger para explorar todos os endpoints disponíveis!
+
+### Normalização de JID
+
+Ao converter um destinatário para JID, `ParseJID` remove o prefixo `+` dos usuários
+em `s.whatsapp.net`: `+15551234567` e `+15551234567@s.whatsapp.net` resultam em
+`15551234567@s.whatsapp.net`. JIDs de grupos (`@g.us`) e LIDs (`@lid`) mantêm
+seus identificadores. Isso evita consultas a usuários com um `+` indevido no JID.
+
+Internamente, `CreateJID` continua preservando o `+` quando necessário para
+consultas de existência via `IsOnWhatsApp`; a remoção ocorre na conversão com
+`ParseJID`, sem alterar as regras atuais de normalização de números brasileiros.
