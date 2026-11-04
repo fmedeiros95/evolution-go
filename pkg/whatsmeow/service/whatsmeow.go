@@ -1085,6 +1085,18 @@ func (mycli *MyClient) myEventHandler(rawEvt interface{}) {
 			return
 		}
 
+		// Message edits use MESSAGE_EDIT; EVENT_EDIT and poll edits are separate types.
+		// Decrypt before normalizing JIDs: the original sender and chat identify the
+		// stored message secret and are used to derive the decryption key.
+		var decryptedEdit *waE2E.Message
+		if encrypted := evt.Message.GetSecretEncryptedMessage(); encrypted != nil && encrypted.GetSecretEncType() == waE2E.SecretEncryptedMessage_MESSAGE_EDIT {
+			var err error
+			decryptedEdit, err = mycli.WAClient.DecryptSecretEncryptedMessage(context.Background(), evt)
+			if err != nil {
+				mycli.loggerWrapper.GetLogger(mycli.userID).LogError("[%s] Failed to decrypt edited message: %v", mycli.userID, err)
+			}
+		}
+
 		// Trata o caso especial onde Sender é @lid e SenderAlt é @s.whatsapp.net
 		// Neste caso, devemos inverter: Sender e Chat devem ser @s.whatsapp.net, SenderAlt deve ser @lid
 		senderStr := evt.Info.Sender.String()
@@ -1167,6 +1179,12 @@ func (mycli *MyClient) myEventHandler(rawEvt interface{}) {
 		dataMap, ok := postMap["data"].(map[string]interface{})
 		if !ok {
 			dataMap = make(map[string]interface{})
+		}
+
+		if decryptedEdit != nil {
+			if messageMap, ok := dataMap["Message"].(map[string]interface{}); ok {
+				messageMap["decryptedEdit"] = decryptedEdit
+			}
 		}
 
 		if evt.Message.GetPollUpdateMessage() != nil {
