@@ -31,7 +31,7 @@ type chatService struct {
 }
 
 type BodyStruct struct {
-	Chat string `json:"chat"`
+	Chat string `json:"chat" validate:"required"`
 }
 
 type HistorySyncRequestStruct struct {

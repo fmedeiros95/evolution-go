@@ -52,42 +52,42 @@ type GroupCollection struct {
 }
 
 type GetGroupInfoStruct struct {
-	GroupJID string `json:"groupJid"`
+	GroupJID string `json:"groupJid" validate:"required"`
 }
 
 type GetGroupInviteLinkStruct struct {
-	GroupJID string `json:"groupJid"`
+	GroupJID string `json:"groupJid" validate:"required"`
 	Reset    bool   `json:"reset"`
 }
 
 type SetGroupPhotoStruct struct {
-	GroupJID string `json:"groupJid"`
-	Image    string `json:"image"`
+	GroupJID string `json:"groupJid" validate:"required"`
+	Image    string `json:"image" validate:"required"`
 }
 
 type SetGroupNameStruct struct {
-	GroupJID string `json:"groupJid"`
-	Name     string `json:"name"`
+	GroupJID string `json:"groupJid" validate:"required"`
+	Name     string `json:"name" validate:"required"`
 }
 
 type SetGroupDescriptionStruct struct {
-	GroupJID    string `json:"groupJid"`
+	GroupJID    string `json:"groupJid" validate:"required"`
 	Description string `json:"description"`
 }
 
 type CreateGroupStruct struct {
-	GroupName    string   `json:"groupName"`
-	Participants []string `json:"participants"`
+	GroupName    string   `json:"groupName" validate:"required"`
+	Participants []string `json:"participants" validate:"required"`
 }
 
 type AddParticipantStruct struct {
 	GroupJID     types.JID                   `json:"groupJid"`
-	Participants []string                    `json:"participants"`
-	Action       whatsmeow.ParticipantChange `json:"action"`
+	Participants []string                    `json:"participants" validate:"required"`
+	Action       whatsmeow.ParticipantChange `json:"action" validate:"required"`
 }
 
 type JoinGroupStruct struct {
-	Code string `json:"code"`
+	Code string `json:"code" validate:"required"`
 }
 
 type LeaveGroupStruct struct {
@@ -115,7 +115,6 @@ type UpdateGroupRequestParticipantsStruct struct {
 	Action       string   `json:"action"` // approve, reject
 	Participants []string `json:"participants"`
 }
-
 
 func (g *groupService) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {
 	client := g.clientPointer[instanceId]

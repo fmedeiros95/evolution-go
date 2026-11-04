@@ -5,7 +5,7 @@ definitions:
   github_com_EvolutionAPI_evolution-go_pkg_call_service.RejectCallStruct:
     properties:
       callCreator:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
       callId:
         type: string
     type: object
@@ -13,6 +13,8 @@ definitions:
     properties:
       chat:
         type: string
+    required:
+    - chat
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_chat_service.HistorySyncRequestStruct:
     properties:
@@ -29,22 +31,30 @@ definitions:
         items:
           type: string
         type: array
+    required:
+    - communityJid
+    - groupJid
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_community_service.CreateCommunityStruct:
     properties:
       communityName:
         type: string
+    required:
+    - communityName
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.AddParticipantStruct:
     properties:
       action:
         $ref: '#/definitions/go_mau_fi_whatsmeow.ParticipantChange'
       groupJid:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
       participants:
         items:
           type: string
         type: array
+    required:
+    - action
+    - participants
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.CreateGroupStruct:
     properties:
@@ -54,11 +64,16 @@ definitions:
         items:
           type: string
         type: array
+    required:
+    - groupName
+    - participants
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.GetGroupInfoStruct:
     properties:
       groupJid:
         type: string
+    required:
+    - groupJid
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.GetGroupInviteLinkStruct:
     properties:
@@ -66,16 +81,20 @@ definitions:
         type: string
       reset:
         type: boolean
+    required:
+    - groupJid
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.JoinGroupStruct:
     properties:
       code:
         type: string
+    required:
+    - code
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.LeaveGroupStruct:
     properties:
       groupJid:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.SetGroupDescriptionStruct:
     properties:
@@ -83,6 +102,8 @@ definitions:
         type: string
       groupJid:
         type: string
+    required:
+    - groupJid
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.SetGroupNameStruct:
     properties:
@@ -90,6 +111,9 @@ definitions:
         type: string
       name:
         type: string
+    required:
+    - groupJid
+    - name
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_group_service.SetGroupPhotoStruct:
     properties:
@@ -97,6 +121,9 @@ definitions:
         type: string
       image:
         type: string
+    required:
+    - groupJid
+    - image
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_instance_model.AdvancedSettings:
     properties:
@@ -144,11 +171,16 @@ definitions:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_instance_service.ProxyConfig'
       token:
         type: string
+    required:
+    - name
+    - token
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_instance_service.ForceReconnectStruct:
     properties:
       number:
         type: string
+    required:
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_instance_service.PairStruct:
     properties:
@@ -158,6 +190,8 @@ definitions:
         items:
           type: string
         type: array
+    required:
+    - phone
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_instance_service.ProxyConfig:
     properties:
@@ -166,6 +200,8 @@ definitions:
       password:
         type: string
       port:
+        type: string
+      protocol:
         type: string
       username:
         type: string
@@ -177,6 +213,8 @@ definitions:
       password:
         type: string
       port:
+        type: string
+      protocol:
         type: string
       username:
         type: string
@@ -190,6 +228,9 @@ definitions:
         type: string
       labelId:
         type: string
+    required:
+    - jid
+    - labelId
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_label_service.EditLabelStruct:
     properties:
@@ -201,6 +242,9 @@ definitions:
         type: string
       name:
         type: string
+    required:
+    - labelId
+    - name
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_label_service.MessageLabelStruct:
     properties:
@@ -210,6 +254,10 @@ definitions:
         type: string
       messageId:
         type: string
+    required:
+    - jid
+    - labelId
+    - messageId
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_message_service.ChatPresenceStruct:
     properties:
@@ -219,6 +267,9 @@ definitions:
         type: string
       state:
         type: string
+    required:
+    - number
+    - state
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_message_service.DownloadMediaStruct:
     properties:
@@ -233,6 +284,10 @@ definitions:
         type: string
       messageId:
         type: string
+    required:
+    - chat
+    - message
+    - messageId
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_message_service.MarkReadStruct:
     properties:
@@ -242,11 +297,16 @@ definitions:
         type: array
       number:
         type: string
+    required:
+    - id
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_message_service.MessageStatusStruct:
     properties:
       id:
         type: string
+    required:
+    - id
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_message_service.MessageStruct:
     properties:
@@ -254,6 +314,9 @@ definitions:
         type: string
       messageId:
         type: string
+    required:
+    - chat
+    - messageId
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_message_service.ReactStruct:
     properties:
@@ -267,6 +330,9 @@ definitions:
         type: string
       reaction:
         type: string
+    required:
+    - number
+    - reaction
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_newsletter_service.CreateNewsletterStruct:
     properties:
@@ -274,11 +340,15 @@ definitions:
         type: string
       name:
         type: string
+    required:
+    - name
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_newsletter_service.GetNewsletterInviteStruct:
     properties:
       key:
         type: string
+    required:
+    - key
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_newsletter_service.GetNewsletterMessagesStruct:
     properties:
@@ -287,12 +357,12 @@ definitions:
       count:
         type: integer
       jid:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_newsletter_service.GetNewsletterStruct:
     properties:
       jid:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_poll_model.PollResults:
     properties:
@@ -461,6 +531,11 @@ definitions:
         description: Header title (required).
         example: Oferta especial
         type: string
+    required:
+    - description
+    - footer
+    - number
+    - title
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.CarouselButtonStruct:
     properties:
@@ -570,6 +645,9 @@ definitions:
         allOf:
         - $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct'
         description: Quoted (reply-to) context.
+    required:
+    - cards
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.ContactStruct:
     properties:
@@ -591,6 +669,8 @@ definitions:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct'
       vcard:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_utils.VCardStruct'
+    required:
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.LinkStruct:
     properties:
@@ -620,12 +700,15 @@ definitions:
         type: string
       url:
         type: string
+    required:
+    - number
+    - text
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.ListStruct:
     properties:
       buttonText:
-        description: Label of the button that opens the list. Defaults to "Ver Menu"
-          when empty.
+        description: Label of the button that opens the list. Required by the HTTP
+          handler.
         example: Abrir cardapio
         type: string
       delay:
@@ -669,6 +752,12 @@ definitions:
         description: Header title (required).
         example: Nossos planos
         type: string
+    required:
+    - buttonText
+    - description
+    - footerText
+    - number
+    - title
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.LocationStruct:
     properties:
@@ -696,6 +785,12 @@ definitions:
         type: string
       quoted:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct'
+    required:
+    - address
+    - latitude
+    - longitude
+    - name
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MediaStruct:
     properties:
@@ -722,7 +817,21 @@ definitions:
       type:
         type: string
       url:
+        description: 'HTTP(S) media URL or raw base64 without a data: prefix.'
         type: string
+    required:
+    - number
+    - type
+    - url
+    type: object
+  github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct:
+    properties:
+      Info:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_types.MessageInfo'
+      Message:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Message'
+      MessageContextInfo:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.PollStruct:
     properties:
@@ -750,6 +859,10 @@ definitions:
         type: string
       quoted:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct'
+    required:
+    - number
+    - options
+    - question
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct:
     properties:
@@ -786,6 +899,32 @@ definitions:
         example: Planos
         type: string
     type: object
+  github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusMediaStruct:
+    properties:
+      caption:
+        type: string
+      id:
+        type: string
+      type:
+        enum:
+        - image
+        - video
+        type: string
+      url:
+        type: string
+    required:
+    - type
+    - url
+    type: object
+  github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusTextStruct:
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+    required:
+    - text
+    type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StickerStruct:
     properties:
       delay:
@@ -806,6 +945,9 @@ definitions:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct'
       sticker:
         type: string
+    required:
+    - number
+    - sticker
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.TextStruct:
     properties:
@@ -827,11 +969,16 @@ definitions:
         $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.QuotedStruct'
       text:
         type: string
+    required:
+    - number
+    - text
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_user_service.BlockStruct:
     properties:
       number:
         type: string
+    required:
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_user_service.CheckUserStruct:
     properties:
@@ -841,6 +988,8 @@ definitions:
         items:
           type: string
         type: array
+    required:
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_user_service.GetAvatarStruct:
     properties:
@@ -848,6 +997,8 @@ definitions:
         type: string
       preview:
         type: boolean
+    required:
+    - number
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_user_service.PrivacyStruct:
     properties:
@@ -865,11 +1016,30 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.PrivacySetting'
       status:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.PrivacySetting'
+    required:
+    - callAdd
+    - groupAdd
+    - lastSeen
+    - online
+    - profile
+    - readReceipts
+    - status
+    type: object
+  github_com_EvolutionAPI_evolution-go_pkg_user_service.ResolveLidStruct:
+    properties:
+      groupJid:
+        type: string
+      lid:
+        type: string
+    required:
+    - lid
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_user_service.SetProfilePictureStruct:
     properties:
       image:
         type: string
+    required:
+    - image
     type: object
   github_com_EvolutionAPI_evolution-go_pkg_utils.VCardStruct:
     properties:
@@ -905,6 +1075,8 @@ definitions:
     properties:
       collectionID:
         type: string
+      uploadOrderIndex:
+        type: integer
     type: object
   go_mau_fi_whatsmeow_proto_waAICommon.AIRegenerateMetadata:
     properties:
@@ -920,6 +1092,23 @@ definitions:
           type: integer
         type: array
     type: object
+  go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionRequestType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-varnames:
+    - AISubscriptionRequestType_UNSPECIFIED
+    - AISubscriptionRequestType_THINK_HARD
+    - AISubscriptionRequestType_IMAGE_GEN
+    - AISubscriptionRequestType_VIDEO_GEN
+  go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionUpsellMetadata:
+    properties:
+      requestType:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionRequestType'
+    type: object
   go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo:
     properties:
       clientInfo:
@@ -929,6 +1118,8 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadClientInfo:
     properties:
+      sourceChatJID:
+        type: string
       type:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadClientInfo_AIThreadType'
     type: object
@@ -937,12 +1128,13 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
+    - 3
     type: integer
     x-enum-varnames:
     - AIThreadInfo_AIThreadClientInfo_UNKNOWN
     - AIThreadInfo_AIThreadClientInfo_DEFAULT
     - AIThreadInfo_AIThreadClientInfo_INCOGNITO
+    - AIThreadInfo_AIThreadClientInfo_SIDE_CHAT
   go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadServerInfo:
     properties:
       title:
@@ -961,11 +1153,20 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - BotAgeCollectionMetadata_O18_BINARY
     - BotAgeCollectionMetadata_WAFFLE
+  go_mau_fi_whatsmeow_proto_waAICommon.BotAgentDeepLinkMetadata:
+    properties:
+      token:
+        type: string
+    type: object
+  go_mau_fi_whatsmeow_proto_waAICommon.BotAgentMetadata:
+    properties:
+      deepLinkMetadata:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotAgentDeepLinkMetadata'
+    type: object
   go_mau_fi_whatsmeow_proto_waAICommon.BotCapabilityMetadata:
     properties:
       capabilities:
@@ -1033,7 +1234,10 @@ definitions:
     - 55
     - 56
     - 57
-    format: int32
+    - 58
+    - 59
+    - 60
+    - 61
     type: integer
     x-enum-varnames:
     - BotCapabilityMetadata_UNKNOWN
@@ -1094,6 +1298,19 @@ definitions:
     - BotCapabilityMetadata_RICH_RESPONSE_UR_BLOKS_ENABLED
     - BotCapabilityMetadata_RICH_RESPONSE_INLINE_LINKS_ENABLED
     - BotCapabilityMetadata_RICH_RESPONSE_UR_IMAGINE_VIDEO
+    - BotCapabilityMetadata_JSON_PATCH_STREAMING
+    - BotCapabilityMetadata_AI_TAB_FORCE_CLIPPY
+    - BotCapabilityMetadata_UNIFIED_RESPONSE_EMBEDDED_SCREENS
+    - BotCapabilityMetadata_AI_SUBSCRIPTION_ENABLED
+  go_mau_fi_whatsmeow_proto_waAICommon.BotCommandMetadata:
+    properties:
+      commandDescription:
+        type: string
+      commandName:
+        type: string
+      commandPrompt:
+        type: string
+    type: object
   go_mau_fi_whatsmeow_proto_waAICommon.BotDocumentMessageMetadata:
     properties:
       pluginType:
@@ -1103,7 +1320,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - BotDocumentMessageMetadata_TEXT_EXTRACTION
@@ -1142,7 +1358,6 @@ definitions:
     - 12
     - 13
     - 14
-    format: int32
     type: integer
     x-enum-varnames:
     - BotFeedbackMessage_BOT_FEEDBACK_POSITIVE
@@ -1164,7 +1379,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - BotFeedbackMessage_NONE
@@ -1272,7 +1486,6 @@ definitions:
     - 2
     - 3
     - 4
-    format: int32
     type: integer
     x-enum-varnames:
     - BotImagineMetadata_UNKNOWN
@@ -1295,7 +1508,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - BotInfrastructureDiagnostics_AAPI
@@ -1308,7 +1520,6 @@ definitions:
   go_mau_fi_whatsmeow_proto_waAICommon.BotLinkedAccount_BotLinkedAccountType:
     enum:
     - 0
-    format: int32
     type: integer
     x-enum-varnames:
     - BotLinkedAccount_BOT_LINKED_ACCOUNT_TYPE_1P
@@ -1347,7 +1558,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - BotMediaMetadata_CENTER
@@ -1388,7 +1598,6 @@ definitions:
   go_mau_fi_whatsmeow_proto_waAICommon.BotMessageOrigin_BotMessageOriginType:
     enum:
     - 0
-    format: int32
     type: integer
     x-enum-varnames:
     - BotMessageOrigin_BOT_MESSAGE_ORIGIN_TYPE_AI_INITIATED
@@ -1442,6 +1651,8 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo'
       capabilityMetadata:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotCapabilityMetadata'
+      commandMetadata:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotCommandMetadata'
       conversationStarterPromptID:
         type: string
       imagineMetadata:
@@ -1474,12 +1685,16 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotReminderMetadata'
       renderingMetadata:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotRenderingMetadata'
+      resolvedToolCallMetadata:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotResolvedToolCallMetadata'
       richResponseSourcesMetadata:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotSourcesMetadata'
       sessionMetadata:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotSessionMetadata'
       sessionTransparencyMetadata:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.SessionTransparencyMetadata'
+      subscriptionUpsellMetadata:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionUpsellMetadata'
       suggestedPromptMetadata:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotSuggestedPromptMetadata'
       timezone:
@@ -1537,7 +1752,8 @@ definitions:
     - 46
     - 47
     - 54
-    format: int32
+    - 55
+    - 56
     type: integer
     x-enum-varnames:
     - BotMetricsEntryPoint_UNDEFINED_ENTRY_POINT
@@ -1586,6 +1802,8 @@ definitions:
     - BotMetricsEntryPoint_WEB_INTRO_PANEL
     - BotMetricsEntryPoint_WEB_NAVIGATION_BAR
     - BotMetricsEntryPoint_GROUP_MEMBER
+    - BotMetricsEntryPoint_CHATLIST_SEARCH
+    - BotMetricsEntryPoint_NEW_CHAT_LIST
   go_mau_fi_whatsmeow_proto_waAICommon.BotMetricsMetadata:
     properties:
       destinationEntryPoint:
@@ -1602,7 +1820,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - BotMetricsThreadEntryPoint_AI_TAB_THREAD
@@ -1625,7 +1842,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - BotModeSelectionMetadata_DEFAULT_MODE
@@ -1644,7 +1860,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - BotModelMetadata_UNKNOWN_TYPE
@@ -1655,7 +1870,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - BotModelMetadata_UNKNOWN_STATUS
@@ -1693,7 +1907,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - BotPluginMetadata_UNKNOWN_PLUGIN
@@ -1705,7 +1918,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - BotPluginMetadata_UNKNOWN
@@ -1770,7 +1982,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - BotProgressIndicatorMetadata_BotPlanningStepMetadata_BotPlanningSearchSourcesMetadata_UNKNOWN
@@ -1794,7 +2005,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - BotProgressIndicatorMetadata_BotPlanningStepMetadata_UNKNOWN_PROVIDER
@@ -1807,7 +2017,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - BotProgressIndicatorMetadata_BotPlanningStepMetadata_UNKNOWN
@@ -1826,7 +2035,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - BotPromotionMessageMetadata_UNKNOWN_TYPE
@@ -1866,7 +2074,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - BotQuotaMetadata_BotFeatureQuotaMetadata_UNKNOWN_FEATURE
@@ -1890,7 +2097,6 @@ definitions:
     - 2
     - 3
     - 4
-    format: int32
     type: integer
     x-enum-varnames:
     - BotReminderMetadata_NOTIFY
@@ -1904,7 +2110,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - BotReminderMetadata_ONCE
@@ -1935,6 +2140,13 @@ definitions:
       value:
         type: string
     type: object
+  go_mau_fi_whatsmeow_proto_waAICommon.BotResolvedToolCallMetadata:
+    properties:
+      resolutionDataSerialized:
+        type: string
+      toolCallID:
+        type: string
+    type: object
   go_mau_fi_whatsmeow_proto_waAICommon.BotSessionMetadata:
     properties:
       sessionID:
@@ -1952,7 +2164,6 @@ definitions:
     - 5
     - 6
     - 7
-    format: int32
     type: integer
     x-enum-varnames:
     - BotSessionSource_NONE
@@ -1975,7 +2186,6 @@ definitions:
       certificateChain:
         items:
           items:
-            format: int32
             type: integer
           type: array
         type: array
@@ -1993,7 +2203,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - BotSignatureVerificationUseCaseProof_UNSPECIFIED
@@ -2030,7 +2239,6 @@ definitions:
     - 2
     - 3
     - 4
-    format: int32
     type: integer
     x-enum-varnames:
     - BotSourcesMetadata_BotSourceItem_UNKNOWN
@@ -2168,7 +2376,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - SessionTransparencyType_UNKNOWN_TYPE
@@ -2197,7 +2404,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - AIRichResponseCodeMetadata_AI_RICH_RESPONSE_CODE_HIGHLIGHT_DEFAULT
@@ -2217,14 +2423,13 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseContentItemsMetadata_AIRichResponseContentItemMetadata:
     properties:
-      airichResponseContentItem:
+      AIRichResponseContentItem:
         description: "Types that are valid to be assigned to AIRichResponseContentItem:\n\n\t*AIRichResponseContentItemsMetadata_AIRichResponseContentItemMetadata_ReelItem"
     type: object
   go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseContentItemsMetadata_ContentType:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - AIRichResponseContentItemsMetadata_DEFAULT
@@ -2245,7 +2450,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - AIRichResponseDynamicMetadata_AI_RICH_RESPONSE_DYNAMIC_METADATA_TYPE_UNKNOWN
@@ -2285,7 +2489,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - AIRichResponseInlineImageMetadata_AI_RICH_RESPONSE_IMAGE_LAYOUT_LEADING_ALIGNED
@@ -2355,7 +2558,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - AIRichResponseMessageType_AI_RICH_RESPONSE_TYPE_UNKNOWN
@@ -2395,7 +2597,6 @@ definitions:
     - 7
     - 8
     - 9
-    format: int32
     type: integer
     x-enum-varnames:
     - AIRichResponseSubMessageType_AI_RICH_RESPONSE_UNKNOWN
@@ -2430,7 +2631,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ADVEncryptionType_E2EE
@@ -2442,6 +2642,8 @@ definitions:
       fullSyncDaysLimit:
         type: integer
       fullSyncSizeMbLimit:
+        type: integer
+      initialSyncMaxMessagesPerChat:
         type: integer
       inlineInitialPayloadInE2EeMsg:
         type: boolean
@@ -2467,12 +2669,22 @@ definitions:
         type: boolean
       supportGuestChat:
         type: boolean
+      supportHatchHistory:
+        type: boolean
       supportHostedGroupMsg:
+        type: boolean
+      supportInlineContacts:
+        type: boolean
+      supportManusHistory:
         type: boolean
       supportMessageAssociation:
         type: boolean
       supportRecentSyncChunkMessageCountTuning:
         type: boolean
+      supportedBotChannelFbids:
+        items:
+          type: string
+        type: array
       thumbnailSyncDaysLimit:
         type: integer
     type: object
@@ -2636,7 +2848,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - BCallMessage_UNKNOWN
@@ -2644,6 +2855,8 @@ definitions:
     - BCallMessage_VIDEO
   go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage:
     properties:
+      Header:
+        description: "Types that are valid to be assigned to Header:\n\n\t*ButtonsMessage_Text\n\t*ButtonsMessage_DocumentMessage\n\t*ButtonsMessage_ImageMessage\n\t*ButtonsMessage_VideoMessage\n\t*ButtonsMessage_LocationMessage"
       buttons:
         items:
           $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage_Button'
@@ -2654,8 +2867,6 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
       footerText:
         type: string
-      header:
-        description: "Types that are valid to be assigned to Header:\n\n\t*ButtonsMessage_Text\n\t*ButtonsMessage_DocumentMessage\n\t*ButtonsMessage_ImageMessage\n\t*ButtonsMessage_VideoMessage\n\t*ButtonsMessage_LocationMessage"
       headerType:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage_HeaderType'
     type: object
@@ -2687,7 +2898,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - ButtonsMessage_Button_UNKNOWN
@@ -2702,7 +2912,6 @@ definitions:
     - 4
     - 5
     - 6
-    format: int32
     type: integer
     x-enum-varnames:
     - ButtonsMessage_UNKNOWN
@@ -2714,10 +2923,10 @@ definitions:
     - ButtonsMessage_LOCATION
   go_mau_fi_whatsmeow_proto_waE2E.ButtonsResponseMessage:
     properties:
+      Response:
+        description: "Types that are valid to be assigned to Response:\n\n\t*ButtonsResponseMessage_SelectedDisplayText"
       contextInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
-      response:
-        description: "Types that are valid to be assigned to Response:\n\n\t*ButtonsResponseMessage_SelectedDisplayText"
       selectedButtonID:
         type: string
       type:
@@ -2727,7 +2936,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ButtonsResponseMessage_UNKNOWN
@@ -2788,7 +2996,6 @@ definitions:
     - 5
     - 6
     - 7
-    format: int32
     type: integer
     x-enum-varnames:
     - CallLogMessage_CONNECTED
@@ -2811,7 +3018,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - CallLogMessage_REGULAR
@@ -2828,6 +3034,17 @@ definitions:
         type: string
       displayName:
         type: string
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.ChatThemeSetting:
+    properties:
+      Wallpaper:
+        description: "Types that are valid to be assigned to Wallpaper:\n\n\t*ChatThemeSetting_DefaultWallpaper\n\t*ChatThemeSetting_SolidColor\n\t*ChatThemeSetting_StockImage\n\t*ChatThemeSetting_CustomImage"
+      clearTheme:
+        type: boolean
+      colorSchemeID:
+        type: string
+      settingTimestampMS:
+        type: integer
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification:
     properties:
@@ -2849,12 +3066,13 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
+    - 3
     type: integer
     x-enum-varnames:
     - CloudAPIThreadControlNotification_UNKNOWN
     - CloudAPIThreadControlNotification_CONTROL_PASSED
     - CloudAPIThreadControlNotification_CONTROL_TAKEN
+    - CloudAPIThreadControlNotification_INFO
   go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification_CloudAPIThreadControlNotificationContent:
     properties:
       extraJSON:
@@ -2888,7 +3106,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ConditionalRevealMessage_UNKNOWN
@@ -2925,6 +3142,8 @@ definitions:
         type: boolean
       botMessageSharingInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotMessageSharingInfo'
+      businessInteractionPills:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills'
       businessMessageForwardInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessMessageForwardInfo'
       conversionData:
@@ -2935,6 +3154,8 @@ definitions:
         type: integer
       conversionSource:
         type: string
+      crossAppSource:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_CrossAppSource'
       ctwaPayload:
         items:
           type: integer
@@ -3011,6 +3232,8 @@ definitions:
         type: string
       placeholderKey:
         $ref: '#/definitions/waCommon.MessageKey'
+      posterStatusID:
+        type: string
       questionReplyQuotedMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_QuestionReplyQuotedMessage'
       quotedAd:
@@ -3066,17 +3289,86 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_AdReplyInfo_NONE
     - ContextInfo_AdReplyInfo_IMAGE
     - ContextInfo_AdReplyInfo_VIDEO
+  go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills:
+    properties:
+      businessJID:
+        type: string
+      entryPoint:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_EntryPoint'
+      pills:
+        items:
+          $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_Pill'
+        type: array
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_EntryPoint:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    type: integer
+    x-enum-varnames:
+    - ContextInfo_BusinessInteractionPills_ENTRY_POINT_UNKNOWN
+    - ContextInfo_BusinessInteractionPills_P2P_LINK_SHARE
+    - ContextInfo_BusinessInteractionPills_CONTACT_CARD_SHARING
+    - ContextInfo_BusinessInteractionPills_PHONE_NUMBER
+    - ContextInfo_BusinessInteractionPills_STATUS
+    - ContextInfo_BusinessInteractionPills_IN_THREAD_CONTEXT_CARD
+  go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_Pill:
+    properties:
+      actionURL:
+        type: string
+      pillType:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_PillType'
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_PillType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    type: integer
+    x-enum-varnames:
+    - ContextInfo_BusinessInteractionPills_UNKNOWN
+    - ContextInfo_BusinessInteractionPills_VIEW_BUSINESS
+    - ContextInfo_BusinessInteractionPills_CHAT
+    - ContextInfo_BusinessInteractionPills_CALL
+    - ContextInfo_BusinessInteractionPills_CATALOG
+    - ContextInfo_BusinessInteractionPills_CHANNEL
+    - ContextInfo_BusinessInteractionPills_BOOK_APPOINTMENT
+    - ContextInfo_BusinessInteractionPills_OFFERS
+    - ContextInfo_BusinessInteractionPills_BESTSELLERS
+    - ContextInfo_BusinessInteractionPills_MENU
+    - ContextInfo_BusinessInteractionPills_ABOUT
   go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessMessageForwardInfo:
     properties:
       businessOwnerJID:
         type: string
     type: object
+  go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_CrossAppSource:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - ContextInfo_CROSS_APP_SOURCE_UNKNOWN
+    - ContextInfo_CROSS_APP_SOURCE_INSTAGRAM
+    - ContextInfo_CROSS_APP_SOURCE_FACEBOOK
   go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_DataSharingContext:
     properties:
       dataSharingFlags:
@@ -3111,6 +3403,14 @@ definitions:
         type: string
       adType:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_ExternalAdReplyInfo_AdType'
+      agmHeaderInteractionStrategy:
+        type: integer
+      agmSubtitleStrategy:
+        type: integer
+      agmThumbnailStrategy:
+        type: integer
+      agmTitleStrategy:
+        type: integer
       automatedGreetingMessageCtaType:
         type: string
       automatedGreetingMessageShown:
@@ -3120,6 +3420,8 @@ definitions:
       clickToWhatsappCall:
         type: boolean
       containsAutoReply:
+        type: boolean
+      containsCtwaFlowsAutoReply:
         type: boolean
       ctaPayload:
         type: string
@@ -3166,7 +3468,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_ExternalAdReplyInfo_CTWA
@@ -3176,7 +3477,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_ExternalAdReplyInfo_NONE
@@ -3203,7 +3503,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_UNKNOWN
@@ -3232,7 +3531,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_ForwardedNewsletterMessageInfo_UPDATE
@@ -3249,7 +3547,6 @@ definitions:
     - 6
     - 7
     - 8
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_NOT_PAIRED_MEDIA
@@ -3279,7 +3576,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_EXPLICIT
@@ -3291,7 +3587,6 @@ definitions:
     - 2
     - 3
     - 4
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_NONE
@@ -3312,7 +3607,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_StatusAudienceMetadata_UNKNOWN
@@ -3325,7 +3619,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - ContextInfo_IMAGE
@@ -3399,7 +3692,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - DisappearingMode_CHANGED_IN_CHAT
@@ -3414,7 +3706,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - DisappearingMode_UNKNOWN
@@ -3482,7 +3773,7 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.EmbeddedContent:
     properties:
-      content:
+      Content:
         description: "Types that are valid to be assigned to Content:\n\n\t*EmbeddedContent_EmbeddedMessage\n\t*EmbeddedContent_EmbeddedMusic"
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.EmbeddedMusic:
@@ -3562,6 +3853,27 @@ definitions:
         type: array
       targetMessageKey:
         $ref: '#/definitions/waCommon.MessageKey'
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.EventInviteMessage:
+    properties:
+      JPEGThumbnail:
+        items:
+          type: integer
+        type: array
+      caption:
+        type: string
+      contextInfo:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
+      endTime:
+        type: integer
+      eventID:
+        type: string
+      eventTitle:
+        type: string
+      isCanceled:
+        type: boolean
+      startTime:
+        type: integer
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.EventMessage:
     properties:
@@ -3679,7 +3991,6 @@ definitions:
     - 8
     - 9
     - 10
-    format: int32
     type: integer
     x-enum-varnames:
     - ExtendedTextMessage_SYSTEM
@@ -3696,7 +4007,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - ExtendedTextMessage_DEFAULT
@@ -3711,7 +4021,6 @@ definitions:
     - 5
     - 6
     - 7
-    format: int32
     type: integer
     x-enum-varnames:
     - ExtendedTextMessage_NONE
@@ -3768,7 +4077,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - GroupInviteMessage_DEFAULT
@@ -3778,6 +4086,24 @@ definitions:
       groupJID:
         type: string
       groupSubject:
+        type: string
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShare:
+    properties:
+      keys:
+        items:
+          $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShareEntry'
+        type: array
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShareEntry:
+    properties:
+      expiryTimestampMS:
+        type: integer
+      groupRootKey:
+        items:
+          type: integer
+        type: array
+      keyID:
         type: string
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.HighlyStructuredMessage:
@@ -3807,10 +4133,10 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.HighlyStructuredMessage_HSMLocalizableParameter:
     properties:
+      ParamOneof:
+        description: "Types that are valid to be assigned to ParamOneof:\n\n\t*HighlyStructuredMessage_HSMLocalizableParameter_Currency\n\t*HighlyStructuredMessage_HSMLocalizableParameter_DateTime"
       default:
         type: string
-      paramOneof:
-        description: "Types that are valid to be assigned to ParamOneof:\n\n\t*HighlyStructuredMessage_HSMLocalizableParameter_Currency\n\t*HighlyStructuredMessage_HSMLocalizableParameter_DateTime"
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.HistorySyncMessageAccessStatus:
     properties:
@@ -3869,7 +4195,6 @@ definitions:
     - 6
     - 7
     - 8
-    format: int32
     type: integer
     x-enum-varnames:
     - HistorySyncType_INITIAL_BOOTSTRAP
@@ -3883,7 +4208,7 @@ definitions:
     - HistorySyncType_MESSAGE_ACCESS_STATUS
   go_mau_fi_whatsmeow_proto_waE2E.HydratedTemplateButton:
     properties:
-      hydratedButton:
+      HydratedButton:
         description: "Types that are valid to be assigned to HydratedButton:\n\n\t*HydratedTemplateButton_QuickReplyButton\n\t*HydratedTemplateButton_UrlButton\n\t*HydratedTemplateButton_CallButton"
       index:
         type: integer
@@ -3983,7 +4308,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - ImageMessage_USER_IMAGE
@@ -3995,9 +4319,23 @@ definitions:
       securityNotificationEnabled:
         type: boolean
     type: object
+  go_mau_fi_whatsmeow_proto_waE2E.InsightDeliveryState:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-varnames:
+    - InsightDeliveryState_SENT
+    - InsightDeliveryState_DELIVERED
+    - InsightDeliveryState_READ
+    - InsightDeliveryState_REPLIED
+    - InsightDeliveryState_QUICK_REPLIED
   go_mau_fi_whatsmeow_proto_waE2E.InteractiveAnnotation:
     properties:
-      action:
+      Action:
         description: "Types that are valid to be assigned to Action:\n\n\t*InteractiveAnnotation_Location\n\t*InteractiveAnnotation_Newsletter\n\t*InteractiveAnnotation_EmbeddedAction\n\t*InteractiveAnnotation_TapAction"
       embeddedContent:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.EmbeddedContent'
@@ -4015,7 +4353,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - InteractiveAnnotation_RASTERIZED_LINK_PREVIEW
@@ -4023,6 +4360,8 @@ definitions:
     - InteractiveAnnotation_RASTERIZED_LINK_FULL_URL
   go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage:
     properties:
+      InteractiveMessage:
+        description: "Types that are valid to be assigned to InteractiveMessage:\n\n\t*InteractiveMessage_ShopStorefrontMessage\n\t*InteractiveMessage_CollectionMessage_\n\t*InteractiveMessage_NativeFlowMessage_\n\t*InteractiveMessage_CarouselMessage_"
       bloksWidget:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_BloksWidget'
       body:
@@ -4033,8 +4372,6 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Footer'
       header:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Header'
-      interactiveMessage:
-        description: "Types that are valid to be assigned to InteractiveMessage:\n\n\t*InteractiveMessage_ShopStorefrontMessage\n\t*InteractiveMessage_CollectionMessage_\n\t*InteractiveMessage_NativeFlowMessage_\n\t*InteractiveMessage_CarouselMessage_"
       urlTrackingMap:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.UrlTrackingMap'
     type: object
@@ -4054,21 +4391,21 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Footer:
     properties:
+      Media:
+        description: "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Footer_AudioMessage"
       hasMediaAttachment:
         type: boolean
-      media:
-        description: "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Footer_AudioMessage"
       text:
         type: string
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Header:
     properties:
+      Media:
+        description: "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Header_DocumentMessage\n\t*InteractiveMessage_Header_ImageMessage\n\t*InteractiveMessage_Header_JPEGThumbnail\n\t*InteractiveMessage_Header_VideoMessage\n\t*InteractiveMessage_Header_LocationMessage\n\t*InteractiveMessage_Header_ProductMessage"
       bloksWidget:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_BloksWidget'
       hasMediaAttachment:
         type: boolean
-      media:
-        description: "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Header_DocumentMessage\n\t*InteractiveMessage_Header_ImageMessage\n\t*InteractiveMessage_Header_JPEGThumbnail\n\t*InteractiveMessage_Header_VideoMessage\n\t*InteractiveMessage_Header_LocationMessage\n\t*InteractiveMessage_Header_ProductMessage"
       subtitle:
         type: string
       title:
@@ -4076,12 +4413,12 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.InteractiveResponseMessage:
     properties:
+      InteractiveResponseMessage:
+        description: "Types that are valid to be assigned to InteractiveResponseMessage:\n\n\t*InteractiveResponseMessage_NativeFlowResponseMessage_"
       body:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveResponseMessage_Body'
       contextInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
-      interactiveResponseMessage:
-        description: "Types that are valid to be assigned to InteractiveResponseMessage:\n\n\t*InteractiveResponseMessage_NativeFlowResponseMessage_"
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.InteractiveResponseMessage_Body:
     properties:
@@ -4094,7 +4431,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - InteractiveResponseMessage_Body_DEFAULT
@@ -4134,7 +4470,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - InvoiceMessage_IMAGE
@@ -4153,7 +4488,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - KeepType_UNKNOWN_KEEP_TYPE
@@ -4195,7 +4529,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - LinkPreviewMetadata_NONE
@@ -4230,7 +4563,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - ListMessage_UNKNOWN
@@ -4305,7 +4637,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ListResponseMessage_UNKNOWN
@@ -4406,7 +4737,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - MediaKeyDomain_MEDIA_KEY_DOMAIN_UNKNOWN
@@ -4488,6 +4818,8 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage'
       eventCoverImage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage'
+      eventInviteMessage:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.EventInviteMessage'
       eventMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.EventMessage'
       extendedTextMessage:
@@ -4498,6 +4830,8 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.GroupInviteMessage'
       groupMentionedMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage'
+      groupRootKeyShare:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShare'
       groupStatusMentionMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage'
       groupStatusMessage:
@@ -4544,6 +4878,8 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.NewsletterFollowerInviteMessage'
       orderMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.OrderMessage'
+      p2PPaymentReminderNotification:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification'
       paymentInviteMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage'
       pinInChatMessage:
@@ -4602,6 +4938,8 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SendPaymentMessage'
       senderKeyDistributionMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SenderKeyDistributionMessage'
+      splitPaymentMessage:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentMessage'
       spoilerMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage'
       statusAddYours:
@@ -4667,7 +5005,6 @@ definitions:
     - 18
     - 19
     - 20
-    format: int32
     type: integer
     x-enum-varnames:
     - MessageAssociation_UNKNOWN
@@ -4727,6 +5064,10 @@ definitions:
         type: integer
       supportPayload:
         type: string
+      teeBotMetadata:
+        items:
+          type: integer
+        type: array
       threadID:
         items:
           $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ThreadID'
@@ -4738,7 +5079,6 @@ definitions:
     enum:
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - MessageContextInfo_STATIC
@@ -4780,7 +5120,9 @@ definitions:
         items:
           type: string
         type: array
-      oldestMessageTimestamp:
+      oldestMessageTimestampInBundle:
+        type: integer
+      oldestMessageTimestampInWindow:
         type: integer
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.MessageHistoryNotice:
@@ -4871,7 +5213,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - OrderMessage_INQUIRY
@@ -4880,10 +5221,64 @@ definitions:
   go_mau_fi_whatsmeow_proto_waE2E.OrderMessage_OrderSurface:
     enum:
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - OrderMessage_CATALOG
+  go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification:
+    properties:
+      amount:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Money'
+      createdTimestamp:
+        type: integer
+      creatorJID:
+        type: string
+      description:
+        type: string
+      expiryTimestamp:
+        type: integer
+      frequency:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderFrequency'
+      nextReminderTimestamp:
+        type: integer
+      receiverJID:
+        type: string
+      reminderID:
+        type: string
+      state:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderState'
+      upiID:
+        type: string
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderFrequency:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-varnames:
+    - P2PPaymentReminderNotification_UNKNOWN_FREQUENCY
+    - P2PPaymentReminderNotification_WEEKLY
+    - P2PPaymentReminderNotification_BIWEEKLY
+    - P2PPaymentReminderNotification_MONTHLY
+    - P2PPaymentReminderNotification_CUSTOM
+  go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderState:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    type: integer
+    x-enum-varnames:
+    - P2PPaymentReminderNotification_UNKNOWN_STATE
+    - P2PPaymentReminderNotification_ACTIVE
+    - P2PPaymentReminderNotification_PAUSED
+    - P2PPaymentReminderNotification_STOPPED
+    - P2PPaymentReminderNotification_EXPIRED
+    - P2PPaymentReminderNotification_CANCELLED
   go_mau_fi_whatsmeow_proto_waE2E.PaymentBackground:
     properties:
       ID:
@@ -4930,7 +5325,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - PaymentBackground_UNKNOWN
@@ -4948,18 +5342,27 @@ definitions:
         type: integer
       incentiveEligible:
         type: boolean
+      inviteType:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_InviteType'
       referralID:
         type: string
       serviceType:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_ServiceType'
     type: object
+  go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_InviteType:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - PaymentInviteMessage_DEFAULT
+    - PaymentInviteMessage_MAPPER
   go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_ServiceType:
     enum:
     - 0
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - PaymentInviteMessage_UNKNOWN
@@ -4989,7 +5392,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - PaymentLinkMetadata_PaymentLinkHeader_LINK_PREVIEW
@@ -5001,6 +5403,10 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage:
     properties:
+      bizBroadcastInsightsContactListRequest:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsContactListRequest'
+      bizBroadcastInsightsRefreshRequest:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsRefreshRequest'
       companionCanonicalUserNonceFetchRequest:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_CompanionCanonicalUserNonceFetchRequest'
       fullHistorySyncOnDemandRequest:
@@ -5027,6 +5433,16 @@ definitions:
         type: array
       syncdCollectionFatalRecoveryRequest:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_SyncDCollectionFatalRecoveryRequest'
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsContactListRequest:
+    properties:
+      campaignID:
+        type: string
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsRefreshRequest:
+    properties:
+      campaignID:
+        type: string
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_CompanionCanonicalUserNonceFetchRequest:
     properties:
@@ -5059,7 +5475,6 @@ definitions:
     enum:
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - PeerDataOperationRequestMessage_GalaxyFlowAction_NOTIFY_LAUNCH
@@ -5089,6 +5504,8 @@ definitions:
         type: integer
       onDemandMsgCount:
         type: integer
+      supportInlineResponse:
+        type: boolean
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_PlaceholderMessageResendRequest:
     properties:
@@ -5127,6 +5544,8 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult:
     properties:
+      bizBroadcastInsightsContactListResponse:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactListResponse'
       companionCanonicalUserNonceFetchRequestResponse:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_CompanionCanonicalUserNonceFetchResponse'
       companionMetaNonceFetchRequestResponse:
@@ -5149,6 +5568,24 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_SyncDSnapshotFatalRecoveryResponse'
       waffleNonceFetchRequestResponse:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_WaffleNonceFetchResponse'
+    type: object
+  ? go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactListResponse
+  : properties:
+      campaignID:
+        type: string
+      contacts:
+        items:
+          $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactState'
+        type: array
+      timestampMS:
+        type: integer
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactState:
+    properties:
+      contactJID:
+        type: string
+      state:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InsightDeliveryState'
     type: object
   ? go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_CompanionCanonicalUserNonceFetchResponse
   : properties:
@@ -5209,7 +5646,7 @@ definitions:
     - 4
     - 5
     - 6
-    format: int32
+    - 7
     type: integer
     x-enum-varnames:
     - PeerDataOperationRequestResponseMessage_PeerDataOperationResult_REQUEST_SUCCESS
@@ -5219,6 +5656,7 @@ definitions:
     - PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_REQUEST_ON_NON_SMB_PRIMARY
     - PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_HOSTED_DEVICE_NOT_CONNECTED
     - PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_HOSTED_DEVICE_LOGIN_TIME_NOT_SET
+    - PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_MULTI_PROVIDER_NOT_CONFIGURED
   go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_HistorySyncChunkRetryResponse:
     properties:
       canRecover:
@@ -5240,7 +5678,6 @@ definitions:
     - 4
     - 5
     - 6
-    format: int32
     type: integer
     x-enum-varnames:
     - PeerDataOperationRequestResponseMessage_PeerDataOperationResult_GENERATION_ERROR
@@ -5339,7 +5776,8 @@ definitions:
     - 9
     - 10
     - 11
-    format: int32
+    - 12
+    - 13
     type: integer
     x-enum-varnames:
     - PeerDataOperationRequestType_UPLOAD_STICKER
@@ -5354,6 +5792,8 @@ definitions:
     - PeerDataOperationRequestType_COMPANION_CANONICAL_USER_NONCE_FETCH
     - PeerDataOperationRequestType_HISTORY_SYNC_CHUNK_RETRY
     - PeerDataOperationRequestType_GALAXY_FLOW_ACTION
+    - PeerDataOperationRequestType_BUSINESS_BROADCAST_INSIGHTS_DELIVERED_TO
+    - PeerDataOperationRequestType_BUSINESS_BROADCAST_INSIGHTS_REFRESH
   go_mau_fi_whatsmeow_proto_waE2E.PinInChatMessage:
     properties:
       key:
@@ -5368,7 +5808,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - PinInChatMessage_UNKNOWN_TYPE
@@ -5382,7 +5821,6 @@ definitions:
   go_mau_fi_whatsmeow_proto_waE2E.PlaceholderMessage_PlaceholderType:
     enum:
     - 0
-    format: int32
     type: integer
     x-enum-varnames:
     - PlaceholderMessage_MASK_LINKED_DEVICES
@@ -5409,7 +5847,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - PollContentType_UNKNOWN_POLL_CONTENT_TYPE
@@ -5486,7 +5923,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - PollType_POLL
@@ -5533,7 +5969,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - ProcessedVideo_UNDEFINED
@@ -5611,6 +6046,8 @@ definitions:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.AppStateSyncKeyShare'
       botFeedbackMessage:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotFeedbackMessage'
+      chatThemeSetting:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ChatThemeSetting'
       cloudApiThreadControlNotification:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification'
       disappearingMode:
@@ -5678,7 +6115,7 @@ definitions:
     - 30
     - 31
     - 32
-    format: int32
+    - 34
     type: integer
     x-enum-varnames:
     - ProtocolMessage_REVOKE
@@ -5709,6 +6146,7 @@ definitions:
     - ProtocolMessage_GROUP_MEMBER_LABEL_CHANGE
     - ProtocolMessage_AI_MEDIA_COLLECTION_MESSAGE
     - ProtocolMessage_MESSAGE_UNSCHEDULE
+    - ProtocolMessage_CHAT_THEME_SETTING
   go_mau_fi_whatsmeow_proto_waE2E.QuestionResponseMessage:
     properties:
       key:
@@ -5751,6 +6189,8 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.RequestWelcomeMessageMetadata:
     properties:
+      botAgentMetadata:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotAgentMetadata'
       localChatState:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.RequestWelcomeMessageMetadata_LocalChatState'
       welcomeTrigger:
@@ -5760,7 +6200,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - RequestWelcomeMessageMetadata_EMPTY
@@ -5769,7 +6208,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - RequestWelcomeMessageMetadata_CHAT_OPEN
@@ -5788,7 +6226,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - ScheduledCallCreationMessage_UNKNOWN
@@ -5805,7 +6242,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - ScheduledCallEditMessage_UNKNOWN
@@ -5835,7 +6271,6 @@ definitions:
     - 3
     - 4
     - 5
-    format: int32
     type: integer
     x-enum-varnames:
     - SecretEncryptedMessage_UNKNOWN
@@ -5864,6 +6299,42 @@ definitions:
       groupID:
         type: string
     type: object
+  go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentMessage:
+    properties:
+      contextInfo:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
+      createdAtMS:
+        type: integer
+      description:
+        type: string
+      participants:
+        items:
+          $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant'
+        type: array
+      requesterJID:
+        type: string
+      splitID:
+        type: string
+      totalAmount:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Money'
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant:
+    properties:
+      JID:
+        type: string
+      amount:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Money'
+      status:
+        $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant_SplitPaymentStatus'
+    type: object
+  go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant_SplitPaymentStatus:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - SplitPaymentParticipant_PENDING
+    - SplitPaymentParticipant_PAID
   go_mau_fi_whatsmeow_proto_waE2E.StatusNotificationMessage:
     properties:
       originalMessageKey:
@@ -5879,7 +6350,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - StatusNotificationMessage_UNKNOWN
@@ -5909,7 +6379,6 @@ definitions:
   go_mau_fi_whatsmeow_proto_waE2E.StatusQuotedMessage_StatusQuotedMessageType:
     enum:
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - StatusQuotedMessage_QUESTION_ANSWER
@@ -5926,7 +6395,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - StatusStickerInteractionMessage_UNKNOWN
@@ -5940,6 +6408,8 @@ definitions:
       contextInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
       directPath:
+        type: string
+      emojis:
         type: string
       fileEncSHA256:
         items:
@@ -6069,7 +6539,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - StickerPackMessage_FIRST_PARTY
@@ -6101,10 +6570,10 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.TemplateMessage:
     properties:
+      Format:
+        description: "Types that are valid to be assigned to Format:\n\n\t*TemplateMessage_FourRowTemplate_\n\t*TemplateMessage_HydratedFourRowTemplate_\n\t*TemplateMessage_InteractiveMessageTemplate"
       contextInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo'
-      format:
-        description: "Types that are valid to be assigned to Format:\n\n\t*TemplateMessage_FourRowTemplate_\n\t*TemplateMessage_HydratedFourRowTemplate_\n\t*TemplateMessage_InteractiveMessageTemplate"
       hydratedTemplate:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.TemplateMessage_HydratedFourRowTemplate'
       templateID:
@@ -6112,6 +6581,8 @@ definitions:
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.TemplateMessage_HydratedFourRowTemplate:
     properties:
+      Title:
+        description: "Types that are valid to be assigned to Title:\n\n\t*TemplateMessage_HydratedFourRowTemplate_DocumentMessage\n\t*TemplateMessage_HydratedFourRowTemplate_HydratedTitleText\n\t*TemplateMessage_HydratedFourRowTemplate_ImageMessage\n\t*TemplateMessage_HydratedFourRowTemplate_VideoMessage\n\t*TemplateMessage_HydratedFourRowTemplate_LocationMessage"
       hydratedButtons:
         items:
           $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waE2E.HydratedTemplateButton'
@@ -6124,13 +6595,9 @@ definitions:
         type: boolean
       templateID:
         type: string
-      title:
-        description: "Types that are valid to be assigned to Title:\n\n\t*TemplateMessage_HydratedFourRowTemplate_DocumentMessage\n\t*TemplateMessage_HydratedFourRowTemplate_HydratedTitleText\n\t*TemplateMessage_HydratedFourRowTemplate_ImageMessage\n\t*TemplateMessage_HydratedFourRowTemplate_VideoMessage\n\t*TemplateMessage_HydratedFourRowTemplate_LocationMessage"
     type: object
   go_mau_fi_whatsmeow_proto_waE2E.ThreadID:
     properties:
-      sourceChatJID:
-        type: string
       threadKey:
         $ref: '#/definitions/waCommon.MessageKey'
       threadType:
@@ -6141,7 +6608,6 @@ definitions:
     - 0
     - 1
     - 2
-    format: int32
     type: integer
     x-enum-varnames:
     - ThreadID_UNKNOWN
@@ -6270,7 +6736,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - VideoMessage_NONE
@@ -6281,7 +6746,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - VideoMessage_USER_VIDEO
@@ -6290,7 +6754,6 @@ definitions:
     enum:
     - 0
     - 1
-    format: int32
     type: integer
     x-enum-varnames:
     - WebLinkRenderConfig_WEBVIEW
@@ -6301,7 +6764,6 @@ definitions:
     - 1
     - 2
     - 3
-    format: int32
     type: integer
     x-enum-varnames:
     - MediaRetryNotification_GENERAL_ERROR
@@ -6310,10 +6772,10 @@ definitions:
     - MediaRetryNotification_DECRYPTION_ERROR
   go_mau_fi_whatsmeow_proto_waStatusAttributions.StatusAttribution:
     properties:
+      AttributionData:
+        description: "Types that are valid to be assigned to AttributionData:\n\n\t*StatusAttribution_StatusReshare_\n\t*StatusAttribution_ExternalShare_\n\t*StatusAttribution_Music_\n\t*StatusAttribution_GroupStatus_\n\t*StatusAttribution_RlAttribution\n\t*StatusAttribution_AiCreatedAttribution_"
       actionURL:
         type: string
-      attributionData:
-        description: "Types that are valid to be assigned to AttributionData:\n\n\t*StatusAttribution_StatusReshare_\n\t*StatusAttribution_ExternalShare_\n\t*StatusAttribution_Music_\n\t*StatusAttribution_GroupStatus_\n\t*StatusAttribution_RlAttribution\n\t*StatusAttribution_AiCreatedAttribution_"
       type:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waStatusAttributions.StatusAttribution_Type'
     type: object
@@ -6328,7 +6790,8 @@ definitions:
     - 6
     - 7
     - 8
-    format: int32
+    - 9
+    - 10
     type: integer
     x-enum-varnames:
     - StatusAttribution_UNKNOWN
@@ -6340,6 +6803,8 @@ definitions:
     - StatusAttribution_RL_ATTRIBUTION
     - StatusAttribution_AI_CREATED
     - StatusAttribution_LAYOUTS
+    - StatusAttribution_NEWSLETTER_STATUS
+    - StatusAttribution_STATUS_CLOSE_SHARING
   go_mau_fi_whatsmeow_proto_waVnameCert.LocalizedName:
     properties:
       lc:
@@ -6399,18 +6864,18 @@ definitions:
     - EditTypeLast
   go_mau_fi_whatsmeow_types.BroadcastRecipient:
     properties:
-      lid:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
-      pn:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+      LID:
+        type: string
+      PN:
+        type: string
     type: object
   go_mau_fi_whatsmeow_types.DeviceSentMeta:
     properties:
-      destinationJID:
+      DestinationJID:
         description: The destination user. This should match the MessageInfo.Recipient
           field.
         type: string
-      phash:
+      Phash:
         type: string
     type: object
   go_mau_fi_whatsmeow_types.EditAttribute:
@@ -6424,13 +6889,6 @@ definitions:
     type: string
     x-enum-comments:
       EditAttributeAdminEdit: only used in newsletters
-    x-enum-descriptions:
-    - ""
-    - ""
-    - ""
-    - only used in newsletters
-    - ""
-    - ""
     x-enum-varnames:
     - EditAttributeEmpty
     - EditAttributeMessageEdit
@@ -6438,115 +6896,94 @@ definitions:
     - EditAttributeAdminEdit
     - EditAttributeSenderRevoke
     - EditAttributeAdminRevoke
-  go_mau_fi_whatsmeow_types.JID:
-    properties:
-      device:
-        format: int32
-        type: integer
-      integrator:
-        format: int32
-        type: integer
-      rawAgent:
-        format: int32
-        type: integer
-      server:
-        type: string
-      user:
-        type: string
-    type: object
   go_mau_fi_whatsmeow_types.MessageInfo:
     properties:
-      addressingMode:
+      AddressingMode:
         allOf:
         - $ref: '#/definitions/go_mau_fi_whatsmeow_types.AddressingMode'
         description: The addressing mode of the message (phone number or LID)
-      broadcastListOwner:
-        allOf:
-        - $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+      BroadcastListOwner:
         description: |-
           When sending a read receipt to a broadcast list message, the Chat is the broadcast list
           and Sender is you, so this field contains the recipient of the read receipt.
-      broadcastRecipients:
+        type: string
+      BroadcastRecipients:
         items:
           $ref: '#/definitions/go_mau_fi_whatsmeow_types.BroadcastRecipient'
         type: array
-      category:
+      Category:
         type: string
-      chat:
-        allOf:
-        - $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+      Chat:
         description: The chat where the message was sent.
-      deviceSentMeta:
+        type: string
+      DeviceSentMeta:
         allOf:
         - $ref: '#/definitions/go_mau_fi_whatsmeow_types.DeviceSentMeta'
         description: Metadata for direct messages sent from another one of the user's
           own devices.
-      edit:
+      Edit:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.EditAttribute'
-      id:
+      ID:
         type: string
-      isFromMe:
+      IsFromMe:
         description: Whether the message was sent by the current user instead of someone
           else.
         type: boolean
-      isGroup:
+      IsGroup:
         description: Whether the chat is a group chat or broadcast list.
         type: boolean
-      mediaType:
+      MediaType:
         type: string
-      msgBotInfo:
+      MsgBotInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.MsgBotInfo'
-      msgMetaInfo:
+      MsgMetaInfo:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.MsgMetaInfo'
-      multicast:
+      Multicast:
         type: boolean
-      pushName:
+      PushName:
         type: string
-      recipientAlt:
-        allOf:
-        - $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+      RecipientAlt:
         description: The alternative address of the recipient of the message for DMs.
-      sender:
-        allOf:
-        - $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
+      Sender:
         description: The user who sent the message.
-      senderAlt:
-        allOf:
-        - $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+        type: string
+      SenderAlt:
         description: The alternative address of the user who sent the message
-      serverID:
+        type: string
+      ServerID:
         type: integer
-      timestamp:
+      Timestamp:
         type: string
-      type:
+      Type:
         type: string
-      verifiedName:
+      VerifiedName:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.VerifiedName'
     type: object
   go_mau_fi_whatsmeow_types.MsgBotInfo:
     properties:
-      editSenderTimestampMS:
+      EditSenderTimestampMS:
         type: string
-      editTargetID:
+      EditTargetID:
         type: string
-      editType:
+      EditType:
         $ref: '#/definitions/go_mau_fi_whatsmeow_types.BotEditType'
     type: object
   go_mau_fi_whatsmeow_types.MsgMetaInfo:
     properties:
-      deprecatedLIDSession:
+      DeprecatedLIDSession:
         type: boolean
-      targetChat:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
-      targetID:
+      TargetChat:
+        type: string
+      TargetID:
         description: Bot things
         type: string
-      targetSender:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
-      threadMessageID:
+      TargetSender:
         type: string
-      threadMessageSenderJID:
-        $ref: '#/definitions/go_mau_fi_whatsmeow_types.JID'
+      ThreadMessageID:
+        type: string
+      ThreadMessageSenderJID:
+        type: string
     type: object
   go_mau_fi_whatsmeow_types.PrivacySetting:
     enum:
@@ -6574,9 +7011,9 @@ definitions:
     - PrivacySettingOff
   go_mau_fi_whatsmeow_types.VerifiedName:
     properties:
-      certificate:
+      Certificate:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waVnameCert.VerifiedNameCertificate'
-      details:
+      Details:
         $ref: '#/definitions/go_mau_fi_whatsmeow_proto_waVnameCert.VerifiedNameCertificate_Details'
     type: object
   waCommon.LimitSharing:
@@ -6603,9 +7040,11 @@ definitions:
     type: object
 info:
   contact: {}
-  description: Evolution GO - whatsmeow
+  description: Evolution GO WhatsApp API. Protected endpoints require an apikey header.
+    Administrative endpoints use GLOBAL_API_KEY; other endpoints use the instance
+    token.
   title: Evolution GO
-  version: "1.0"
+  version: 0.7.1
 paths:
   /call/reject:
     post:
@@ -6626,10 +7065,35 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid request
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Reject call
       tags:
       - Call
@@ -6655,15 +7119,36 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Archive a chat
       tags:
       - Chat
-  /chat/history-sync-request:
+  /chat/history-sync:
     post:
       consumes:
       - application/json
@@ -6685,11 +7170,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: HistorySyncRequest a chat
       tags:
       - Chat
@@ -6715,11 +7221,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Mute a chat
       tags:
       - Chat
@@ -6745,11 +7272,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Pin a chat
       tags:
       - Chat
@@ -6775,11 +7323,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Unarchive a chat
       tags:
       - Chat
@@ -6805,11 +7374,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Unmute a chat
       tags:
       - Chat
@@ -6835,11 +7425,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Unpin a chat
       tags:
       - Chat
@@ -6865,11 +7476,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Add participant to community
       tags:
       - Community
@@ -6895,11 +7527,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Create community
       tags:
       - Community
@@ -6925,11 +7578,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Remove participant from community
       tags:
       - Community
@@ -6955,11 +7629,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Create group
       tags:
       - Group
@@ -6985,11 +7680,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set group description
       tags:
       - Group
@@ -7015,11 +7731,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get group info
       tags:
       - Group
@@ -7045,11 +7782,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get group invite link
       tags:
       - Group
@@ -7075,11 +7833,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Join group link
       tags:
       - Group
@@ -7105,11 +7884,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Leave group
       tags:
       - Group
@@ -7125,10 +7925,26 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: List groups
       tags:
       - Group
@@ -7144,10 +7960,26 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get my groups
       tags:
       - Group
@@ -7173,11 +8005,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set group name
       tags:
       - Group
@@ -7203,11 +8056,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Update participant
       tags:
       - Group
@@ -7233,11 +8107,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set group photo
       tags:
       - Group
@@ -7260,15 +8155,41 @@ paths:
         "400":
           description: Invalid instance ID
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "404":
           description: Instance not found
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get advanced settings
       tags:
       - Instance
@@ -7298,15 +8219,41 @@ paths:
         "400":
           description: Invalid request data
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "404":
           description: Instance not found
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Update advanced settings
       tags:
       - Instance
@@ -7322,10 +8269,26 @@ paths:
           description: All instances
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Get all instances
       tags:
       - Instance
@@ -7351,11 +8314,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Connect to instance
       tags:
       - Instance
@@ -7382,11 +8366,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Create a new instance
       tags:
       - Instance
@@ -7411,11 +8416,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Delete instance
       tags:
       - Instance
@@ -7431,10 +8457,26 @@ paths:
           description: Instance disconnected successfully
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Disconnect from instance
       tags:
       - Instance
@@ -7465,15 +8507,36 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Force reconnect
       tags:
       - Instance
-  /instance/get/{instanceId}:
+  /instance/info/{instanceId}:
     get:
       consumes:
       - application/json
@@ -7494,11 +8557,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Get instance
       tags:
       - Instance
@@ -7514,11 +8598,115 @@ paths:
           description: Instance logged out successfully
           schema:
             $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid request
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Logout from instance
+      tags:
+      - Instance
+  /instance/logs/{instanceId}:
+    get:
+      parameters:
+      - description: Instance ID
+        in: path
+        name: instanceId
+        required: true
+        type: string
+      - description: Start date (YYYY-MM-DD); defaults to seven days ago
+        in: query
+        name: start_date
+        type: string
+      - description: End date (YYYY-MM-DD); defaults to today
+        in: query
+        name: end_date
+        type: string
+      - description: Log level filter
+        in: query
+        name: level
+        type: string
+      - default: 100
+        description: Maximum records; defaults to 100
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              allOf:
+              - $ref: '#/definitions/gin.H'
+              - properties:
+                  instance_id:
+                    type: string
+                  level:
+                    type: string
+                  message:
+                    type: string
+                  metadata:
+                    type: object
+                  timestamp:
+                    type: string
+                type: object
+            type: array
+        "400":
+          description: Invalid query
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid admin API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Could not read logs
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
+      summary: Get instance logs
       tags:
       - Instance
   /instance/pair:
@@ -7543,11 +8731,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Request pairing code
       tags:
       - Instance
@@ -7572,11 +8781,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Delete proxy
       tags:
       - Instance
@@ -7606,11 +8836,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - AdminApiKey: []
       summary: Set proxy configuration
       tags:
       - Instance
@@ -7626,10 +8877,35 @@ paths:
           description: Instance QR code
           schema:
             $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid request
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get instance QR code
       tags:
       - Instance
@@ -7645,10 +8921,26 @@ paths:
           description: Instance reconnected successfully
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Reconnect to instance
       tags:
       - Instance
@@ -7664,32 +8956,38 @@ paths:
           description: Instance status
           schema:
             $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid request
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get instance status
       tags:
       - Instance
-  /label:
-    get:
-      consumes:
-      - application/json
-      description: Get all labels
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: success
-          schema:
-            $ref: '#/definitions/gin.H'
-        "500":
-          description: Internal server error
-          schema:
-            $ref: '#/definitions/gin.H'
-      summary: Get all labels
-      tags:
-      - Label
   /label/chat:
     post:
       consumes:
@@ -7712,11 +9010,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Add label to chat
       tags:
       - Label
@@ -7742,12 +9061,68 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Edit label
+      tags:
+      - Label
+  /label/list:
+    get:
+      consumes:
+      - application/json
+      description: Get all labels
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Internal server error
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
+      summary: Get all labels
       tags:
       - Label
   /label/message:
@@ -7772,11 +9147,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Add label to message
       tags:
       - Label
@@ -7802,15 +9198,36 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Delete a message for everyone
       tags:
       - Message
-  /message/downloadimage:
+  /message/downloadmedia:
     post:
       consumes:
       - application/json
@@ -7832,11 +9249,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Download an image
       tags:
       - Message
@@ -7862,11 +9300,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Edit a message
       tags:
       - Message
@@ -7892,11 +9351,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Mark a message as read
       tags:
       - Message
@@ -7922,11 +9402,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set chat presence
       tags:
       - Message
@@ -7953,11 +9454,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: React a message
       tags:
       - Message
@@ -7983,11 +9505,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get message status
       tags:
       - Message
@@ -8013,11 +9556,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Create newsletter
       tags:
       - Newsletter
@@ -8043,11 +9607,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get newsletter
       tags:
       - Newsletter
@@ -8073,11 +9658,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get newsletter invite
       tags:
       - Newsletter
@@ -8093,10 +9699,26 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: List newsletters
       tags:
       - Newsletter
@@ -8122,11 +9744,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get newsletter messages
       tags:
       - Newsletter
@@ -8152,11 +9795,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Subscribe newsletter
       tags:
       - Newsletter
@@ -8181,15 +9845,41 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get poll results
       tags:
       - Polls
@@ -8223,15 +9913,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a button message
       tags:
       - Send Message
@@ -8269,15 +9987,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a carousel message
       tags:
       - Send Message
@@ -8299,15 +10045,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a contact message
       tags:
       - Send Message
@@ -8329,15 +10103,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a link message
       tags:
       - Send Message
@@ -8350,7 +10152,7 @@ paths:
 
         Required body fields: `number`, `title`, `description`, `footerText`, `buttonText`, `sections`.
         Each section must contain one or more `rows`. When `rowId` is omitted, the server generates a fallback ID.
-        When `buttonText` is empty, the server falls back to "Ver Menu".
+        The HTTP endpoint rejects empty `buttonText` and `footerText`.
 
         Uses legacy `ListMessage` format (no ViewOnceMessage wrapper) so it renders on iOS, Android and WhatsApp Web.
       parameters:
@@ -8366,15 +10168,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a list message
       tags:
       - Send Message
@@ -8396,15 +10226,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a location message
       tags:
       - Send Message
@@ -8412,9 +10270,12 @@ paths:
     post:
       consumes:
       - application/json
-      description: Send a media message
+      - multipart/form-data
+      description: |-
+        JSON: number, type and url are required. url accepts HTTP(S) or raw base64 without a data: prefix. Multipart: number, type and file are required; optional fields are caption, filename, id, delay, mentionAll, repeated mentionedJid, quoted.messageId and quoted.participant.
+        Swagger 2.0 cannot model JSON body and multipart form parameters on the same operation; the interactive body below represents JSON. See Postman and the media guide for multipart examples.
       parameters:
-      - description: Message data
+      - description: JSON body; for multipart use number, type and file
         in: body
         name: message
         required: true
@@ -8426,15 +10287,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a media message
       tags:
       - Send Message
@@ -8456,16 +10345,163 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a poll message
+      tags:
+      - Send Message
+  /send/status/media:
+    post:
+      consumes:
+      - application/json
+      - multipart/form-data
+      description: |-
+        Send an image or video status to status@broadcast. Supports JSON (URL) or multipart/form-data (file upload)
+        JSON body: {"type":"image","url":"https://example.com/image.jpg","caption":"optional","id":"optional"}. type and url are required. Multipart uses type and file instead.
+      parameters:
+      - description: JSON body; multipart uses type and file instead of url
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusMediaStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
+        "400":
+          description: Error on validation
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Internal server error
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
+      summary: Send a WhatsApp media status (image/video)
+      tags:
+      - Send Message
+  /send/status/text:
+    post:
+      consumes:
+      - application/json
+      description: Send a WhatsApp text status to status@broadcast
+      parameters:
+      - description: Status text data
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusTextStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
+        "400":
+          description: Error on validation
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Internal server error
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
+      summary: Send a WhatsApp text status
       tags:
       - Send Message
   /send/sticker:
@@ -8486,15 +10522,43 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a sticker message
       tags:
       - Send Message
@@ -8516,18 +10580,64 @@ paths:
         "200":
           description: success
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct'
+                message:
+                  type: string
+              type: object
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Send a text message
       tags:
       - Send Message
+  /server/ok:
+    get:
+      description: Public health endpoint; no API key is required.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Server is running
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                status:
+                  type: string
+              type: object
+      summary: Check server health
+      tags:
+      - Server
   /unlabel/chat:
     post:
       consumes:
@@ -8550,11 +10660,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Remove label from chat
       tags:
       - Label
@@ -8580,11 +10711,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Remove label from message
       tags:
       - Label
@@ -8610,11 +10762,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get a user's avatar
       tags:
       - User
@@ -8640,11 +10813,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Block a contact
       tags:
       - User
@@ -8660,10 +10854,26 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get a user's block list
       tags:
       - User
@@ -8689,11 +10899,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Check a user
       tags:
       - User
@@ -8709,10 +10940,26 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get a user's contacts
       tags:
       - User
@@ -8738,12 +10985,84 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get a user
+      tags:
+      - User
+  /user/lid:
+    post:
+      consumes:
+      - application/json
+      description: Resolve the phone number behind a LID
+      parameters:
+      - description: Lid data
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_EvolutionAPI_evolution-go_pkg_user_service.ResolveLidStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Error on validation
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Internal server error
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
+      summary: Resolve the phone number behind a LID
       tags:
       - User
   /user/privacy:
@@ -8758,10 +11077,26 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Get a user's privacy settings
       tags:
       - User
@@ -8783,10 +11118,35 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid request
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set a user's privacy settings
       tags:
       - User
@@ -8812,11 +11172,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set a user's profile name
       tags:
       - User
@@ -8842,11 +11223,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set a user's profile picture
       tags:
       - User
@@ -8872,11 +11274,32 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Set a user's profile status
       tags:
       - User
@@ -8902,12 +11325,44 @@ paths:
         "400":
           description: Error on validation
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "401":
+          description: Missing or invalid API key
+          schema:
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
         "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/gin.H'
+            allOf:
+            - $ref: '#/definitions/gin.H'
+            - properties:
+                error:
+                  type: string
+              type: object
+      security:
+      - InstanceApiKey: []
       summary: Unblock a contact
       tags:
       - User
+securityDefinitions:
+  AdminApiKey:
+    description: GLOBAL_API_KEY from the server environment.
+    in: header
+    name: apikey
+    type: apiKey
+  InstanceApiKey:
+    description: Token configured when creating the instance.
+    in: header
+    name: apikey
+    type: apiKey
 swagger: "2.0"

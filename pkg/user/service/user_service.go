@@ -74,33 +74,33 @@ type CheckUserCollection struct {
 }
 
 type CheckUserStruct struct {
-	Number    []string `json:"number"`
+	Number    []string `json:"number" validate:"required"`
 	FormatJid *bool    `json:"formatJid,omitempty"`
 }
 
 type GetAvatarStruct struct {
-	Number  string `json:"number"`
+	Number  string `json:"number" validate:"required"`
 	Preview bool   `json:"preview"`
 }
 
 type BlockStruct struct {
-	Number string `json:"number"`
+	Number string `json:"number" validate:"required"`
 }
 
 type SetProfilePictureStruct struct {
-	Image string `json:"image"`
+	Image string `json:"image" validate:"required"`
 }
 
 type SetProfileNameStruct struct {
-	Name string `json:"name"`
+	Name string `json:"name" validate:"required"`
 }
 
 type SetProfileStatusStruct struct {
-	Status string `json:"status"`
+	Status string `json:"status" validate:"required"`
 }
 
 type ResolveLidStruct struct {
-	Lid      string `json:"lid"`
+	Lid      string `json:"lid" validate:"required"`
 	GroupJid string `json:"groupJid,omitempty"`
 }
 
@@ -111,13 +111,13 @@ type ResolveLidResult struct {
 }
 
 type PrivacyStruct struct {
-	GroupAdd     types.PrivacySetting `json:"groupAdd"`
-	LastSeen     types.PrivacySetting `json:"lastSeen"`
-	Status       types.PrivacySetting `json:"status"`
-	Profile      types.PrivacySetting `json:"profile"`
-	ReadReceipts types.PrivacySetting `json:"readReceipts"`
-	CallAdd      types.PrivacySetting `json:"callAdd"`
-	Online       types.PrivacySetting `json:"online"`
+	GroupAdd     types.PrivacySetting `json:"groupAdd" validate:"required"`
+	LastSeen     types.PrivacySetting `json:"lastSeen" validate:"required"`
+	Status       types.PrivacySetting `json:"status" validate:"required"`
+	Profile      types.PrivacySetting `json:"profile" validate:"required"`
+	ReadReceipts types.PrivacySetting `json:"readReceipts" validate:"required"`
+	CallAdd      types.PrivacySetting `json:"callAdd" validate:"required"`
+	Online       types.PrivacySetting `json:"online" validate:"required"`
 }
 
 func (u *userService) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {

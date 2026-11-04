@@ -29,3 +29,11 @@ jobs:
       # go build never compiles _test.go files; vet does. This is the real gate.
       - run: go vet ./...
       - run: go test ./...
+
+      - name: Check API documentation contracts
+        run: go run ./tools/check-api-docs
+
+      - name: Check generated Swagger is current
+        run: |
+          go run github.com/swaggo/swag/cmd/swag@v1.16.3 init -g cmd/evolution-go/main.go -o ./docs --parseDependency --parseInternal --propertyStrategy pascalcase
+          git diff --exit-code -- docs/docs.go docs/swagger.json docs/swagger.yaml

@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import apiClient from '@/services/api/client';
-import { checkLicenseStatus } from '@/services/api/license';
-import type { AuthStore, LicenseState } from '@/types/auth';
+import type { AuthStore, AuthState } from '@/types/auth';
 
 /**
  * Authentication Store
@@ -18,7 +17,6 @@ const useAuthStore = create<AuthStore>()(
       apiUrl: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8082',
       apiKey: '',
       isAuthenticated: false,
-      licenseState: 'unchecked' as LicenseState,
 
       // Login method - validates connection and stores credentials
       login: async (apiUrl: string, apiKey: string) => {
@@ -66,12 +64,11 @@ const useAuthStore = create<AuthStore>()(
         // Clear localStorage
         localStorage.removeItem('evolution-auth');
         
-        // Reset state (including license)
+        // Reset authentication state
         set({
           apiUrl: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8082',
           apiKey: '',
           isAuthenticated: false,
-          licenseState: 'unchecked' as LicenseState,
         });
         
         // Redirect to login page
@@ -88,32 +85,22 @@ const useAuthStore = create<AuthStore>()(
         set({ apiKey });
       },
 
-      // Update license state
-      setLicenseState: (licenseState: LicenseState) => {
-        set({ licenseState });
-      },
-
-      // Check license status against backend
-      checkLicense: async (apiUrl?: string, apiKey?: string) => {
-        try {
-          const result = await checkLicenseStatus(apiUrl, apiKey);
-          const state: LicenseState = result.status === 'active' ? 'licensed' : 'unlicensed';
-          set({ licenseState: state });
-          return state;
-        } catch (error) {
-          console.error('License check error:', error);
-          set({ licenseState: 'unlicensed' });
-          return 'unlicensed' as LicenseState;
-        }
-      },
     }),
     {
       name: 'evolution-auth', // localStorage key
+      version: 1,
+      migrate: (persistedState) => {
+        const state = persistedState as Partial<AuthState> | null;
+        return {
+          apiUrl: state?.apiUrl || window.location.origin,
+          apiKey: state?.apiKey || '',
+          isAuthenticated: state?.isAuthenticated === true,
+        };
+      },
       partialize: (state) => ({
         apiUrl: state.apiUrl,
         apiKey: state.apiKey,
         isAuthenticated: state.isAuthenticated,
-        licenseState: state.licenseState,
       }),
     }
   )

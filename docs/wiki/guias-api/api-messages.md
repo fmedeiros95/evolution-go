@@ -48,7 +48,7 @@ apikey: SUA-CHAVE-API
   "text": "Olá! Como posso ajudar?",
   "id": "msg-custom-123",
   "delay": 1000,
-  "mentionedJid": "5511888888888@s.whatsapp.net",
+  "mentionedJid": ["5511888888888@s.whatsapp.net"],
   "mentionAll": false,
   "formatJid": true,
   "quoted": {
@@ -66,7 +66,7 @@ apikey: SUA-CHAVE-API
 | `text` | string | ✅ Sim | Texto da mensagem |
 | `id` | string | ❌ Não | ID customizado (se vazio, será gerado automaticamente) |
 | `delay` | int32 | ❌ Não | Delay em milissegundos antes de enviar |
-| `mentionedJid` | string | ❌ Não | JID do usuário a mencionar |
+| `mentionedJid` | string[] | ❌ Não | Lista de JIDs a mencionar |
 | `mentionAll` | bool | ❌ Não | Mencionar todos os participantes (apenas grupos) |
 | `formatJid` | bool | ❌ Não | Formatar número automaticamente (padrão: true) |
 | `quoted` | object | ❌ Não | Mensagem a ser citada |
@@ -1011,7 +1011,7 @@ curl -X POST http://localhost:4000/message/presence \
 
 Faz download de mídia de uma mensagem recebida e retorna em base64.
 
-**Endpoint**: `POST /message/downloadimage`
+**Endpoint**: `POST /message/downloadmedia`
 
 **Body**:
 ```json
@@ -1055,7 +1055,7 @@ Faz download de mídia de uma mensagem recebida e retorna em base64.
 
 **Exemplo cURL**:
 ```bash
-curl -X POST http://localhost:4000/message/downloadimage \
+curl -X POST http://localhost:4000/message/downloadmedia \
   -H "Content-Type: application/json" \
   -H "apikey: SUA-CHAVE-API" \
   -d '{
@@ -1154,7 +1154,7 @@ Para mencionar usuários em grupos, use `mentionedJid` ou `mentionAll`:
 {
   "number": "120363XXXXXXXXXX@g.us",
   "text": "Olá @usuario, tudo bem?",
-  "mentionedJid": "5511888888888@s.whatsapp.net"
+  "mentionedJid": ["5511888888888@s.whatsapp.net"]
 }
 ```
 

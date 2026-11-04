@@ -209,7 +209,7 @@ Chaves únicas para cada conversa que mudam automaticamente a cada mensagem envi
 **Solicitação de histórico** (implementado via API):
 
 ```bash
-POST /chat/history-sync-request
+POST /chat/history-sync
 {
   "messageInfo": {
     "Chat": "5511999999999@s.whatsapp.net",

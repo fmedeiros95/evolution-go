@@ -1,0 +1,2 @@
+// JID implements encoding.TextMarshaler and is serialized as a JSON string.
+replace go.mau.fi/whatsmeow/types.JID string

@@ -38,9 +38,11 @@ type sendHandler struct {
 // @Accept json
 // @Produce json
 // @Param message body send_service.TextStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/text [post]
 func (s *sendHandler) SendText(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -84,9 +86,11 @@ func (s *sendHandler) SendText(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.LinkStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/link [post]
 func (s *sendHandler) SendLink(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -125,14 +129,17 @@ func (s *sendHandler) SendLink(ctx *gin.Context) {
 
 // Send a media message
 // @Summary Send a media message
-// @Description Send a media message
+// @Description JSON: number, type and url are required. url accepts HTTP(S) or raw base64 without a data: prefix. Multipart: number, type and file are required; optional fields are caption, filename, id, delay, mentionAll, repeated mentionedJid, quoted.messageId and quoted.participant.
+// @Description Swagger 2.0 cannot model JSON body and multipart form parameters on the same operation; the interactive body below represents JSON. See Postman and the media guide for multipart examples.
 // @Tags Send Message
-// @Accept json
+// @Accept json,multipart/form-data
+// @Param message body send_service.MediaStruct true "JSON body; for multipart use number, type and file"
 // @Produce json
-// @Param message body send_service.MediaStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/media [post]
 func (s *sendHandler) SendMedia(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -290,9 +297,11 @@ func (s *sendHandler) SendMedia(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.PollStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/poll [post]
 func (s *sendHandler) SendPoll(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -341,9 +350,11 @@ func (s *sendHandler) SendPoll(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.StickerStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/sticker [post]
 func (s *sendHandler) SendSticker(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -387,9 +398,11 @@ func (s *sendHandler) SendSticker(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.LocationStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/location [post]
 func (s *sendHandler) SendLocation(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -448,9 +461,11 @@ func (s *sendHandler) SendLocation(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.ContactStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/contact [post]
 func (s *sendHandler) SendContact(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -510,9 +525,11 @@ func (s *sendHandler) SendContact(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.ButtonStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/button [post]
 func (s *sendHandler) SendButton(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -565,16 +582,18 @@ func (s *sendHandler) SendButton(ctx *gin.Context) {
 // @Description
 // @Description Required body fields: `number`, `title`, `description`, `footerText`, `buttonText`, `sections`.
 // @Description Each section must contain one or more `rows`. When `rowId` is omitted, the server generates a fallback ID.
-// @Description When `buttonText` is empty, the server falls back to "Ver Menu".
+// @Description The HTTP endpoint rejects empty `buttonText` and `footerText`.
 // @Description
 // @Description Uses legacy `ListMessage` format (no ViewOnceMessage wrapper) so it renders on iOS, Android and WhatsApp Web.
 // @Tags Send Message
 // @Accept json
 // @Produce json
 // @Param message body send_service.ListStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/list [post]
 func (s *sendHandler) SendList(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -648,9 +667,11 @@ func (s *sendHandler) SendList(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.CarouselStruct true "Message data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/carousel [post]
 func (s *sendHandler) SendCarousel(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -694,9 +715,11 @@ func (s *sendHandler) SendCarousel(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param message body send_service.StatusTextStruct true "Status text data"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/status/text [post]
 func (s *sendHandler) SendStatusText(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -732,16 +755,15 @@ func (s *sendHandler) SendStatusText(ctx *gin.Context) {
 // @Summary Send a WhatsApp media status (image/video)
 // @Description Send an image or video status to status@broadcast. Supports JSON (URL) or multipart/form-data (file upload)
 // @Tags Send Message
-// @Accept json, multipart/form-data
+// @Accept json,multipart/form-data
+// @Param message body send_service.StatusMediaStruct true "JSON body; multipart uses type and file instead of url"
 // @Produce json
-// @Param type formData string true "Media type: image or video"
-// @Param file formData file false "Media file (for multipart upload)"
-// @Param url formData string false "Media URL (for JSON upload)"
-// @Param caption formData string false "Caption for the media"
-// @Param id formData string false "Custom message ID"
-// @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Description JSON body: {"type":"image","url":"https://example.com/image.jpg","caption":"optional","id":"optional"}. type and url are required. Multipart uses type and file instead.
+// @Success 200 {object} gin.H{message=string,data=send_service.MessageSendStruct} "success"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /send/status/media [post]
 func (s *sendHandler) SendStatusMedia(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")

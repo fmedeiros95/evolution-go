@@ -16,7 +16,6 @@ ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist/release"
 DIST_REPO="https://github.com/EvolutionAPI/evolution-go.git"
 MANAGER_SRC="$ROOT_DIR/evolution-go-manager"
-OBFUSCATE_TOOL="$(dirname "$0")/obfuscate.go"
 
 echo ""
 echo "  ╔══════════════════════════════════════════╗"
@@ -111,9 +110,9 @@ fi
 mkdir -p "$DIST_DIR/cmd/evolution-go"
 cp "$ROOT_DIR/cmd/evolution-go/main.go" "$DIST_DIR/cmd/evolution-go/"
 
-# pkg/ — everything except pkg/core/
+# pkg/ — application source
 cd "$ROOT_DIR"
-find pkg -name "*.go" -not -path "pkg/core/*" | while read f; do
+find pkg -name "*.go" | while read f; do
     mkdir -p "$DIST_DIR/$(dirname "$f")"
     cp "$f" "$DIST_DIR/$f"
 done
@@ -136,17 +135,6 @@ else
     fi
 fi
 
-# ── 4. Obfuscate pkg/core → c0.go ──
-echo "[4/6] Obfuscating pkg/core..."
-mkdir -p "$DIST_DIR/pkg/core"
-
-if [ -f "$OBFUSCATE_TOOL" ]; then
-    go run "$OBFUSCATE_TOOL" "$ROOT_DIR/pkg/core" "$DIST_DIR/pkg/core/c0.go"
-else
-    echo "  ERROR: $OBFUSCATE_TOOL not found"
-    exit 1
-fi
-
 # ── 5. Clean artifacts ──
 echo "[5/6] Cleaning artifacts..."
 
@@ -163,7 +151,7 @@ rm -f "$DIST_DIR/CLAUDE.md" 2>/dev/null
 echo "[6/6] Verifying..."
 
 OK=true
-for f in cmd/evolution-go/main.go go.mod go.sum pkg/core/c0.go \
+for f in cmd/evolution-go/main.go go.mod go.sum \
          Dockerfile README.md CHANGELOG.md VERSION .gitignore; do
     if [ ! -f "$DIST_DIR/$f" ]; then
         echo "  MISSING: $f"

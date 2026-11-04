@@ -17,7 +17,6 @@ ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 BETA_DIR="$ROOT_DIR/dist/beta"
 BETA_REPO="https://github.com/EvolutionAPI/evolution-go-beta.git"
 MANAGER_SRC="$ROOT_DIR/evolution-go-manager"
-OBFUSCATE_TOOL="$(dirname "$0")/obfuscate.go"
 TEMPLATES_DIR="$(dirname "$0")/templates"
 VERSION=$(cat "$ROOT_DIR/VERSION" 2>/dev/null || echo "0.0.0")
 BETA_VERSION="${VERSION}-beta"
@@ -111,9 +110,9 @@ fi
 mkdir -p "$BETA_DIR/cmd/evolution-go"
 cp "$ROOT_DIR/cmd/evolution-go/main.go" "$BETA_DIR/cmd/evolution-go/"
 
-# pkg/ (except core)
+# pkg/ — application source
 cd "$ROOT_DIR"
-find pkg -name "*.go" -not -path "pkg/core/*" | while read f; do
+find pkg -name "*.go" | while read f; do
     mkdir -p "$BETA_DIR/$(dirname "$f")"
     cp "$f" "$BETA_DIR/$f"
 done
@@ -125,16 +124,6 @@ if [ -d "$BETA_DIR/.git" ] || [ -f "$BETA_DIR/.git" ]; then
         git submodule add https://github.com/EvolutionAPI/whatsmeow.git whatsmeow-lib 2>/dev/null || true
     fi
     cd "$ROOT_DIR"
-fi
-
-# ── 4. Obfuscate pkg/core ──
-echo "[4/7] Obfuscating pkg/core..."
-mkdir -p "$BETA_DIR/pkg/core"
-if [ -f "$OBFUSCATE_TOOL" ]; then
-    go run "$OBFUSCATE_TOOL" "$ROOT_DIR/pkg/core" "$BETA_DIR/pkg/core/c0.go"
-else
-    echo "  ERROR: $OBFUSCATE_TOOL not found"
-    exit 1
 fi
 
 # ── 5. Patch Docker workflow for beta ──
@@ -212,7 +201,7 @@ rm -f "$BETA_DIR/CLAUDE.md" 2>/dev/null
 echo "[7/7] Verifying..."
 
 OK=true
-for f in cmd/evolution-go/main.go go.mod go.sum pkg/core/c0.go \
+for f in cmd/evolution-go/main.go go.mod go.sum \
          Dockerfile README.md VERSION .gitignore; do
     if [ ! -f "$BETA_DIR/$f" ]; then
         echo "  MISSING: $f"

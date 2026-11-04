@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/call/reject": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Reject call",
                 "consumes": [
                     "application/json"
@@ -46,10 +51,58 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -57,6 +110,11 @@ const docTemplate = `{
         },
         "/chat/archive": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Archive a chat",
                 "consumes": [
                     "application/json"
@@ -89,20 +147,67 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
             }
         },
-        "/chat/history-sync-request": {
+        "/chat/history-sync": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "HistorySyncRequest a chat",
                 "consumes": [
                     "application/json"
@@ -135,13 +240,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -149,6 +296,11 @@ const docTemplate = `{
         },
         "/chat/mute": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Mute a chat",
                 "consumes": [
                     "application/json"
@@ -181,13 +333,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -195,6 +389,11 @@ const docTemplate = `{
         },
         "/chat/pin": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Pin a chat",
                 "consumes": [
                     "application/json"
@@ -227,13 +426,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -241,6 +482,11 @@ const docTemplate = `{
         },
         "/chat/unarchive": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Unarchive a chat",
                 "consumes": [
                     "application/json"
@@ -273,13 +519,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -287,6 +575,11 @@ const docTemplate = `{
         },
         "/chat/unmute": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Unmute a chat",
                 "consumes": [
                     "application/json"
@@ -319,13 +612,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -333,6 +668,11 @@ const docTemplate = `{
         },
         "/chat/unpin": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Unpin a chat",
                 "consumes": [
                     "application/json"
@@ -365,13 +705,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -379,6 +761,11 @@ const docTemplate = `{
         },
         "/community/add": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Add participant to community",
                 "consumes": [
                     "application/json"
@@ -411,13 +798,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -425,6 +854,11 @@ const docTemplate = `{
         },
         "/community/create": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Create community",
                 "consumes": [
                     "application/json"
@@ -457,13 +891,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -471,6 +947,11 @@ const docTemplate = `{
         },
         "/community/remove": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Remove participant from community",
                 "consumes": [
                     "application/json"
@@ -503,13 +984,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -517,6 +1040,11 @@ const docTemplate = `{
         },
         "/group/create": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Create group",
                 "consumes": [
                     "application/json"
@@ -549,13 +1077,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -563,6 +1133,11 @@ const docTemplate = `{
         },
         "/group/description": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set group description",
                 "consumes": [
                     "application/json"
@@ -595,13 +1170,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -609,6 +1226,11 @@ const docTemplate = `{
         },
         "/group/info": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get group info",
                 "consumes": [
                     "application/json"
@@ -641,13 +1263,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -655,6 +1319,11 @@ const docTemplate = `{
         },
         "/group/invitelink": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get group invite link",
                 "consumes": [
                     "application/json"
@@ -687,13 +1356,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -701,6 +1412,11 @@ const docTemplate = `{
         },
         "/group/join": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Join group link",
                 "consumes": [
                     "application/json"
@@ -733,13 +1449,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -747,6 +1505,11 @@ const docTemplate = `{
         },
         "/group/leave": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Leave group",
                 "consumes": [
                     "application/json"
@@ -779,13 +1542,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -793,6 +1598,11 @@ const docTemplate = `{
         },
         "/group/list": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "List groups",
                 "consumes": [
                     "application/json"
@@ -811,10 +1621,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -822,6 +1662,11 @@ const docTemplate = `{
         },
         "/group/myall": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get my groups",
                 "consumes": [
                     "application/json"
@@ -840,10 +1685,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -851,6 +1726,11 @@ const docTemplate = `{
         },
         "/group/name": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set group name",
                 "consumes": [
                     "application/json"
@@ -883,13 +1763,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -897,6 +1819,11 @@ const docTemplate = `{
         },
         "/group/participant": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Update participant",
                 "consumes": [
                     "application/json"
@@ -929,13 +1856,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -943,6 +1912,11 @@ const docTemplate = `{
         },
         "/group/photo": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set group photo",
                 "consumes": [
                     "application/json"
@@ -975,13 +1949,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -989,6 +2005,11 @@ const docTemplate = `{
         },
         "/instance/all": {
             "get": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Get all instances",
                 "consumes": [
                     "application/json"
@@ -1007,10 +2028,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1018,6 +2069,11 @@ const docTemplate = `{
         },
         "/instance/connect": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Connect to instance with the provided data",
                 "consumes": [
                     "application/json"
@@ -1050,13 +2106,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1064,6 +2162,11 @@ const docTemplate = `{
         },
         "/instance/create": {
             "post": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Creates a new instance with the provided data including optional advanced settings",
                 "consumes": [
                     "application/json"
@@ -1096,13 +2199,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1110,6 +2255,11 @@ const docTemplate = `{
         },
         "/instance/delete/{instanceId}": {
             "delete": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Delete instance",
                 "consumes": [
                     "application/json"
@@ -1140,13 +2290,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1154,6 +2346,11 @@ const docTemplate = `{
         },
         "/instance/disconnect": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Disconnect from instance",
                 "consumes": [
                     "application/json"
@@ -1172,10 +2369,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1183,6 +2410,11 @@ const docTemplate = `{
         },
         "/instance/forcereconnect/{instanceId}": {
             "post": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Force reconnect",
                 "consumes": [
                     "application/json"
@@ -1222,20 +2454,67 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
             }
         },
-        "/instance/get/{instanceId}": {
+        "/instance/info/{instanceId}": {
             "get": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Get instance",
                 "consumes": [
                     "application/json"
@@ -1266,13 +2545,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1280,6 +2601,11 @@ const docTemplate = `{
         },
         "/instance/logout": {
             "delete": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Logout from instance",
                 "consumes": [
                     "application/json"
@@ -1298,10 +2624,197 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/instance/logs/{instanceId}": {
+            "get": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Instance"
+                ],
+                "summary": "Get instance logs",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Instance ID",
+                        "name": "instanceId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Start date (YYYY-MM-DD); defaults to seven days ago",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "End date (YYYY-MM-DD); defaults to today",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Log level filter",
+                        "name": "level",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 100,
+                        "description": "Maximum records; defaults to 100",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/gin.H"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "instance_id": {
+                                                "type": "string"
+                                            },
+                                            "level": {
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "metadata": {
+                                                "type": "object"
+                                            },
+                                            "timestamp": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid query",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid admin API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Could not read logs",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1309,6 +2822,11 @@ const docTemplate = `{
         },
         "/instance/pair": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Request pairing code",
                 "consumes": [
                     "application/json"
@@ -1341,13 +2859,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1355,6 +2915,11 @@ const docTemplate = `{
         },
         "/instance/proxy/{instanceId}": {
             "post": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Set proxy configuration for an instance",
                 "consumes": [
                     "application/json"
@@ -1394,18 +2959,65 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "AdminApiKey": []
+                    }
+                ],
                 "description": "Delete proxy",
                 "consumes": [
                     "application/json"
@@ -1436,13 +3048,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1450,6 +3104,11 @@ const docTemplate = `{
         },
         "/instance/qr": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get instance QR code",
                 "consumes": [
                     "application/json"
@@ -1468,10 +3127,58 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1479,6 +3186,11 @@ const docTemplate = `{
         },
         "/instance/reconnect": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Reconnect to instance",
                 "consumes": [
                     "application/json"
@@ -1497,10 +3209,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1508,6 +3250,11 @@ const docTemplate = `{
         },
         "/instance/status": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get instance status",
                 "consumes": [
                     "application/json"
@@ -1526,10 +3273,58 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1537,6 +3332,11 @@ const docTemplate = `{
         },
         "/instance/{instanceId}/advanced-settings": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get advanced settings for a specific instance",
                 "produces": [
                     "application/json"
@@ -1564,24 +3364,83 @@ const docTemplate = `{
                     "400": {
                         "description": "Invalid instance ID",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
                         "description": "Instance not found",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Update advanced settings for a specific instance",
                 "consumes": [
                     "application/json"
@@ -1621,48 +3480,73 @@ const docTemplate = `{
                     "400": {
                         "description": "Invalid request data",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
                         "description": "Instance not found",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
-                        }
-                    }
-                }
-            }
-        },
-        "/label": {
-            "get": {
-                "description": "Get all labels",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Label"
-                ],
-                "summary": "Get all labels",
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "schema": {
-                            "$ref": "#/definitions/gin.H"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1670,6 +3554,11 @@ const docTemplate = `{
         },
         "/label/chat": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Add label to chat",
                 "consumes": [
                     "application/json"
@@ -1702,13 +3591,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1716,6 +3647,11 @@ const docTemplate = `{
         },
         "/label/edit": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Edit label",
                 "consumes": [
                     "application/json"
@@ -1748,13 +3684,119 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/label/list": {
+            "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
+                "description": "Get all labels",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Label"
+                ],
+                "summary": "Get all labels",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
                             "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1762,6 +3804,11 @@ const docTemplate = `{
         },
         "/label/message": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Add label to message",
                 "consumes": [
                     "application/json"
@@ -1794,13 +3841,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1808,6 +3897,11 @@ const docTemplate = `{
         },
         "/message/delete": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Delete a message for everyone",
                 "consumes": [
                     "application/json"
@@ -1840,20 +3934,67 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
             }
         },
-        "/message/downloadimage": {
+        "/message/downloadmedia": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Download an image",
                 "consumes": [
                     "application/json"
@@ -1886,13 +4027,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1900,6 +4083,11 @@ const docTemplate = `{
         },
         "/message/edit": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Edit a message",
                 "consumes": [
                     "application/json"
@@ -1932,13 +4120,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1946,6 +4176,11 @@ const docTemplate = `{
         },
         "/message/markread": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Mark a message as read",
                 "consumes": [
                     "application/json"
@@ -1978,13 +4213,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -1992,6 +4269,11 @@ const docTemplate = `{
         },
         "/message/presence": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set chat presence",
                 "consumes": [
                     "application/json"
@@ -2024,13 +4306,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2038,6 +4362,11 @@ const docTemplate = `{
         },
         "/message/react": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "React to a message with support for fromMe field and participant field for group messages",
                 "consumes": [
                     "application/json"
@@ -2070,13 +4399,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2084,6 +4455,11 @@ const docTemplate = `{
         },
         "/message/status": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get message status",
                 "consumes": [
                     "application/json"
@@ -2116,13 +4492,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2130,6 +4548,11 @@ const docTemplate = `{
         },
         "/newsletter/create": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Create newsletter",
                 "consumes": [
                     "application/json"
@@ -2162,13 +4585,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2176,6 +4641,11 @@ const docTemplate = `{
         },
         "/newsletter/info": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get newsletter",
                 "consumes": [
                     "application/json"
@@ -2208,13 +4678,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2222,6 +4734,11 @@ const docTemplate = `{
         },
         "/newsletter/link": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get newsletter invite",
                 "consumes": [
                     "application/json"
@@ -2254,13 +4771,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2268,6 +4827,11 @@ const docTemplate = `{
         },
         "/newsletter/list": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "List newsletters",
                 "consumes": [
                     "application/json"
@@ -2286,10 +4850,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2297,6 +4891,11 @@ const docTemplate = `{
         },
         "/newsletter/messages": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get newsletter messages",
                 "consumes": [
                     "application/json"
@@ -2329,13 +4928,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2343,6 +4984,11 @@ const docTemplate = `{
         },
         "/newsletter/subscribe": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Subscribe newsletter",
                 "consumes": [
                     "application/json"
@@ -2375,13 +5021,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2389,6 +5077,11 @@ const docTemplate = `{
         },
         "/polls/{pollMessageId}/results": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Retorna todos os votos de uma enquete específica",
                 "consumes": [
                     "application/json"
@@ -2419,19 +5112,73 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2439,6 +5186,11 @@ const docTemplate = `{
         },
         "/send/button": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send an interactive message with buttons. Each button has a ` + "`" + `type` + "`" + `: ` + "`" + `reply` + "`" + `, ` + "`" + `copy` + "`" + `, ` + "`" + `url` + "`" + `, ` + "`" + `call` + "`" + ` or ` + "`" + `pix` + "`" + `.\n\nCombination rules enforced by the server:\n- Up to 3 ` + "`" + `reply` + "`" + ` buttons per message.\n- ` + "`" + `reply` + "`" + ` buttons cannot be mixed with any other type.\n- ` + "`" + `pix` + "`" + ` button must be sent ALONE (no other button in the same message).\n\nWhatsApp client rendering quirks (NOT enforced by the server, but verified in the field):\n- WhatsApp Web: only ` + "`" + `reply` + "`" + `-only messages (up to 3) OR CTAs grouped together (` + "`" + `copy` + "`" + ` + ` + "`" + `url` + "`" + ` + ` + "`" + `call` + "`" + `) render correctly.\n- Do NOT mix ` + "`" + `reply` + "`" + ` with CTA buttons (` + "`" + `copy` + "`" + `/` + "`" + `url` + "`" + `/` + "`" + `call` + "`" + `) — the message will not appear on WhatsApp Web.\n\nRequired body fields: ` + "`" + `number` + "`" + `, ` + "`" + `title` + "`" + `, ` + "`" + `description` + "`" + `, ` + "`" + `footer` + "`" + `, ` + "`" + `buttons` + "`" + `.",
                 "consumes": [
                     "application/json"
@@ -2465,19 +5217,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2485,6 +5294,11 @@ const docTemplate = `{
         },
         "/send/carousel": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send an interactive carousel (multiple swipeable cards). Each card carries its own image or video, body and optional buttons.\n\nCard button ` + "`" + `type` + "`" + ` accepted values (case-insensitive, uppercased internally): ` + "`" + `REPLY` + "`" + ` (default), ` + "`" + `URL` + "`" + `, ` + "`" + `CALL` + "`" + `, ` + "`" + `COPY` + "`" + `.\nThe ` + "`" + `PIX` + "`" + ` button type is NOT supported in carousel cards — use ` + "`" + `/send/button` + "`" + ` for PIX.\n\nIMPORTANT — ` + "`" + `CarouselButtonStruct` + "`" + ` is different from the flat button used in ` + "`" + `/send/button` + "`" + `:\n- URL button: put the link in the ` + "`" + `id` + "`" + ` field (NOT in a ` + "`" + `url` + "`" + ` field).\n- CALL button: put the phone number in the ` + "`" + `id` + "`" + ` field (NOT in a ` + "`" + `phoneNumber` + "`" + ` field).\n- COPY button: put the code to be copied in ` + "`" + `copyCode` + "`" + `.\n- REPLY button: put the payload/callback ID in ` + "`" + `id` + "`" + `.\n\nPer-card combination rules (NOT enforced by the server, but verified in the field):\n- Same WhatsApp Web quirk as ` + "`" + `/send/button` + "`" + `: avoid mixing REPLY with CTA buttons (URL/CALL/COPY) in the same card — mixed sets do not render on Web.\n- Stick to either \"only REPLY\" or \"only CTAs grouped together\" per card.\n\nRequired body fields: ` + "`" + `number` + "`" + `, ` + "`" + `cards` + "`" + ` (at least one). Each card requires ` + "`" + `header` + "`" + ` + ` + "`" + `body` + "`" + `.",
                 "consumes": [
                     "application/json"
@@ -2511,19 +5325,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2531,6 +5402,11 @@ const docTemplate = `{
         },
         "/send/contact": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send a contact message",
                 "consumes": [
                     "application/json"
@@ -2557,19 +5433,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2577,6 +5510,11 @@ const docTemplate = `{
         },
         "/send/link": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send a link message",
                 "consumes": [
                     "application/json"
@@ -2603,19 +5541,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2623,7 +5618,12 @@ const docTemplate = `{
         },
         "/send/list": {
             "post": {
-                "description": "Send an interactive list message (single-select) rendered as a tappable menu.\n\nRequired body fields: ` + "`" + `number` + "`" + `, ` + "`" + `title` + "`" + `, ` + "`" + `description` + "`" + `, ` + "`" + `footerText` + "`" + `, ` + "`" + `buttonText` + "`" + `, ` + "`" + `sections` + "`" + `.\nEach section must contain one or more ` + "`" + `rows` + "`" + `. When ` + "`" + `rowId` + "`" + ` is omitted, the server generates a fallback ID.\nWhen ` + "`" + `buttonText` + "`" + ` is empty, the server falls back to \"Ver Menu\".\n\nUses legacy ` + "`" + `ListMessage` + "`" + ` format (no ViewOnceMessage wrapper) so it renders on iOS, Android and WhatsApp Web.",
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
+                "description": "Send an interactive list message (single-select) rendered as a tappable menu.\n\nRequired body fields: ` + "`" + `number` + "`" + `, ` + "`" + `title` + "`" + `, ` + "`" + `description` + "`" + `, ` + "`" + `footerText` + "`" + `, ` + "`" + `buttonText` + "`" + `, ` + "`" + `sections` + "`" + `.\nEach section must contain one or more ` + "`" + `rows` + "`" + `. When ` + "`" + `rowId` + "`" + ` is omitted, the server generates a fallback ID.\nThe HTTP endpoint rejects empty ` + "`" + `buttonText` + "`" + ` and ` + "`" + `footerText` + "`" + `.\n\nUses legacy ` + "`" + `ListMessage` + "`" + ` format (no ViewOnceMessage wrapper) so it renders on iOS, Android and WhatsApp Web.",
                 "consumes": [
                     "application/json"
                 ],
@@ -2649,19 +5649,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2669,6 +5726,11 @@ const docTemplate = `{
         },
         "/send/location": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send a location message",
                 "consumes": [
                     "application/json"
@@ -2695,19 +5757,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2715,9 +5834,15 @@ const docTemplate = `{
         },
         "/send/media": {
             "post": {
-                "description": "Send a media message",
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
+                "description": "JSON: number, type and url are required. url accepts HTTP(S) or raw base64 without a data: prefix. Multipart: number, type and file are required; optional fields are caption, filename, id, delay, mentionAll, repeated mentionedJid, quoted.messageId and quoted.participant.\nSwagger 2.0 cannot model JSON body and multipart form parameters on the same operation; the interactive body below represents JSON. See Postman and the media guide for multipart examples.",
                 "consumes": [
-                    "application/json"
+                    "application/json",
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "application/json"
@@ -2728,7 +5853,7 @@ const docTemplate = `{
                 "summary": "Send a media message",
                 "parameters": [
                     {
-                        "description": "Message data",
+                        "description": "JSON body; for multipart use number, type and file",
                         "name": "message",
                         "in": "body",
                         "required": true,
@@ -2741,19 +5866,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2761,6 +5943,11 @@ const docTemplate = `{
         },
         "/send/poll": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send a poll message",
                 "consumes": [
                     "application/json"
@@ -2787,19 +5974,293 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/send/status/media": {
+            "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
+                "description": "Send an image or video status to status@broadcast. Supports JSON (URL) or multipart/form-data (file upload)\nJSON body: {\"type\":\"image\",\"url\":\"https://example.com/image.jpg\",\"caption\":\"optional\",\"id\":\"optional\"}. type and url are required. Multipart uses type and file instead.",
+                "consumes": [
+                    "application/json",
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Send Message"
+                ],
+                "summary": "Send a WhatsApp media status (image/video)",
+                "parameters": [
+                    {
+                        "description": "JSON body; multipart uses type and file instead of url",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusMediaStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Error on validation",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/send/status/text": {
+            "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
+                "description": "Send a WhatsApp text status to status@broadcast",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Send Message"
+                ],
+                "summary": "Send a WhatsApp text status",
+                "parameters": [
+                    {
+                        "description": "Status text data",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusTextStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Error on validation",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2807,6 +6268,11 @@ const docTemplate = `{
         },
         "/send/sticker": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send a sticker message",
                 "consumes": [
                     "application/json"
@@ -2833,19 +6299,76 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2853,6 +6376,11 @@ const docTemplate = `{
         },
         "/send/text": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Send a text message",
                 "consumes": [
                     "application/json"
@@ -2879,19 +6407,108 @@ const docTemplate = `{
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/server/ok": {
+            "get": {
+                "description": "Public health endpoint; no API key is required.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Server"
+                ],
+                "summary": "Check server health",
+                "responses": {
+                    "200": {
+                        "description": "Server is running",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2899,6 +6516,11 @@ const docTemplate = `{
         },
         "/unlabel/chat": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Remove label from chat",
                 "consumes": [
                     "application/json"
@@ -2931,13 +6553,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2945,6 +6609,11 @@ const docTemplate = `{
         },
         "/unlabel/message": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Remove label from message",
                 "consumes": [
                     "application/json"
@@ -2977,13 +6646,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -2991,6 +6702,11 @@ const docTemplate = `{
         },
         "/user/avatar": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get a user's avatar",
                 "consumes": [
                     "application/json"
@@ -3023,13 +6739,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3037,6 +6795,11 @@ const docTemplate = `{
         },
         "/user/block": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Block a contact",
                 "consumes": [
                     "application/json"
@@ -3069,13 +6832,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3083,6 +6888,11 @@ const docTemplate = `{
         },
         "/user/blocklist": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get a user's block list",
                 "consumes": [
                     "application/json"
@@ -3101,10 +6911,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3112,6 +6952,11 @@ const docTemplate = `{
         },
         "/user/check": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Check a user",
                 "consumes": [
                     "application/json"
@@ -3144,13 +6989,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3158,6 +7045,11 @@ const docTemplate = `{
         },
         "/user/contacts": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get a user's contacts",
                 "consumes": [
                     "application/json"
@@ -3176,10 +7068,40 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3187,6 +7109,11 @@ const docTemplate = `{
         },
         "/user/info": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get a user",
                 "consumes": [
                     "application/json"
@@ -3219,13 +7146,148 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/user/lid": {
+            "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
+                "description": "Resolve the phone number behind a LID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Resolve the phone number behind a LID",
+                "parameters": [
+                    {
+                        "description": "Lid data",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_user_service.ResolveLidStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
                             "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "400": {
+                        "description": "Error on validation",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3233,6 +7295,11 @@ const docTemplate = `{
         },
         "/user/privacy": {
             "get": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Get a user's privacy settings",
                 "consumes": [
                     "application/json"
@@ -3251,15 +7318,50 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set a user's privacy settings",
                 "consumes": [
                     "application/json"
@@ -3289,10 +7391,58 @@ const docTemplate = `{
                             "$ref": "#/definitions/gin.H"
                         }
                     },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3300,6 +7450,11 @@ const docTemplate = `{
         },
         "/user/profileName": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set a user's profile name",
                 "consumes": [
                     "application/json"
@@ -3332,13 +7487,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3346,6 +7543,11 @@ const docTemplate = `{
         },
         "/user/profilePicture": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set a user's profile picture",
                 "consumes": [
                     "application/json"
@@ -3378,13 +7580,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3392,6 +7636,11 @@ const docTemplate = `{
         },
         "/user/profileStatus": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Set a user's profile status",
                 "consumes": [
                     "application/json"
@@ -3424,13 +7673,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3438,6 +7729,11 @@ const docTemplate = `{
         },
         "/user/unblock": {
             "post": {
+                "security": [
+                    {
+                        "InstanceApiKey": []
+                    }
+                ],
                 "description": "Unblock a contact",
                 "consumes": [
                     "application/json"
@@ -3470,13 +7766,55 @@ const docTemplate = `{
                     "400": {
                         "description": "Error on validation",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid API key",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "500": {
                         "description": "Internal server error",
                         "schema": {
-                            "$ref": "#/definitions/gin.H"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/gin.H"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3492,7 +7830,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "callCreator": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                    "type": "string"
                 },
                 "callId": {
                     "type": "string"
@@ -3501,6 +7839,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_chat_service.BodyStruct": {
             "type": "object",
+            "required": [
+                "chat"
+            ],
             "properties": {
                 "chat": {
                     "type": "string"
@@ -3520,6 +7861,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_community_service.AddParticipantStruct": {
             "type": "object",
+            "required": [
+                "communityJid",
+                "groupJid"
+            ],
             "properties": {
                 "communityJid": {
                     "type": "string"
@@ -3534,6 +7879,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_community_service.CreateCommunityStruct": {
             "type": "object",
+            "required": [
+                "communityName"
+            ],
             "properties": {
                 "communityName": {
                     "type": "string"
@@ -3542,12 +7890,16 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.AddParticipantStruct": {
             "type": "object",
+            "required": [
+                "action",
+                "participants"
+            ],
             "properties": {
                 "action": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow.ParticipantChange"
                 },
                 "groupJid": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                    "type": "string"
                 },
                 "participants": {
                     "type": "array",
@@ -3559,6 +7911,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.CreateGroupStruct": {
             "type": "object",
+            "required": [
+                "groupName",
+                "participants"
+            ],
             "properties": {
                 "groupName": {
                     "type": "string"
@@ -3573,6 +7929,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.GetGroupInfoStruct": {
             "type": "object",
+            "required": [
+                "groupJid"
+            ],
             "properties": {
                 "groupJid": {
                     "type": "string"
@@ -3581,6 +7940,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.GetGroupInviteLinkStruct": {
             "type": "object",
+            "required": [
+                "groupJid"
+            ],
             "properties": {
                 "groupJid": {
                     "type": "string"
@@ -3592,6 +7954,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.JoinGroupStruct": {
             "type": "object",
+            "required": [
+                "code"
+            ],
             "properties": {
                 "code": {
                     "type": "string"
@@ -3602,12 +7967,15 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "groupJid": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                    "type": "string"
                 }
             }
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.SetGroupDescriptionStruct": {
             "type": "object",
+            "required": [
+                "groupJid"
+            ],
             "properties": {
                 "description": {
                     "type": "string"
@@ -3619,6 +7987,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.SetGroupNameStruct": {
             "type": "object",
+            "required": [
+                "groupJid",
+                "name"
+            ],
             "properties": {
                 "groupJid": {
                     "type": "string"
@@ -3630,6 +8002,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_group_service.SetGroupPhotoStruct": {
             "type": "object",
+            "required": [
+                "groupJid",
+                "image"
+            ],
             "properties": {
                 "groupJid": {
                     "type": "string"
@@ -3693,6 +8069,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_instance_service.CreateStruct": {
             "type": "object",
+            "required": [
+                "name",
+                "token"
+            ],
             "properties": {
                 "advancedSettings": {
                     "$ref": "#/definitions/github_com_EvolutionAPI_evolution-go_pkg_instance_model.AdvancedSettings"
@@ -3713,6 +8093,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_instance_service.ForceReconnectStruct": {
             "type": "object",
+            "required": [
+                "number"
+            ],
             "properties": {
                 "number": {
                     "type": "string"
@@ -3721,6 +8104,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_instance_service.PairStruct": {
             "type": "object",
+            "required": [
+                "phone"
+            ],
             "properties": {
                 "phone": {
                     "type": "string"
@@ -3745,6 +8131,9 @@ const docTemplate = `{
                 "port": {
                     "type": "string"
                 },
+                "protocol": {
+                    "type": "string"
+                },
                 "username": {
                     "type": "string"
                 }
@@ -3766,6 +8155,9 @@ const docTemplate = `{
                 "port": {
                     "type": "string"
                 },
+                "protocol": {
+                    "type": "string"
+                },
                 "username": {
                     "type": "string"
                 }
@@ -3773,6 +8165,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_label_service.ChatLabelStruct": {
             "type": "object",
+            "required": [
+                "jid",
+                "labelId"
+            ],
             "properties": {
                 "jid": {
                     "type": "string"
@@ -3784,6 +8180,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_label_service.EditLabelStruct": {
             "type": "object",
+            "required": [
+                "labelId",
+                "name"
+            ],
             "properties": {
                 "color": {
                     "type": "integer"
@@ -3801,6 +8201,11 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_label_service.MessageLabelStruct": {
             "type": "object",
+            "required": [
+                "jid",
+                "labelId",
+                "messageId"
+            ],
             "properties": {
                 "jid": {
                     "type": "string"
@@ -3815,6 +8220,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_message_service.ChatPresenceStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "state"
+            ],
             "properties": {
                 "isAudio": {
                     "type": "boolean"
@@ -3837,6 +8246,11 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_message_service.EditMessageStruct": {
             "type": "object",
+            "required": [
+                "chat",
+                "message",
+                "messageId"
+            ],
             "properties": {
                 "chat": {
                     "type": "string"
@@ -3851,6 +8265,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_message_service.MarkReadStruct": {
             "type": "object",
+            "required": [
+                "id",
+                "number"
+            ],
             "properties": {
                 "id": {
                     "type": "array",
@@ -3865,6 +8283,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_message_service.MessageStatusStruct": {
             "type": "object",
+            "required": [
+                "id"
+            ],
             "properties": {
                 "id": {
                     "type": "string"
@@ -3873,6 +8294,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_message_service.MessageStruct": {
             "type": "object",
+            "required": [
+                "chat",
+                "messageId"
+            ],
             "properties": {
                 "chat": {
                     "type": "string"
@@ -3884,6 +8309,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_message_service.ReactStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "reaction"
+            ],
             "properties": {
                 "fromMe": {
                     "type": "boolean"
@@ -3904,6 +8333,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_newsletter_service.CreateNewsletterStruct": {
             "type": "object",
+            "required": [
+                "name"
+            ],
             "properties": {
                 "description": {
                     "type": "string"
@@ -3915,6 +8347,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_newsletter_service.GetNewsletterInviteStruct": {
             "type": "object",
+            "required": [
+                "key"
+            ],
             "properties": {
                 "key": {
                     "type": "string"
@@ -3931,7 +8366,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "jid": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                    "type": "string"
                 }
             }
         },
@@ -3939,7 +8374,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "jid": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                    "type": "string"
                 }
             }
         },
@@ -4115,6 +8550,12 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.ButtonStruct": {
             "type": "object",
+            "required": [
+                "description",
+                "footer",
+                "number",
+                "title"
+            ],
             "properties": {
                 "buttons": {
                     "description": "Buttons array. See combination rules on the parent type description.",
@@ -4277,6 +8718,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.CarouselStruct": {
             "type": "object",
+            "required": [
+                "cards",
+                "number"
+            ],
             "properties": {
                 "body": {
                     "description": "Optional message body shown above the cards.",
@@ -4321,6 +8766,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.ContactStruct": {
             "type": "object",
+            "required": [
+                "number"
+            ],
             "properties": {
                 "delay": {
                     "type": "integer"
@@ -4353,6 +8801,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.LinkStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "text"
+            ],
             "properties": {
                 "delay": {
                     "type": "integer"
@@ -4397,9 +8849,16 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.ListStruct": {
             "type": "object",
+            "required": [
+                "buttonText",
+                "description",
+                "footerText",
+                "number",
+                "title"
+            ],
             "properties": {
                 "buttonText": {
-                    "description": "Label of the button that opens the list. Defaults to \"Ver Menu\" when empty.",
+                    "description": "Label of the button that opens the list. Required by the HTTP handler.",
                     "type": "string",
                     "example": "Abrir cardapio"
                 },
@@ -4462,6 +8921,13 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.LocationStruct": {
             "type": "object",
+            "required": [
+                "address",
+                "latitude",
+                "longitude",
+                "name",
+                "number"
+            ],
             "properties": {
                 "address": {
                     "type": "string"
@@ -4503,6 +8969,11 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MediaStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "type",
+                "url"
+            ],
             "properties": {
                 "caption": {
                     "type": "string"
@@ -4538,12 +9009,32 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "url": {
+                    "description": "HTTP(S) media URL or raw base64 without a data: prefix.",
                     "type": "string"
+                }
+            }
+        },
+        "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.MessageSendStruct": {
+            "type": "object",
+            "properties": {
+                "Info": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.MessageInfo"
+                },
+                "Message": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Message"
+                },
+                "MessageContextInfo": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
                 }
             }
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.PollStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "options",
+                "question"
+            ],
             "properties": {
                 "delay": {
                     "type": "integer"
@@ -4631,8 +9122,51 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusMediaStruct": {
+            "type": "object",
+            "required": [
+                "type",
+                "url"
+            ],
+            "properties": {
+                "caption": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "video"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StatusTextStruct": {
+            "type": "object",
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.StickerStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "sticker"
+            ],
             "properties": {
                 "delay": {
                     "type": "integer"
@@ -4665,6 +9199,10 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_sendMessage_service.TextStruct": {
             "type": "object",
+            "required": [
+                "number",
+                "text"
+            ],
             "properties": {
                 "delay": {
                     "type": "integer"
@@ -4697,6 +9235,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_user_service.BlockStruct": {
             "type": "object",
+            "required": [
+                "number"
+            ],
             "properties": {
                 "number": {
                     "type": "string"
@@ -4705,6 +9246,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_user_service.CheckUserStruct": {
             "type": "object",
+            "required": [
+                "number"
+            ],
             "properties": {
                 "formatJid": {
                     "type": "boolean"
@@ -4719,6 +9263,9 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_user_service.GetAvatarStruct": {
             "type": "object",
+            "required": [
+                "number"
+            ],
             "properties": {
                 "number": {
                     "type": "string"
@@ -4730,6 +9277,15 @@ const docTemplate = `{
         },
         "github_com_EvolutionAPI_evolution-go_pkg_user_service.PrivacyStruct": {
             "type": "object",
+            "required": [
+                "callAdd",
+                "groupAdd",
+                "lastSeen",
+                "online",
+                "profile",
+                "readReceipts",
+                "status"
+            ],
             "properties": {
                 "callAdd": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_types.PrivacySetting"
@@ -4754,8 +9310,25 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_EvolutionAPI_evolution-go_pkg_user_service.ResolveLidStruct": {
+            "type": "object",
+            "required": [
+                "lid"
+            ],
+            "properties": {
+                "groupJid": {
+                    "type": "string"
+                },
+                "lid": {
+                    "type": "string"
+                }
+            }
+        },
         "github_com_EvolutionAPI_evolution-go_pkg_user_service.SetProfilePictureStruct": {
             "type": "object",
+            "required": [
+                "image"
+            ],
             "properties": {
                 "image": {
                     "type": "string"
@@ -4810,6 +9383,9 @@ const docTemplate = `{
             "properties": {
                 "collectionID": {
                     "type": "string"
+                },
+                "uploadOrderIndex": {
+                    "type": "integer"
                 }
             }
         },
@@ -4835,6 +9411,29 @@ const docTemplate = `{
                 }
             }
         },
+        "go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionRequestType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "x-enum-varnames": [
+                "AISubscriptionRequestType_UNSPECIFIED",
+                "AISubscriptionRequestType_THINK_HARD",
+                "AISubscriptionRequestType_IMAGE_GEN",
+                "AISubscriptionRequestType_VIDEO_GEN"
+            ]
+        },
+        "go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionUpsellMetadata": {
+            "type": "object",
+            "properties": {
+                "requestType": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionRequestType"
+                }
+            }
+        },
         "go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo": {
             "type": "object",
             "properties": {
@@ -4849,6 +9448,9 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadClientInfo": {
             "type": "object",
             "properties": {
+                "sourceChatJID": {
+                    "type": "string"
+                },
                 "type": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadClientInfo_AIThreadType"
                 }
@@ -4856,16 +9458,17 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadClientInfo_AIThreadType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
-                2
+                2,
+                3
             ],
             "x-enum-varnames": [
                 "AIThreadInfo_AIThreadClientInfo_UNKNOWN",
                 "AIThreadInfo_AIThreadClientInfo_DEFAULT",
-                "AIThreadInfo_AIThreadClientInfo_INCOGNITO"
+                "AIThreadInfo_AIThreadClientInfo_INCOGNITO",
+                "AIThreadInfo_AIThreadClientInfo_SIDE_CHAT"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.AIThreadInfo_AIThreadServerInfo": {
@@ -4892,7 +9495,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotAgeCollectionMetadata_AgeCollectionType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -4901,6 +9503,22 @@ const docTemplate = `{
                 "BotAgeCollectionMetadata_O18_BINARY",
                 "BotAgeCollectionMetadata_WAFFLE"
             ]
+        },
+        "go_mau_fi_whatsmeow_proto_waAICommon.BotAgentDeepLinkMetadata": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waAICommon.BotAgentMetadata": {
+            "type": "object",
+            "properties": {
+                "deepLinkMetadata": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotAgentDeepLinkMetadata"
+                }
+            }
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotCapabilityMetadata": {
             "type": "object",
@@ -4915,7 +9533,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotCapabilityMetadata_BotCapabilityType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -4974,7 +9591,11 @@ const docTemplate = `{
                 54,
                 55,
                 56,
-                57
+                57,
+                58,
+                59,
+                60,
+                61
             ],
             "x-enum-varnames": [
                 "BotCapabilityMetadata_UNKNOWN",
@@ -5034,8 +9655,26 @@ const docTemplate = `{
                 "BotCapabilityMetadata_AI_IMAGINE_UR_TO_NATIVE_LOADING_INDICATOR",
                 "BotCapabilityMetadata_RICH_RESPONSE_UR_BLOKS_ENABLED",
                 "BotCapabilityMetadata_RICH_RESPONSE_INLINE_LINKS_ENABLED",
-                "BotCapabilityMetadata_RICH_RESPONSE_UR_IMAGINE_VIDEO"
+                "BotCapabilityMetadata_RICH_RESPONSE_UR_IMAGINE_VIDEO",
+                "BotCapabilityMetadata_JSON_PATCH_STREAMING",
+                "BotCapabilityMetadata_AI_TAB_FORCE_CLIPPY",
+                "BotCapabilityMetadata_UNIFIED_RESPONSE_EMBEDDED_SCREENS",
+                "BotCapabilityMetadata_AI_SUBSCRIPTION_ENABLED"
             ]
+        },
+        "go_mau_fi_whatsmeow_proto_waAICommon.BotCommandMetadata": {
+            "type": "object",
+            "properties": {
+                "commandDescription": {
+                    "type": "string"
+                },
+                "commandName": {
+                    "type": "string"
+                },
+                "commandPrompt": {
+                    "type": "string"
+                }
+            }
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotDocumentMessageMetadata": {
             "type": "object",
@@ -5047,7 +9686,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotDocumentMessageMetadata_DocumentPluginType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -5085,7 +9723,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotFeedbackMessage_BotFeedbackKind": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5123,7 +9760,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotFeedbackMessage_ReportKind": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -5284,7 +9920,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotImagineMetadata_ImagineType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5319,7 +9954,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotInfrastructureDiagnostics_BotBackend": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -5339,7 +9973,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotLinkedAccount_BotLinkedAccountType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0
             ],
@@ -5395,7 +10028,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotMediaMetadata_OrientationType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -5470,7 +10102,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotMessageOrigin_BotMessageOriginType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0
             ],
@@ -5543,6 +10174,9 @@ const docTemplate = `{
                 "capabilityMetadata": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotCapabilityMetadata"
                 },
+                "commandMetadata": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotCommandMetadata"
+                },
                 "conversationStarterPromptID": {
                     "type": "string"
                 },
@@ -5591,6 +10225,9 @@ const docTemplate = `{
                 "renderingMetadata": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotRenderingMetadata"
                 },
+                "resolvedToolCallMetadata": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotResolvedToolCallMetadata"
+                },
                 "richResponseSourcesMetadata": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotSourcesMetadata"
                 },
@@ -5599,6 +10236,9 @@ const docTemplate = `{
                 },
                 "sessionTransparencyMetadata": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.SessionTransparencyMetadata"
+                },
+                "subscriptionUpsellMetadata": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.AISubscriptionUpsellMetadata"
                 },
                 "suggestedPromptMetadata": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotSuggestedPromptMetadata"
@@ -5616,7 +10256,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotMetricsEntryPoint": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5663,7 +10302,9 @@ const docTemplate = `{
                 45,
                 46,
                 47,
-                54
+                54,
+                55,
+                56
             ],
             "x-enum-varnames": [
                 "BotMetricsEntryPoint_UNDEFINED_ENTRY_POINT",
@@ -5711,7 +10352,9 @@ const docTemplate = `{
                 "BotMetricsEntryPoint_META_AI_SETTINGS",
                 "BotMetricsEntryPoint_WEB_INTRO_PANEL",
                 "BotMetricsEntryPoint_WEB_NAVIGATION_BAR",
-                "BotMetricsEntryPoint_GROUP_MEMBER"
+                "BotMetricsEntryPoint_GROUP_MEMBER",
+                "BotMetricsEntryPoint_CHATLIST_SEARCH",
+                "BotMetricsEntryPoint_NEW_CHAT_LIST"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotMetricsMetadata": {
@@ -5730,7 +10373,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotMetricsThreadEntryPoint": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -5765,7 +10407,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotModeSelectionMetadata_BotUserSelectionMode": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -5791,7 +10432,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotModelMetadata_ModelType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5805,7 +10445,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotModelMetadata_PremiumModelStatus": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5860,7 +10499,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotPluginMetadata_PluginType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5874,7 +10512,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotPluginMetadata_SearchProvider": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -5970,7 +10607,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotProgressIndicatorMetadata_BotPlanningStepMetadata_BotPlanningSearchSourcesMetadata_BotPlanningSearchSourceProvider": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6003,7 +10639,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotProgressIndicatorMetadata_BotPlanningStepMetadata_BotSearchSourceProvider": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6019,7 +10654,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotProgressIndicatorMetadata_BotPlanningStepMetadata_PlanningStepStatus": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6046,7 +10680,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotPromotionMessageMetadata_BotPromotionType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6107,7 +10740,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotQuotaMetadata_BotFeatureQuotaMetadata_BotFeatureType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -6139,7 +10771,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotReminderMetadata_ReminderAction": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -6155,7 +10786,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotReminderMetadata_ReminderFrequency": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -6207,6 +10837,17 @@ const docTemplate = `{
                 }
             }
         },
+        "go_mau_fi_whatsmeow_proto_waAICommon.BotResolvedToolCallMetadata": {
+            "type": "object",
+            "properties": {
+                "resolutionDataSerialized": {
+                    "type": "string"
+                },
+                "toolCallID": {
+                    "type": "string"
+                }
+            }
+        },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotSessionMetadata": {
             "type": "object",
             "properties": {
@@ -6220,7 +10861,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotSessionSource": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6261,8 +10901,7 @@ const docTemplate = `{
                     "items": {
                         "type": "array",
                         "items": {
-                            "type": "integer",
-                            "format": "int32"
+                            "type": "integer"
                         }
                     }
                 },
@@ -6282,7 +10921,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotSignatureVerificationUseCaseProof_BotSignatureUseCase": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6333,7 +10971,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.BotSourcesMetadata_BotSourceItem_SourceProvider": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6545,7 +11182,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommon.SessionTransparencyType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -6582,7 +11218,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseCodeMetadata_AIRichResponseCodeHighlightType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6617,14 +11252,13 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseContentItemsMetadata_AIRichResponseContentItemMetadata": {
             "type": "object",
             "properties": {
-                "airichResponseContentItem": {
+                "AIRichResponseContentItem": {
                     "description": "Types that are valid to be assigned to AIRichResponseContentItem:\n\n\t*AIRichResponseContentItemsMetadata_AIRichResponseContentItemMetadata_ReelItem"
                 }
             }
         },
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseContentItemsMetadata_ContentType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -6653,7 +11287,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseDynamicMetadata_AIRichResponseDynamicMetadataType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6712,7 +11345,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseInlineImageMetadata_AIRichResponseImageAlignment": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6818,7 +11450,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseMessageType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -6865,7 +11496,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAICommonDeprecated.AIRichResponseSubMessageType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -6921,7 +11551,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waAdv.ADVEncryptionType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -6941,6 +11570,9 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "fullSyncSizeMbLimit": {
+                    "type": "integer"
+                },
+                "initialSyncMaxMessagesPerChat": {
                     "type": "integer"
                 },
                 "inlineInitialPayloadInE2EeMsg": {
@@ -6979,7 +11611,16 @@ const docTemplate = `{
                 "supportGuestChat": {
                     "type": "boolean"
                 },
+                "supportHatchHistory": {
+                    "type": "boolean"
+                },
                 "supportHostedGroupMsg": {
+                    "type": "boolean"
+                },
+                "supportInlineContacts": {
+                    "type": "boolean"
+                },
+                "supportManusHistory": {
                     "type": "boolean"
                 },
                 "supportMessageAssociation": {
@@ -6987,6 +11628,12 @@ const docTemplate = `{
                 },
                 "supportRecentSyncChunkMessageCountTuning": {
                     "type": "boolean"
+                },
+                "supportedBotChannelFbids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "thumbnailSyncDaysLimit": {
                     "type": "integer"
@@ -7234,7 +11881,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.BCallMessage_MediaType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -7249,6 +11895,9 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage": {
             "type": "object",
             "properties": {
+                "Header": {
+                    "description": "Types that are valid to be assigned to Header:\n\n\t*ButtonsMessage_Text\n\t*ButtonsMessage_DocumentMessage\n\t*ButtonsMessage_ImageMessage\n\t*ButtonsMessage_VideoMessage\n\t*ButtonsMessage_LocationMessage"
+                },
                 "buttons": {
                     "type": "array",
                     "items": {
@@ -7263,9 +11912,6 @@ const docTemplate = `{
                 },
                 "footerText": {
                     "type": "string"
-                },
-                "header": {
-                    "description": "Types that are valid to be assigned to Header:\n\n\t*ButtonsMessage_Text\n\t*ButtonsMessage_DocumentMessage\n\t*ButtonsMessage_ImageMessage\n\t*ButtonsMessage_VideoMessage\n\t*ButtonsMessage_LocationMessage"
                 },
                 "headerType": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage_HeaderType"
@@ -7310,7 +11956,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage_Button_Type": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -7324,7 +11969,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ButtonsMessage_HeaderType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -7347,11 +11991,11 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.ButtonsResponseMessage": {
             "type": "object",
             "properties": {
+                "Response": {
+                    "description": "Types that are valid to be assigned to Response:\n\n\t*ButtonsResponseMessage_SelectedDisplayText"
+                },
                 "contextInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
-                },
-                "response": {
-                    "description": "Types that are valid to be assigned to Response:\n\n\t*ButtonsResponseMessage_SelectedDisplayText"
                 },
                 "selectedButtonID": {
                     "type": "string"
@@ -7363,7 +12007,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ButtonsResponseMessage_Type": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -7445,7 +12088,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.CallLogMessage_CallOutcome": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -7480,7 +12122,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.CallLogMessage_CallType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -7511,6 +12152,23 @@ const docTemplate = `{
                 }
             }
         },
+        "go_mau_fi_whatsmeow_proto_waE2E.ChatThemeSetting": {
+            "type": "object",
+            "properties": {
+                "Wallpaper": {
+                    "description": "Types that are valid to be assigned to Wallpaper:\n\n\t*ChatThemeSetting_DefaultWallpaper\n\t*ChatThemeSetting_SolidColor\n\t*ChatThemeSetting_StockImage\n\t*ChatThemeSetting_CustomImage"
+                },
+                "clearTheme": {
+                    "type": "boolean"
+                },
+                "colorSchemeID": {
+                    "type": "string"
+                },
+                "settingTimestampMS": {
+                    "type": "integer"
+                }
+            }
+        },
         "go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification": {
             "type": "object",
             "properties": {
@@ -7536,16 +12194,17 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification_CloudAPIThreadControl": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
-                2
+                2,
+                3
             ],
             "x-enum-varnames": [
                 "CloudAPIThreadControlNotification_UNKNOWN",
                 "CloudAPIThreadControlNotification_CONTROL_PASSED",
-                "CloudAPIThreadControlNotification_CONTROL_TAKEN"
+                "CloudAPIThreadControlNotification_CONTROL_TAKEN",
+                "CloudAPIThreadControlNotification_INFO"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification_CloudAPIThreadControlNotificationContent": {
@@ -7595,7 +12254,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ConditionalRevealMessage_ConditionalRevealMessageType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -7654,6 +12312,9 @@ const docTemplate = `{
                 "botMessageSharingInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotMessageSharingInfo"
                 },
+                "businessInteractionPills": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills"
+                },
                 "businessMessageForwardInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessMessageForwardInfo"
                 },
@@ -7668,6 +12329,9 @@ const docTemplate = `{
                 },
                 "conversionSource": {
                     "type": "string"
+                },
+                "crossAppSource": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_CrossAppSource"
                 },
                 "ctwaPayload": {
                     "type": "array",
@@ -7783,6 +12447,9 @@ const docTemplate = `{
                 "placeholderKey": {
                     "$ref": "#/definitions/waCommon.MessageKey"
                 },
+                "posterStatusID": {
+                    "type": "string"
+                },
                 "questionReplyQuotedMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_QuestionReplyQuotedMessage"
                 },
@@ -7861,7 +12528,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_AdReplyInfo_MediaType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -7873,6 +12539,82 @@ const docTemplate = `{
                 "ContextInfo_AdReplyInfo_VIDEO"
             ]
         },
+        "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills": {
+            "type": "object",
+            "properties": {
+                "businessJID": {
+                    "type": "string"
+                },
+                "entryPoint": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_EntryPoint"
+                },
+                "pills": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_Pill"
+                    }
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_EntryPoint": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "x-enum-varnames": [
+                "ContextInfo_BusinessInteractionPills_ENTRY_POINT_UNKNOWN",
+                "ContextInfo_BusinessInteractionPills_P2P_LINK_SHARE",
+                "ContextInfo_BusinessInteractionPills_CONTACT_CARD_SHARING",
+                "ContextInfo_BusinessInteractionPills_PHONE_NUMBER",
+                "ContextInfo_BusinessInteractionPills_STATUS",
+                "ContextInfo_BusinessInteractionPills_IN_THREAD_CONTEXT_CARD"
+            ]
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_Pill": {
+            "type": "object",
+            "properties": {
+                "actionURL": {
+                    "type": "string"
+                },
+                "pillType": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_PillType"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessInteractionPills_PillType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "x-enum-varnames": [
+                "ContextInfo_BusinessInteractionPills_UNKNOWN",
+                "ContextInfo_BusinessInteractionPills_VIEW_BUSINESS",
+                "ContextInfo_BusinessInteractionPills_CHAT",
+                "ContextInfo_BusinessInteractionPills_CALL",
+                "ContextInfo_BusinessInteractionPills_CATALOG",
+                "ContextInfo_BusinessInteractionPills_CHANNEL",
+                "ContextInfo_BusinessInteractionPills_BOOK_APPOINTMENT",
+                "ContextInfo_BusinessInteractionPills_OFFERS",
+                "ContextInfo_BusinessInteractionPills_BESTSELLERS",
+                "ContextInfo_BusinessInteractionPills_MENU",
+                "ContextInfo_BusinessInteractionPills_ABOUT"
+            ]
+        },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_BusinessMessageForwardInfo": {
             "type": "object",
             "properties": {
@@ -7880,6 +12622,19 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_CrossAppSource": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "x-enum-varnames": [
+                "ContextInfo_CROSS_APP_SOURCE_UNKNOWN",
+                "ContextInfo_CROSS_APP_SOURCE_INSTAGRAM",
+                "ContextInfo_CROSS_APP_SOURCE_FACEBOOK"
+            ]
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_DataSharingContext": {
             "type": "object",
@@ -7933,6 +12688,18 @@ const docTemplate = `{
                 "adType": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_ExternalAdReplyInfo_AdType"
                 },
+                "agmHeaderInteractionStrategy": {
+                    "type": "integer"
+                },
+                "agmSubtitleStrategy": {
+                    "type": "integer"
+                },
+                "agmThumbnailStrategy": {
+                    "type": "integer"
+                },
+                "agmTitleStrategy": {
+                    "type": "integer"
+                },
                 "automatedGreetingMessageCtaType": {
                     "type": "string"
                 },
@@ -7946,6 +12713,9 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "containsAutoReply": {
+                    "type": "boolean"
+                },
+                "containsCtwaFlowsAutoReply": {
                     "type": "boolean"
                 },
                 "ctaPayload": {
@@ -8012,7 +12782,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_ExternalAdReplyInfo_AdType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -8024,7 +12793,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_ExternalAdReplyInfo_MediaType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8058,7 +12826,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_ForwardOrigin": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8101,7 +12868,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_ForwardedNewsletterMessageInfo_ContentType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -8115,7 +12881,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_PairedMediaType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8163,7 +12928,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_QuotedType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -8175,7 +12939,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_StatusAttributionType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8207,7 +12970,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_StatusAudienceMetadata_AudienceType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -8219,7 +12981,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ContextInfo_StatusSourceType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8330,7 +13091,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.DisappearingMode_Initiator": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8346,7 +13106,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.DisappearingMode_Trigger": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8453,7 +13212,7 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.EmbeddedContent": {
             "type": "object",
             "properties": {
-                "content": {
+                "Content": {
                     "description": "Types that are valid to be assigned to Content:\n\n\t*EmbeddedContent_EmbeddedMessage\n\t*EmbeddedContent_EmbeddedMusic"
                 }
             }
@@ -8574,6 +13333,38 @@ const docTemplate = `{
                 },
                 "targetMessageKey": {
                     "$ref": "#/definitions/waCommon.MessageKey"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.EventInviteMessage": {
+            "type": "object",
+            "properties": {
+                "JPEGThumbnail": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "contextInfo": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
+                },
+                "endTime": {
+                    "type": "integer"
+                },
+                "eventID": {
+                    "type": "string"
+                },
+                "eventTitle": {
+                    "type": "string"
+                },
+                "isCanceled": {
+                    "type": "boolean"
+                },
+                "startTime": {
+                    "type": "integer"
                 }
             }
         },
@@ -8739,7 +13530,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ExtendedTextMessage_FontType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8763,7 +13553,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ExtendedTextMessage_InviteLinkGroupType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8779,7 +13568,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ExtendedTextMessage_PreviewType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -8867,7 +13655,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.GroupInviteMessage_GroupType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -8884,6 +13671,34 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "groupSubject": {
+                    "type": "string"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShare": {
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShareEntry"
+                    }
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShareEntry": {
+            "type": "object",
+            "properties": {
+                "expiryTimestampMS": {
+                    "type": "integer"
+                },
+                "groupRootKey": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "keyID": {
                     "type": "string"
                 }
             }
@@ -8929,11 +13744,11 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.HighlyStructuredMessage_HSMLocalizableParameter": {
             "type": "object",
             "properties": {
+                "ParamOneof": {
+                    "description": "Types that are valid to be assigned to ParamOneof:\n\n\t*HighlyStructuredMessage_HSMLocalizableParameter_Currency\n\t*HighlyStructuredMessage_HSMLocalizableParameter_DateTime"
+                },
                 "default": {
                     "type": "string"
-                },
-                "paramOneof": {
-                    "description": "Types that are valid to be assigned to ParamOneof:\n\n\t*HighlyStructuredMessage_HSMLocalizableParameter_Currency\n\t*HighlyStructuredMessage_HSMLocalizableParameter_DateTime"
                 }
             }
         },
@@ -9009,7 +13824,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.HistorySyncType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -9036,7 +13850,7 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.HydratedTemplateButton": {
             "type": "object",
             "properties": {
-                "hydratedButton": {
+                "HydratedButton": {
                     "description": "Types that are valid to be assigned to HydratedButton:\n\n\t*HydratedTemplateButton_QuickReplyButton\n\t*HydratedTemplateButton_UrlButton\n\t*HydratedTemplateButton_CallButton"
                 },
                 "index": {
@@ -9180,7 +13994,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ImageMessage_ImageSourceType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -9202,10 +14015,27 @@ const docTemplate = `{
                 }
             }
         },
+        "go_mau_fi_whatsmeow_proto_waE2E.InsightDeliveryState": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "x-enum-varnames": [
+                "InsightDeliveryState_SENT",
+                "InsightDeliveryState_DELIVERED",
+                "InsightDeliveryState_READ",
+                "InsightDeliveryState_REPLIED",
+                "InsightDeliveryState_QUICK_REPLIED"
+            ]
+        },
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveAnnotation": {
             "type": "object",
             "properties": {
-                "action": {
+                "Action": {
                     "description": "Types that are valid to be assigned to Action:\n\n\t*InteractiveAnnotation_Location\n\t*InteractiveAnnotation_Newsletter\n\t*InteractiveAnnotation_EmbeddedAction\n\t*InteractiveAnnotation_TapAction"
                 },
                 "embeddedContent": {
@@ -9227,7 +14057,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveAnnotation_StatusLinkType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -9242,6 +14071,9 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage": {
             "type": "object",
             "properties": {
+                "InteractiveMessage": {
+                    "description": "Types that are valid to be assigned to InteractiveMessage:\n\n\t*InteractiveMessage_ShopStorefrontMessage\n\t*InteractiveMessage_CollectionMessage_\n\t*InteractiveMessage_NativeFlowMessage_\n\t*InteractiveMessage_CarouselMessage_"
+                },
                 "bloksWidget": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_BloksWidget"
                 },
@@ -9256,9 +14088,6 @@ const docTemplate = `{
                 },
                 "header": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Header"
-                },
-                "interactiveMessage": {
-                    "description": "Types that are valid to be assigned to InteractiveMessage:\n\n\t*InteractiveMessage_ShopStorefrontMessage\n\t*InteractiveMessage_CollectionMessage_\n\t*InteractiveMessage_NativeFlowMessage_\n\t*InteractiveMessage_CarouselMessage_"
                 },
                 "urlTrackingMap": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.UrlTrackingMap"
@@ -9290,11 +14119,11 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Footer": {
             "type": "object",
             "properties": {
+                "Media": {
+                    "description": "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Footer_AudioMessage"
+                },
                 "hasMediaAttachment": {
                     "type": "boolean"
-                },
-                "media": {
-                    "description": "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Footer_AudioMessage"
                 },
                 "text": {
                     "type": "string"
@@ -9304,14 +14133,14 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_Header": {
             "type": "object",
             "properties": {
+                "Media": {
+                    "description": "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Header_DocumentMessage\n\t*InteractiveMessage_Header_ImageMessage\n\t*InteractiveMessage_Header_JPEGThumbnail\n\t*InteractiveMessage_Header_VideoMessage\n\t*InteractiveMessage_Header_LocationMessage\n\t*InteractiveMessage_Header_ProductMessage"
+                },
                 "bloksWidget": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveMessage_BloksWidget"
                 },
                 "hasMediaAttachment": {
                     "type": "boolean"
-                },
-                "media": {
-                    "description": "Types that are valid to be assigned to Media:\n\n\t*InteractiveMessage_Header_DocumentMessage\n\t*InteractiveMessage_Header_ImageMessage\n\t*InteractiveMessage_Header_JPEGThumbnail\n\t*InteractiveMessage_Header_VideoMessage\n\t*InteractiveMessage_Header_LocationMessage\n\t*InteractiveMessage_Header_ProductMessage"
                 },
                 "subtitle": {
                     "type": "string"
@@ -9324,14 +14153,14 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveResponseMessage": {
             "type": "object",
             "properties": {
+                "InteractiveResponseMessage": {
+                    "description": "Types that are valid to be assigned to InteractiveResponseMessage:\n\n\t*InteractiveResponseMessage_NativeFlowResponseMessage_"
+                },
                 "body": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InteractiveResponseMessage_Body"
                 },
                 "contextInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
-                },
-                "interactiveResponseMessage": {
-                    "description": "Types that are valid to be assigned to InteractiveResponseMessage:\n\n\t*InteractiveResponseMessage_NativeFlowResponseMessage_"
                 }
             }
         },
@@ -9348,7 +14177,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.InteractiveResponseMessage_Body_Format": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -9407,7 +14235,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.InvoiceMessage_AttachmentType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -9433,7 +14260,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.KeepType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -9490,7 +14316,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.LinkPreviewMetadata_SocialMediaPostType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -9542,7 +14367,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ListMessage_ListType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -9657,7 +14481,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ListResponseMessage_ListType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -9808,7 +14631,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.MediaKeyDomain": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -9935,6 +14757,9 @@ const docTemplate = `{
                 "eventCoverImage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage"
                 },
+                "eventInviteMessage": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.EventInviteMessage"
+                },
                 "eventMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.EventMessage"
                 },
@@ -9949,6 +14774,9 @@ const docTemplate = `{
                 },
                 "groupMentionedMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage"
+                },
+                "groupRootKeyShare": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.GroupRootKeyShare"
                 },
                 "groupStatusMentionMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage"
@@ -10018,6 +14846,9 @@ const docTemplate = `{
                 },
                 "orderMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.OrderMessage"
+                },
+                "p2PPaymentReminderNotification": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification"
                 },
                 "paymentInviteMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage"
@@ -10106,6 +14937,9 @@ const docTemplate = `{
                 "senderKeyDistributionMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SenderKeyDistributionMessage"
                 },
+                "splitPaymentMessage": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentMessage"
+                },
                 "spoilerMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.FutureProofMessage"
                 },
@@ -10172,7 +15006,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.MessageAssociation_AssociationType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -10274,6 +15107,12 @@ const docTemplate = `{
                 "supportPayload": {
                     "type": "string"
                 },
+                "teeBotMetadata": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
                 "threadID": {
                     "type": "array",
                     "items": {
@@ -10287,7 +15126,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.MessageContextInfo_MessageAddonExpiryType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2
@@ -10353,7 +15191,10 @@ const docTemplate = `{
                         "type": "string"
                     }
                 },
-                "oldestMessageTimestamp": {
+                "oldestMessageTimestampInBundle": {
+                    "type": "integer"
+                },
+                "oldestMessageTimestampInWindow": {
                     "type": "integer"
                 }
             }
@@ -10487,7 +15328,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.OrderMessage_OrderStatus": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -10501,12 +15341,85 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.OrderMessage_OrderSurface": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1
             ],
             "x-enum-varnames": [
                 "OrderMessage_CATALOG"
+            ]
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Money"
+                },
+                "createdTimestamp": {
+                    "type": "integer"
+                },
+                "creatorJID": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "expiryTimestamp": {
+                    "type": "integer"
+                },
+                "frequency": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderFrequency"
+                },
+                "nextReminderTimestamp": {
+                    "type": "integer"
+                },
+                "receiverJID": {
+                    "type": "string"
+                },
+                "reminderID": {
+                    "type": "string"
+                },
+                "state": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderState"
+                },
+                "upiID": {
+                    "type": "string"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderFrequency": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "x-enum-varnames": [
+                "P2PPaymentReminderNotification_UNKNOWN_FREQUENCY",
+                "P2PPaymentReminderNotification_WEEKLY",
+                "P2PPaymentReminderNotification_BIWEEKLY",
+                "P2PPaymentReminderNotification_MONTHLY",
+                "P2PPaymentReminderNotification_CUSTOM"
+            ]
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.P2PPaymentReminderNotification_ReminderState": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "x-enum-varnames": [
+                "P2PPaymentReminderNotification_UNKNOWN_STATE",
+                "P2PPaymentReminderNotification_ACTIVE",
+                "P2PPaymentReminderNotification_PAUSED",
+                "P2PPaymentReminderNotification_STOPPED",
+                "P2PPaymentReminderNotification_EXPIRED",
+                "P2PPaymentReminderNotification_CANCELLED"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PaymentBackground": {
@@ -10575,7 +15488,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PaymentBackground_Type": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -10605,6 +15517,9 @@ const docTemplate = `{
                 "incentiveEligible": {
                     "type": "boolean"
                 },
+                "inviteType": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_InviteType"
+                },
                 "referralID": {
                     "type": "string"
                 },
@@ -10613,9 +15528,19 @@ const docTemplate = `{
                 }
             }
         },
+        "go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_InviteType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1
+            ],
+            "x-enum-varnames": [
+                "PaymentInviteMessage_DEFAULT",
+                "PaymentInviteMessage_MAPPER"
+            ]
+        },
         "go_mau_fi_whatsmeow_proto_waE2E.PaymentInviteMessage_ServiceType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -10661,7 +15586,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PaymentLinkMetadata_PaymentLinkHeader_PaymentLinkHeaderType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -10682,6 +15606,12 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage": {
             "type": "object",
             "properties": {
+                "bizBroadcastInsightsContactListRequest": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsContactListRequest"
+                },
+                "bizBroadcastInsightsRefreshRequest": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsRefreshRequest"
+                },
                 "companionCanonicalUserNonceFetchRequest": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_CompanionCanonicalUserNonceFetchRequest"
                 },
@@ -10720,6 +15650,22 @@ const docTemplate = `{
                 },
                 "syncdCollectionFatalRecoveryRequest": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_SyncDCollectionFatalRecoveryRequest"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsContactListRequest": {
+            "type": "object",
+            "properties": {
+                "campaignID": {
+                    "type": "string"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_BizBroadcastInsightsRefreshRequest": {
+            "type": "object",
+            "properties": {
+                "campaignID": {
+                    "type": "string"
                 }
             }
         },
@@ -10767,7 +15713,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestMessage_GalaxyFlowAction_GalaxyFlowActionType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2
@@ -10814,6 +15759,9 @@ const docTemplate = `{
                 },
                 "onDemandMsgCount": {
                     "type": "integer"
+                },
+                "supportInlineResponse": {
+                    "type": "boolean"
                 }
             }
         },
@@ -10875,6 +15823,9 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult": {
             "type": "object",
             "properties": {
+                "bizBroadcastInsightsContactListResponse": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactListResponse"
+                },
                 "companionCanonicalUserNonceFetchRequestResponse": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_CompanionCanonicalUserNonceFetchResponse"
                 },
@@ -10907,6 +15858,34 @@ const docTemplate = `{
                 },
                 "waffleNonceFetchRequestResponse": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_WaffleNonceFetchResponse"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactListResponse": {
+            "type": "object",
+            "properties": {
+                "campaignID": {
+                    "type": "string"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactState"
+                    }
+                },
+                "timestampMS": {
+                    "type": "integer"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_BizBroadcastInsightsContactState": {
+            "type": "object",
+            "properties": {
+                "contactJID": {
+                    "type": "string"
+                },
+                "state": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.InsightDeliveryState"
                 }
             }
         },
@@ -10989,7 +15968,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_FullHistorySyncOnDemandResponseCode": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -10997,7 +15975,8 @@ const docTemplate = `{
                 3,
                 4,
                 5,
-                6
+                6,
+                7
             ],
             "x-enum-varnames": [
                 "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_REQUEST_SUCCESS",
@@ -11006,7 +15985,8 @@ const docTemplate = `{
                 "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_GENERIC_ERROR",
                 "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_REQUEST_ON_NON_SMB_PRIMARY",
                 "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_HOSTED_DEVICE_NOT_CONNECTED",
-                "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_HOSTED_DEVICE_LOGIN_TIME_NOT_SET"
+                "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_HOSTED_DEVICE_LOGIN_TIME_NOT_SET",
+                "PeerDataOperationRequestResponseMessage_PeerDataOperationResult_ERROR_MULTI_PROVIDER_NOT_CONFIGURED"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_HistorySyncChunkRetryResponse": {
@@ -11031,7 +16011,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestResponseMessage_PeerDataOperationResult_HistorySyncChunkRetryResponseCode": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1,
                 2,
@@ -11168,7 +16147,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PeerDataOperationRequestType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11181,7 +16159,9 @@ const docTemplate = `{
                 8,
                 9,
                 10,
-                11
+                11,
+                12,
+                13
             ],
             "x-enum-varnames": [
                 "PeerDataOperationRequestType_UPLOAD_STICKER",
@@ -11195,7 +16175,9 @@ const docTemplate = `{
                 "PeerDataOperationRequestType_COMPANION_SYNCD_SNAPSHOT_FATAL_RECOVERY",
                 "PeerDataOperationRequestType_COMPANION_CANONICAL_USER_NONCE_FETCH",
                 "PeerDataOperationRequestType_HISTORY_SYNC_CHUNK_RETRY",
-                "PeerDataOperationRequestType_GALAXY_FLOW_ACTION"
+                "PeerDataOperationRequestType_GALAXY_FLOW_ACTION",
+                "PeerDataOperationRequestType_BUSINESS_BROADCAST_INSIGHTS_DELIVERED_TO",
+                "PeerDataOperationRequestType_BUSINESS_BROADCAST_INSIGHTS_REFRESH"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PinInChatMessage": {
@@ -11214,7 +16196,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PinInChatMessage_Type": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11236,7 +16217,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PlaceholderMessage_PlaceholderType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0
             ],
@@ -11274,7 +16254,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PollContentType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11391,7 +16370,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.PollType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -11458,7 +16436,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ProcessedVideo_VideoQuality": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11580,6 +16557,9 @@ const docTemplate = `{
                 "botFeedbackMessage": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotFeedbackMessage"
                 },
+                "chatThemeSetting": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ChatThemeSetting"
+                },
                 "cloudApiThreadControlNotification": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.CloudAPIThreadControlNotification"
                 },
@@ -11638,7 +16618,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ProtocolMessage_Type": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 3,
@@ -11667,7 +16646,8 @@ const docTemplate = `{
                 29,
                 30,
                 31,
-                32
+                32,
+                34
             ],
             "x-enum-varnames": [
                 "ProtocolMessage_REVOKE",
@@ -11697,7 +16677,8 @@ const docTemplate = `{
                 "ProtocolMessage_AI_QUERY_FANOUT",
                 "ProtocolMessage_GROUP_MEMBER_LABEL_CHANGE",
                 "ProtocolMessage_AI_MEDIA_COLLECTION_MESSAGE",
-                "ProtocolMessage_MESSAGE_UNSCHEDULE"
+                "ProtocolMessage_MESSAGE_UNSCHEDULE",
+                "ProtocolMessage_CHAT_THEME_SETTING"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waE2E.QuestionResponseMessage": {
@@ -11765,6 +16746,9 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.RequestWelcomeMessageMetadata": {
             "type": "object",
             "properties": {
+                "botAgentMetadata": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waAICommon.BotAgentMetadata"
+                },
                 "localChatState": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.RequestWelcomeMessageMetadata_LocalChatState"
                 },
@@ -11775,7 +16759,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.RequestWelcomeMessageMetadata_LocalChatState": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -11787,7 +16770,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.RequestWelcomeMessageMetadata_WelcomeTrigger": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -11813,7 +16795,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ScheduledCallCreationMessage_CallType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11838,7 +16819,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ScheduledCallEditMessage_EditType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -11876,7 +16856,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.SecretEncryptedMessage_SecretEncType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11925,6 +16904,60 @@ const docTemplate = `{
                 }
             }
         },
+        "go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentMessage": {
+            "type": "object",
+            "properties": {
+                "contextInfo": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
+                },
+                "createdAtMS": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "participants": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant"
+                    }
+                },
+                "requesterJID": {
+                    "type": "string"
+                },
+                "splitID": {
+                    "type": "string"
+                },
+                "totalAmount": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Money"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant": {
+            "type": "object",
+            "properties": {
+                "JID": {
+                    "type": "string"
+                },
+                "amount": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.Money"
+                },
+                "status": {
+                    "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant_SplitPaymentStatus"
+                }
+            }
+        },
+        "go_mau_fi_whatsmeow_proto_waE2E.SplitPaymentParticipant_SplitPaymentStatus": {
+            "type": "integer",
+            "enum": [
+                0,
+                1
+            ],
+            "x-enum-varnames": [
+                "SplitPaymentParticipant_PENDING",
+                "SplitPaymentParticipant_PAID"
+            ]
+        },
         "go_mau_fi_whatsmeow_proto_waE2E.StatusNotificationMessage": {
             "type": "object",
             "properties": {
@@ -11941,7 +16974,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.StatusNotificationMessage_StatusNotificationType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -11988,7 +17020,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.StatusQuotedMessage_StatusQuotedMessageType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 1
             ],
@@ -12012,7 +17043,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.StatusStickerInteractionMessage_StatusStickerType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -12035,6 +17065,9 @@ const docTemplate = `{
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
                 },
                 "directPath": {
+                    "type": "string"
+                },
+                "emojis": {
                     "type": "string"
                 },
                 "fileEncSHA256": {
@@ -12225,7 +17258,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.StickerPackMessage_StickerPackOrigin": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -12277,11 +17309,11 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.TemplateMessage": {
             "type": "object",
             "properties": {
+                "Format": {
+                    "description": "Types that are valid to be assigned to Format:\n\n\t*TemplateMessage_FourRowTemplate_\n\t*TemplateMessage_HydratedFourRowTemplate_\n\t*TemplateMessage_InteractiveMessageTemplate"
+                },
                 "contextInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.ContextInfo"
-                },
-                "format": {
-                    "description": "Types that are valid to be assigned to Format:\n\n\t*TemplateMessage_FourRowTemplate_\n\t*TemplateMessage_HydratedFourRowTemplate_\n\t*TemplateMessage_InteractiveMessageTemplate"
                 },
                 "hydratedTemplate": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waE2E.TemplateMessage_HydratedFourRowTemplate"
@@ -12294,6 +17326,9 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waE2E.TemplateMessage_HydratedFourRowTemplate": {
             "type": "object",
             "properties": {
+                "Title": {
+                    "description": "Types that are valid to be assigned to Title:\n\n\t*TemplateMessage_HydratedFourRowTemplate_DocumentMessage\n\t*TemplateMessage_HydratedFourRowTemplate_HydratedTitleText\n\t*TemplateMessage_HydratedFourRowTemplate_ImageMessage\n\t*TemplateMessage_HydratedFourRowTemplate_VideoMessage\n\t*TemplateMessage_HydratedFourRowTemplate_LocationMessage"
+                },
                 "hydratedButtons": {
                     "type": "array",
                     "items": {
@@ -12311,18 +17346,12 @@ const docTemplate = `{
                 },
                 "templateID": {
                     "type": "string"
-                },
-                "title": {
-                    "description": "Types that are valid to be assigned to Title:\n\n\t*TemplateMessage_HydratedFourRowTemplate_DocumentMessage\n\t*TemplateMessage_HydratedFourRowTemplate_HydratedTitleText\n\t*TemplateMessage_HydratedFourRowTemplate_ImageMessage\n\t*TemplateMessage_HydratedFourRowTemplate_VideoMessage\n\t*TemplateMessage_HydratedFourRowTemplate_LocationMessage"
                 }
             }
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ThreadID": {
             "type": "object",
             "properties": {
-                "sourceChatJID": {
-                    "type": "string"
-                },
                 "threadKey": {
                     "$ref": "#/definitions/waCommon.MessageKey"
                 },
@@ -12333,7 +17362,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.ThreadID_ThreadType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -12525,7 +17553,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.VideoMessage_Attribution": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -12541,7 +17568,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.VideoMessage_VideoSourceType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -12553,7 +17579,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waE2E.WebLinkRenderConfig": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1
@@ -12565,7 +17590,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waMmsRetry.MediaRetryNotification_ResultType": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -12582,11 +17606,11 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_proto_waStatusAttributions.StatusAttribution": {
             "type": "object",
             "properties": {
+                "AttributionData": {
+                    "description": "Types that are valid to be assigned to AttributionData:\n\n\t*StatusAttribution_StatusReshare_\n\t*StatusAttribution_ExternalShare_\n\t*StatusAttribution_Music_\n\t*StatusAttribution_GroupStatus_\n\t*StatusAttribution_RlAttribution\n\t*StatusAttribution_AiCreatedAttribution_"
+                },
                 "actionURL": {
                     "type": "string"
-                },
-                "attributionData": {
-                    "description": "Types that are valid to be assigned to AttributionData:\n\n\t*StatusAttribution_StatusReshare_\n\t*StatusAttribution_ExternalShare_\n\t*StatusAttribution_Music_\n\t*StatusAttribution_GroupStatus_\n\t*StatusAttribution_RlAttribution\n\t*StatusAttribution_AiCreatedAttribution_"
                 },
                 "type": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waStatusAttributions.StatusAttribution_Type"
@@ -12595,7 +17619,6 @@ const docTemplate = `{
         },
         "go_mau_fi_whatsmeow_proto_waStatusAttributions.StatusAttribution_Type": {
             "type": "integer",
-            "format": "int32",
             "enum": [
                 0,
                 1,
@@ -12605,7 +17628,9 @@ const docTemplate = `{
                 5,
                 6,
                 7,
-                8
+                8,
+                9,
+                10
             ],
             "x-enum-varnames": [
                 "StatusAttribution_UNKNOWN",
@@ -12616,7 +17641,9 @@ const docTemplate = `{
                 "StatusAttribution_GROUP_STATUS",
                 "StatusAttribution_RL_ATTRIBUTION",
                 "StatusAttribution_AI_CREATED",
-                "StatusAttribution_LAYOUTS"
+                "StatusAttribution_LAYOUTS",
+                "StatusAttribution_NEWSLETTER_STATUS",
+                "StatusAttribution_STATUS_CLOSE_SHARING"
             ]
         },
         "go_mau_fi_whatsmeow_proto_waVnameCert.LocalizedName": {
@@ -12706,22 +17733,22 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_types.BroadcastRecipient": {
             "type": "object",
             "properties": {
-                "lid": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                "LID": {
+                    "type": "string"
                 },
-                "pn": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                "PN": {
+                    "type": "string"
                 }
             }
         },
         "go_mau_fi_whatsmeow_types.DeviceSentMeta": {
             "type": "object",
             "properties": {
-                "destinationJID": {
+                "DestinationJID": {
                     "description": "The destination user. This should match the MessageInfo.Recipient field.",
                     "type": "string"
                 },
-                "phash": {
+                "Phash": {
                     "type": "string"
                 }
             }
@@ -12739,14 +17766,6 @@ const docTemplate = `{
             "x-enum-comments": {
                 "EditAttributeAdminEdit": "only used in newsletters"
             },
-            "x-enum-descriptions": [
-                "",
-                "",
-                "",
-                "only used in newsletters",
-                "",
-                ""
-            ],
             "x-enum-varnames": [
                 "EditAttributeEmpty",
                 "EditAttributeMessageEdit",
@@ -12756,33 +17775,10 @@ const docTemplate = `{
                 "EditAttributeAdminRevoke"
             ]
         },
-        "go_mau_fi_whatsmeow_types.JID": {
-            "type": "object",
-            "properties": {
-                "device": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "integrator": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "rawAgent": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "server": {
-                    "type": "string"
-                },
-                "user": {
-                    "type": "string"
-                }
-            }
-        },
         "go_mau_fi_whatsmeow_types.MessageInfo": {
             "type": "object",
             "properties": {
-                "addressingMode": {
+                "AddressingMode": {
                     "description": "The addressing mode of the message (phone number or LID)",
                     "allOf": [
                         {
@@ -12790,32 +17786,24 @@ const docTemplate = `{
                         }
                     ]
                 },
-                "broadcastListOwner": {
+                "BroadcastListOwner": {
                     "description": "When sending a read receipt to a broadcast list message, the Chat is the broadcast list\nand Sender is you, so this field contains the recipient of the read receipt.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
-                        }
-                    ]
+                    "type": "string"
                 },
-                "broadcastRecipients": {
+                "BroadcastRecipients": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/go_mau_fi_whatsmeow_types.BroadcastRecipient"
                     }
                 },
-                "category": {
+                "Category": {
                     "type": "string"
                 },
-                "chat": {
+                "Chat": {
                     "description": "The chat where the message was sent.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
-                        }
-                    ]
+                    "type": "string"
                 },
-                "deviceSentMeta": {
+                "DeviceSentMeta": {
                     "description": "Metadata for direct messages sent from another one of the user's own devices.",
                     "allOf": [
                         {
@@ -12823,69 +17811,57 @@ const docTemplate = `{
                         }
                     ]
                 },
-                "edit": {
+                "Edit": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_types.EditAttribute"
                 },
-                "id": {
+                "ID": {
                     "type": "string"
                 },
-                "isFromMe": {
+                "IsFromMe": {
                     "description": "Whether the message was sent by the current user instead of someone else.",
                     "type": "boolean"
                 },
-                "isGroup": {
+                "IsGroup": {
                     "description": "Whether the chat is a group chat or broadcast list.",
                     "type": "boolean"
                 },
-                "mediaType": {
+                "MediaType": {
                     "type": "string"
                 },
-                "msgBotInfo": {
+                "MsgBotInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_types.MsgBotInfo"
                 },
-                "msgMetaInfo": {
+                "MsgMetaInfo": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_types.MsgMetaInfo"
                 },
-                "multicast": {
+                "Multicast": {
                     "type": "boolean"
                 },
-                "pushName": {
+                "PushName": {
                     "type": "string"
                 },
-                "recipientAlt": {
+                "RecipientAlt": {
                     "description": "The alternative address of the recipient of the message for DMs.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
-                        }
-                    ]
+                    "type": "string"
                 },
-                "sender": {
+                "Sender": {
                     "description": "The user who sent the message.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
-                        }
-                    ]
+                    "type": "string"
                 },
-                "senderAlt": {
+                "SenderAlt": {
                     "description": "The alternative address of the user who sent the message",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
-                        }
-                    ]
+                    "type": "string"
                 },
-                "serverID": {
+                "ServerID": {
                     "type": "integer"
                 },
-                "timestamp": {
+                "Timestamp": {
                     "type": "string"
                 },
-                "type": {
+                "Type": {
                     "type": "string"
                 },
-                "verifiedName": {
+                "VerifiedName": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_types.VerifiedName"
                 }
             }
@@ -12893,13 +17869,13 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_types.MsgBotInfo": {
             "type": "object",
             "properties": {
-                "editSenderTimestampMS": {
+                "EditSenderTimestampMS": {
                     "type": "string"
                 },
-                "editTargetID": {
+                "EditTargetID": {
                     "type": "string"
                 },
-                "editType": {
+                "EditType": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_types.BotEditType"
                 }
             }
@@ -12907,24 +17883,24 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_types.MsgMetaInfo": {
             "type": "object",
             "properties": {
-                "deprecatedLIDSession": {
+                "DeprecatedLIDSession": {
                     "type": "boolean"
                 },
-                "targetChat": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                "TargetChat": {
+                    "type": "string"
                 },
-                "targetID": {
+                "TargetID": {
                     "description": "Bot things",
                     "type": "string"
                 },
-                "targetSender": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
-                },
-                "threadMessageID": {
+                "TargetSender": {
                     "type": "string"
                 },
-                "threadMessageSenderJID": {
-                    "$ref": "#/definitions/go_mau_fi_whatsmeow_types.JID"
+                "ThreadMessageID": {
+                    "type": "string"
+                },
+                "ThreadMessageSenderJID": {
+                    "type": "string"
                 }
             }
         },
@@ -12958,10 +17934,10 @@ const docTemplate = `{
         "go_mau_fi_whatsmeow_types.VerifiedName": {
             "type": "object",
             "properties": {
-                "certificate": {
+                "Certificate": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waVnameCert.VerifiedNameCertificate"
                 },
-                "details": {
+                "Details": {
                     "$ref": "#/definitions/go_mau_fi_whatsmeow_proto_waVnameCert.VerifiedNameCertificate_Details"
                 }
             }
@@ -13000,17 +17976,31 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "AdminApiKey": {
+            "description": "GLOBAL_API_KEY from the server environment.",
+            "type": "apiKey",
+            "name": "apikey",
+            "in": "header"
+        },
+        "InstanceApiKey": {
+            "description": "Token configured when creating the instance.",
+            "type": "apiKey",
+            "name": "apikey",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "1.0",
+	Version:          "0.7.1",
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Evolution GO",
-	Description:      "Evolution GO - whatsmeow",
+	Description:      "Evolution GO WhatsApp API. Protected endpoints require an apikey header. Administrative endpoints use GLOBAL_API_KEY; other endpoints use the instance token.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

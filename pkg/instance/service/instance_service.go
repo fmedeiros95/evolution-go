@@ -65,8 +65,8 @@ type ProxyConfig struct {
 
 type CreateStruct struct {
 	InstanceId       string                           `json:"instanceId"`
-	Name             string                           `json:"name"`
-	Token            string                           `json:"token"`
+	Name             string                           `json:"name" validate:"required"`
+	Token            string                           `json:"token" validate:"required"`
 	Proxy            *ProxyConfig                     `json:"proxy"`
 	AdvancedSettings *instance_model.AdvancedSettings `json:"advancedSettings"`
 }
@@ -95,7 +95,7 @@ type QrcodeStruct struct {
 
 type PairStruct struct {
 	Subscribe []string `json:"subscribe"`
-	Phone     string   `json:"phone"`
+	Phone     string   `json:"phone" validate:"required"`
 }
 
 type PairReturnStruct struct {
@@ -111,7 +111,7 @@ type SetProxyStruct struct {
 }
 
 type ForceReconnectStruct struct {
-	Number string `json:"number"`
+	Number string `json:"number" validate:"required"`
 }
 
 func (i *instances) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {

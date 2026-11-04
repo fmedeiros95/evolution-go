@@ -1,4 +1,4 @@
-.PHONY: help dev run build test clean swagger deps docker-build docker-run install setup migrate-up migrate-down logs
+.PHONY: help dev run build test clean swagger docs-check deps docker-build docker-run install setup migrate-up migrate-down logs
 
 # Configurações
 APP_NAME=evolution-go
@@ -122,13 +122,10 @@ deps-reset: ## Limpa cache e reinstala dependências (força uso do código loca
 
 swagger: ## Gera documentação Swagger
 	@echo "$(GREEN)📚 Gerando documentação Swagger...$(NC)"
-	@if command -v swag > /dev/null; then \
-		swag init -g $(MAIN_PATH) -o ./docs; \
-		echo "$(GREEN)✅ Swagger gerado com sucesso$(NC)"; \
-	else \
-		echo "$(RED)❌ Swag não instalado. Instale com: go install github.com/swaggo/swag/cmd/swag@latest$(NC)"; \
-		exit 1; \
-	fi
+	$(GO) run github.com/swaggo/swag/cmd/swag@v1.16.3 init -g $(MAIN_PATH) -o ./docs --parseDependency --parseInternal --propertyStrategy pascalcase
+
+docs-check: ## Confere cobertura de rotas, autenticação e coleção Postman
+	$(GO) run ./tools/check-api-docs
 
 docs: ## Abre a documentação local
 	@echo "$(GREEN)📖 Abrindo documentação...$(NC)"

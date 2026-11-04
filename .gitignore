@@ -21,4 +21,4 @@ carousel-sender.html
 *.postman_collection (*.json
 
 # Generated release directories (built by tools/build-dist/)
-dist/
+/dist/

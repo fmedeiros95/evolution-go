@@ -163,7 +163,7 @@ go test -run TestFunctionName ./pkg/package/
 
 ## Important Considerations
 
-- **License Validation**: Production builds validate licenses against external API
+- **Authentication**: API keys protect administrative and instance routes; no external activation is required in this fork.
 - **Media Storage**: Configure MinIO for production; uses local storage in development
 - **Connection Limits**: Default PostgreSQL pool size is 100 connections
 - **Rate Limiting**: Framework supports rate limiting but not enabled by default

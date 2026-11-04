@@ -514,7 +514,7 @@ curl -X DELETE "http://localhost:4000/instance/delete/vendas" \
 
 ## Configurar Proxy
 
-Configura proxy HTTP para a instância.
+Configura proxy HTTP, HTTPS ou SOCKS5 para a instância. `protocol` é opcional; quando omitido, o servidor infere SOCKS5 para portas 1080, 2080 ou entre 42000 e 43000, e HTTP para as demais. No endpoint de atualização, `host` e `port` são obrigatórios; `username` e `password` são opcionais.
 
 ### Endpoint
 ```
@@ -530,6 +530,7 @@ apikey: SUA-GLOBAL-API-KEY
 ### Body
 ```json
 {
+  "protocol": "http",
   "host": "proxy.exemplo.com",
   "port": "8080",
   "username": "usuario",
@@ -542,6 +543,7 @@ apikey: SUA-GLOBAL-API-KEY
 {
   "message": "success",
   "data": {
+    "protocol": "http",
     "host": "proxy.exemplo.com",
     "port": "8080",
     "hasAuth": true
@@ -555,6 +557,7 @@ curl -X POST "http://localhost:4000/instance/proxy/vendas" \
   -H "Content-Type: application/json" \
   -H "apikey: SUA-GLOBAL-API-KEY" \
   -d '{
+    "protocol": "http",
     "host": "proxy.exemplo.com",
     "port": "8080",
     "username": "usuario",

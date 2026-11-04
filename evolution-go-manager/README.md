@@ -10,11 +10,10 @@
 
 ## About
 
-Web interface for managing WhatsApp instances through [Evolution Go](https://github.com/EvolutionAPI/evolution-go). Handles license activation, instance management, QR code pairing, messaging, and real-time event monitoring.
+Web interface for managing WhatsApp instances through [Evolution Go](https://github.com/EvolutionAPI/evolution-go). Handles instance management, QR code pairing, messaging, and real-time event monitoring.
 
 ## Features
 
-- **License Activation** — Built-in license registration and activation flow
 - **Instance Management** — Create, connect, disconnect, and delete WhatsApp instances
 - **QR Code Pairing** — Real-time QR code authentication
 - **Messaging** — Send text, media, contacts, and location messages
@@ -37,12 +36,11 @@ pnpm build
 
 Available at `http://localhost:5174`
 
-## Authentication & License
+## Authentication
 
 1. Enter your **Evolution Go API URL** (e.g., `http://localhost:8080`)
 2. Enter your **GLOBAL_API_KEY** from the Evolution Go `.env` file
-3. If no license is active, you'll be redirected to complete registration
-4. After activation, the manager grants full access to the dashboard
+3. The Manager validates the key against the administrative API and opens the dashboard.
 
 Credentials are stored in the browser's localStorage.
 
@@ -50,11 +48,11 @@ Credentials are stored in the browser's localStorage.
 
 ```
 src/
-├── pages/               # Login, Dashboard, Instances, LicenseCallback
+├── pages/               # Login, Dashboard, Instances
 ├── components/
 │   ├── base/            # Layout, Header, Sidebar, ErrorBoundary
 │   └── instances/       # Instance cards, QR code, create modal
-├── services/api/        # Axios client, license API, instances API
+├── services/api/        # Axios client and instances API
 ├── store/               # Zustand stores (auth, instances)
 ├── hooks/               # useAuth, useDarkMode
 ├── contexts/            # Theme context
@@ -83,7 +81,7 @@ The manager communicates with Evolution Go via:
 
 - **REST API** — All requests include `apikey` header
 - **WebSocket** — Real-time events at `/ws?token=<apiKey>&instanceId=<id>`
-- **License API** — `/license/status`, `/license/register`, `/license/activate`
+- **Authentication** — `GLOBAL_API_KEY` for the Manager; instance tokens for instance operations
 
 ## Docker
 

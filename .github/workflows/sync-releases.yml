@@ -99,16 +99,11 @@ jobs:
           mkdir -p "$TARGET/cmd/evolution-go"
           cp cmd/evolution-go/main.go "$TARGET/cmd/evolution-go/"
 
-          # pkg (except core)
-          find pkg -name "*.go" -not -path "pkg/core/*" | while read f; do
+          # Application source
+          find pkg -name "*.go" | while read f; do
             mkdir -p "$TARGET/$(dirname "$f")"
             cp "$f" "$TARGET/$f"
           done
-
-      - name: Obfuscate pkg/core
-        run: |
-          mkdir -p ${{ steps.target.outputs.dir }}/pkg/core
-          go run tools/build-dist/obfuscate.go pkg/core ${{ steps.target.outputs.dir }}/pkg/core/c0.go
 
       - name: Setup whatsmeow-lib
         run: |

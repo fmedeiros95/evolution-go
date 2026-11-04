@@ -29,8 +29,10 @@ type newsletterHandler struct {
 // @Produce json
 // @Param message body newsletter_service.CreateNewsletterStruct true "Newsletter data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /newsletter/create [post]
 func (n *newsletterHandler) CreateNewsletter(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -69,7 +71,9 @@ func (n *newsletterHandler) CreateNewsletter(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /newsletter/list [get]
 func (n *newsletterHandler) ListNewsletter(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -97,8 +101,10 @@ func (n *newsletterHandler) ListNewsletter(ctx *gin.Context) {
 // @Produce json
 // @Param message body newsletter_service.GetNewsletterStruct true "Newsletter data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /newsletter/info [post]
 func (n *newsletterHandler) GetNewsletter(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -138,8 +144,10 @@ func (n *newsletterHandler) GetNewsletter(ctx *gin.Context) {
 // @Produce json
 // @Param message body newsletter_service.GetNewsletterInviteStruct true "Newsletter data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /newsletter/link [post]
 func (n *newsletterHandler) GetNewsletterInvite(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -179,8 +187,10 @@ func (n *newsletterHandler) GetNewsletterInvite(ctx *gin.Context) {
 // @Produce json
 // @Param message body newsletter_service.GetNewsletterStruct true "Newsletter data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /newsletter/subscribe [post]
 func (n *newsletterHandler) SubscribeNewsletter(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -220,8 +230,10 @@ func (n *newsletterHandler) SubscribeNewsletter(ctx *gin.Context) {
 // @Produce json
 // @Param message body newsletter_service.GetNewsletterMessagesStruct true "Newsletter data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /newsletter/messages [post]
 func (n *newsletterHandler) GetNewsletterMessages(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")

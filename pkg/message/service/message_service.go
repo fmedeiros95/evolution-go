@@ -41,22 +41,22 @@ type messageService struct {
 }
 
 type ReactStruct struct {
-	Number      string `json:"number"`
-	Reaction    string `json:"reaction"`
+	Number      string `json:"number" validate:"required"`
+	Reaction    string `json:"reaction" validate:"required"`
 	Id          string `json:"id"`
 	FromMe      bool   `json:"fromMe"`
 	Participant string `json:"participant,omitempty"`
 }
 
 type ChatPresenceStruct struct {
-	Number  string `json:"number"`
-	State   string `json:"state"`
+	Number  string `json:"number" validate:"required"`
+	State   string `json:"state" validate:"required"`
 	IsAudio bool   `json:"isAudio"`
 }
 
 type MarkReadStruct struct {
-	Id     []string `json:"id"`
-	Number string   `json:"number"`
+	Id     []string `json:"id" validate:"required"`
+	Number string   `json:"number" validate:"required"`
 }
 
 type DownloadMediaStruct struct {
@@ -64,18 +64,18 @@ type DownloadMediaStruct struct {
 }
 
 type MessageStatusStruct struct {
-	Id string `json:"id"`
+	Id string `json:"id" validate:"required"`
 }
 
 type MessageStruct struct {
-	Chat      string `json:"chat"`
-	MessageID string `json:"messageId"`
+	Chat      string `json:"chat" validate:"required"`
+	MessageID string `json:"messageId" validate:"required"`
 }
 
 type EditMessageStruct struct {
-	Chat      string `json:"chat"`
-	Message   string `json:"message"`
-	MessageID string `json:"messageId"`
+	Chat      string `json:"chat" validate:"required"`
+	Message   string `json:"message" validate:"required"`
+	MessageID string `json:"messageId" validate:"required"`
 }
 
 type MessageSendStruct struct {

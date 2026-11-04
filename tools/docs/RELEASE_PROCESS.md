@@ -5,6 +5,10 @@
 > (`evolution-go` e `evolution-go-beta`). Nunca mover para `docs/`, raiz ou
 > qualquer path copiado pelo workflow.
 
+> Este fluxo de publicação foi herdado do upstream. Neste fork, o desenvolvimento fica em `fmedeiros95/evolution-go`, na branch `develop`. Os destinos externos abaixo precisam ser configurados antes de usar a sincronização. O build local usa `Dockerfile` e `compose.local.yaml`, sem publicar imagens.
+>
+> A ativação externa, a telemetria e a ofuscação de licença foram removidas do fork.
+
 ## Arquitetura de repositórios
 
 Existem 3 repositórios envolvidos:
@@ -12,8 +16,8 @@ Existem 3 repositórios envolvidos:
 | Repo | Papel | Quem pusha |
 |---|---|---|
 | `EvolutionAPI/evolution-go-develop` | **Fonte de verdade** — onde o código é desenvolvido | Time (push manual) |
-| `EvolutionAPI/evolution-go-beta` | Espelho da branch `develop`, com `pkg/core` ofuscado | Apenas o workflow |
-| `EvolutionAPI/evolution-go` | **Espelho público oficial** da branch `main`, com `pkg/core` ofuscado | Apenas o workflow |
+| `EvolutionAPI/evolution-go-beta` | Espelho da branch `develop`, com os fontes Go | Apenas o workflow |
+| `EvolutionAPI/evolution-go` | **Espelho público oficial** da branch `main`, com os fontes Go | Apenas o workflow |
 
 O fluxo é **unidirecional**: `develop-repo → público`. Os repos públicos são
 mirrors — qualquer commit feito direto neles é **sobrescrito** no próximo sync.
@@ -32,10 +36,8 @@ Dispara em `push` nas branches `main` ou `develop` deste repo (`evolution-go-dev
      `CHANGELOG.md`, `COMMANDS.md`, `.env.example`, `.dockerignore`,
      `Dockerfile`, `Makefile`
    - Dirs: `docker/`, `docs/`, `public/`, `manager/dist/`, `cmd/`
-   - `pkg/**/*.go` (exceto `pkg/core/`)
+   - `pkg/**/*.go`
    - `tools/build-dist/templates/.github/` como `.github/` do target
-5. **Ofusca** `pkg/core/` via `tools/build-dist/obfuscate.go` em um único
-   arquivo `pkg/core/c0.go`
 6. Registra `whatsmeow-lib` como submódulo apontando para
    `EvolutionAPI/whatsmeow`
 7. Remove: `manager/dist/dist`, `tools/`, `scripts/`, `CLAUDE.md`
@@ -45,7 +47,6 @@ Dispara em `push` nas branches `main` ou `develop` deste repo (`evolution-go-dev
 ## Implicações práticas
 
 - Toda mudança que deve chegar nos repos públicos **precisa estar no develop**.
-- `pkg/core/` é ofuscado — código ali vai virar um arquivo ilegível público.
 - `CLAUDE.md`, `tools/`, `scripts/` ficam só no develop (são limpos no sync).
 - Arquivos **não listados** (ex: este `.md`, `.claude/`, configs próprias)
   nunca chegam ao público — o workflow apaga tudo no target antes de copiar
@@ -100,5 +101,5 @@ o commit/versão.
 |---|---|
 | Arquivo não aparece no público | Não está na whitelist do workflow — adicionar em `.github/workflows/sync-releases.yml` ou mover para um path copiado |
 | Tag já existia e o push falhou | O workflow faz `tag -d` e `push :refs/tags/X` antes — se ainda falhar, ver permissão do `RELEASE_TOKEN` |
-| Build falha em `Verify build` | Código que só compila no develop (depende de `pkg/core/` não-ofuscado) — refatorar |
+| Build falha em `Verify build` | Dependências ou fontes ausentes no pacote de release — revisar a lista de arquivos copiados |
 | Manager não atualiza | Submódulo `evolution-go-manager` no develop precisa estar atualizado |

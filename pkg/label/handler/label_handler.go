@@ -29,8 +29,10 @@ type labelHandler struct {
 // @Produce json
 // @Param message body label_service.ChatLabelStruct true "Label data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /label/chat [post]
 func (l *labelHandler) ChatLabel(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -75,8 +77,10 @@ func (l *labelHandler) ChatLabel(ctx *gin.Context) {
 // @Produce json
 // @Param message body label_service.MessageLabelStruct true "Label data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /label/message [post]
 func (l *labelHandler) MessageLabel(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -126,8 +130,10 @@ func (l *labelHandler) MessageLabel(ctx *gin.Context) {
 // @Produce json
 // @Param message body label_service.EditLabelStruct true "Label data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /label/edit [post]
 func (l *labelHandler) EditLabel(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -172,8 +178,10 @@ func (l *labelHandler) EditLabel(ctx *gin.Context) {
 // @Produce json
 // @Param message body label_service.ChatLabelStruct true "Label data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /unlabel/chat [post]
 func (l *labelHandler) ChatUnlabel(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -218,8 +226,10 @@ func (l *labelHandler) ChatUnlabel(ctx *gin.Context) {
 // @Produce json
 // @Param message body label_service.MessageLabelStruct true "Label data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /unlabel/message [post]
 func (l *labelHandler) MessageUnlabel(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -268,8 +278,10 @@ func (l *labelHandler) MessageUnlabel(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
-// @Router /label [get]
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Router /label/list [get]
 func (l *labelHandler) GetLabels(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
 

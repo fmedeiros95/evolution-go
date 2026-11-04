@@ -10,16 +10,12 @@ import InstanceSettings from '@/pages/InstanceSettings';
 import Messages from '@/pages/Messages';
 import Events from '@/pages/Events';
 import Settings from '@/pages/Settings';
-import LicenseCallback from '@/pages/LicenseCallback';
 import ApiTester from '@/pages/ApiTester';
 import useAuth from '@/hooks/useAuth';
 import { DarkModeProvider } from '@/contexts/ThemeContext';
 
 function App() {
-  const { isAuthenticated, licenseState } = useAuth();
-
-  // User must be authenticated AND have a valid license to access protected routes
-  const isFullyAuthorized = isAuthenticated && licenseState === 'licensed';
+  const { isAuthenticated } = useAuth();
 
   return (
     <DarkModeProvider>
@@ -32,14 +28,11 @@ function App() {
             {/* Manager Login - Public */}
             <Route
               path="/manager/login"
-              element={!isFullyAuthorized ? <Login /> : <Navigate to="/manager" replace />}
+              element={!isAuthenticated ? <Login /> : <Navigate to="/manager" replace />}
             />
 
-            {/* License Callback - Public (must be before the wildcard catch) */}
-            <Route path="/manager/license/callback" element={<LicenseCallback />} />
-
-            {/* Manager Protected Routes - requires auth + valid license */}
-            {isFullyAuthorized ? (
+            {/* Manager Protected Routes - requires authentication */}
+            {isAuthenticated ? (
               <Route path="/manager" element={<Layout />}>
               <Route index element={<Dashboard />} />
               <Route path="instances" element={<Instances />} />
@@ -50,7 +43,7 @@ function App() {
               <Route path="settings" element={<Settings />} />
             </Route>
             ) : (
-              /* Redirect to login if not authenticated or not licensed */
+              /* Redirect to login if not authenticated */
               <Route path="/manager/*" element={<Navigate to="/manager/login" replace />} />
             )}
 

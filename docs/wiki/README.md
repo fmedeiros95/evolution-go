@@ -4,8 +4,6 @@
 
 **Gateway de API WhatsApp de alta performance desenvolvido em Go**
 
-[![Documentação: 100%](https://img.shields.io/badge/Documenta%C3%A7%C3%A3o-100%25-success?style=flat-square)]()
-[![Endpoints: 79](https://img.shields.io/badge/Endpoints-79-blue?style=flat-square)]()
 [![Guias: 30](https://img.shields.io/badge/Guias-30-informational?style=flat-square)]()
 
 </div>
@@ -13,6 +11,12 @@
 ---
 
 Bem-vindo à documentação oficial do Evolution GO! Aqui você encontrará guias completos, referências de API e melhores práticas para integrar o WhatsApp às suas aplicações de forma profissional e escalável.
+
+## Fontes dos contratos
+
+O contrato executado está nas rotas, handlers, estruturas de requisição e middlewares Go. O Swagger é gerado a partir das anotações nesses arquivos. A coleção Postman na raiz contém exemplos de requisições. Os guias desta pasta explicam os fluxos e formatos alternativos.
+
+Para atualizar ou verificar esses arquivos, consulte [Manutenção da documentação](../CONTRIBUTING.md).
 
 ## 🚀 Começo Rápido
 

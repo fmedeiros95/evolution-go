@@ -570,7 +570,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"text\": \"mensagem de teste\",\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": \"557499879409@s.whatsapp.net\",\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
+              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"text\": \"mensagem de teste\",\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": [\"557499879409@s.whatsapp.net\"],\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -597,7 +597,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"text\": \"mensagem de teste https://agenciadgcode.com\",\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": \"557499879409@s.whatsapp.net\",\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
+              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"text\": \"mensagem de teste https://agenciadgcode.com\",\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": [\"557499879409@s.whatsapp.net\"],\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -651,7 +651,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"question\": \"teste de mensagem\",\r\n    \"maxAnswer\": 4,\r\n    \"options\": [\r\n        \"option1\",\r\n        \"option2\"\r\n    ],\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": \"557499879409@s.whatsapp.net\",\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
+              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"question\": \"teste de mensagem\",\r\n    \"maxAnswer\": 4,\r\n    \"options\": [\r\n        \"option1\",\r\n        \"option2\"\r\n    ],\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": [\"557499879409@s.whatsapp.net\"],\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -678,7 +678,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"sticker\": \"https://evolution-api.com/files/sticker.png\",\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": \"557499879409@s.whatsapp.net\",\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
+              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"sticker\": \"https://evolution-api.com/files/sticker.png\",\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": [\"557499879409@s.whatsapp.net\"],\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -705,7 +705,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"name\": \"Bora Bora\",\r\n    \"address\": \"French Polynesian\",\r\n    \"latitude\": -16.505538233564373,\r\n    \"longitude\": -151.7422770494996,\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": \"557499879409@s.whatsapp.net\",\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
+              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"name\": \"Bora Bora\",\r\n    \"address\": \"French Polynesian\",\r\n    \"latitude\": -16.505538233564373,\r\n    \"longitude\": -151.7422770494996,\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": [\"557499879409@s.whatsapp.net\"],\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -732,7 +732,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"vcard\": {\r\n        \"fullName\": \"Davidson Gomes\",\r\n        \"organization\": \"AtendAI\",\r\n        \"phone\": \"5511999999999\"\r\n    },\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": \"557499879409@s.whatsapp.net\",\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
+              "raw": "{\r\n    \"number\": \"5511999999999\",\r\n    \"vcard\": {\r\n        \"fullName\": \"Davidson Gomes\",\r\n        \"organization\": \"AtendAI\",\r\n        \"phone\": \"5511999999999\"\r\n    },\r\n    \"delay\": 1000\r\n    // \"mentionedJid\": [\"557499879409@s.whatsapp.net\"],\r\n    // \"mentionAll\": true\r\n    // \"quoted\": {\r\n    //     \"messageId\": \"3EB00E86C964FE604AF39A\",\r\n    //     \"participant\": \"557499879409@s.whatsapp.net\"\r\n    // }\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1164,6 +1164,70 @@
                 "user",
                 "profileStatus"
               ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Resolve LID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/user/lid",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "user",
+                "lid"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lid\": \"123456789012345@lid\",\n  \"groupJid\": \"120363000000000000@g.us\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Set Privacy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/user/privacy",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "user",
+                "privacy"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupAdd\": \"contacts\",\n  \"lastSeen\": \"contacts\",\n  \"status\": \"contacts\",\n  \"profile\": \"contacts\",\n  \"readReceipts\": \"all\",\n  \"callAdd\": \"all\",\n  \"online\": \"all\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           },
           "response": []

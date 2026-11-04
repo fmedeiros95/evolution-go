@@ -27,12 +27,12 @@ type communityService struct {
 }
 
 type CreateCommunityStruct struct {
-	CommunityName string `json:"communityName"`
+	CommunityName string `json:"communityName" validate:"required"`
 }
 
 type AddParticipantStruct struct {
-	CommunityJID string   `json:"communityJid"`
-	GroupJID     []string `json:"groupJid"`
+	CommunityJID string   `json:"communityJid" validate:"required"`
+	GroupJID     []string `json:"groupJid" validate:"required"`
 }
 
 func (c *communityService) ensureClientConnected(instanceId string) (*whatsmeow.Client, error) {

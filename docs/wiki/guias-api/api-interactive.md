@@ -53,10 +53,10 @@ apikey: SUA-CHAVE-API
 | `number` | string | ✅ Sim | Número do destinatário (formato: DDI + DDD + número) |
 | `description` | string | ✅ Sim | Texto do corpo da mensagem |
 | `buttons` | array | ✅ Sim | Array de botões (ver [Tipos de Botões](#tipos-de-botões)) |
-| `title` | string | ❌ Não | Título exibido em negrito acima do corpo |
-| `footer` | string | ❌ Não | Texto pequeno no rodapé. **Não enviar vazio** |
+| `title` | string | ✅ Sim | Título exibido em negrito acima do corpo |
+| `footer` | string | ✅ Sim | Texto pequeno no rodapé. **Não enviar vazio** |
 | `delay` | int32 | ❌ Não | Delay em milissegundos antes de enviar |
-| `mentionedJid` | string | ❌ Não | JID do usuário a mencionar |
+| `mentionedJid` | string[] | ❌ Não | Lista de JIDs a mencionar |
 | `mentionAll` | bool | ❌ Não | Mencionar todos os participantes (apenas grupos) |
 | `formatJid` | bool | ❌ Não | Formatar número automaticamente (padrão: true) |
 | `quoted` | object | ❌ Não | Mensagem a ser citada |
@@ -197,11 +197,11 @@ apikey: SUA-CHAVE-API
 | `number` | string | ✅ Sim | Número do destinatário |
 | `description` | string | ✅ Sim | Texto do corpo da mensagem |
 | `sections` | array | ✅ Sim | Array de seções contendo rows |
-| `buttonText` | string | ❌ Não | Texto do botão que abre a lista (padrão: "Ver Menu") |
-| `title` | string | ❌ Não | Título em negrito no topo |
-| `footerText` | string | ❌ Não | Texto do rodapé |
+| `buttonText` | string | ✅ Sim | Texto do botão que abre a lista; vazio é rejeitado pelo endpoint |
+| `title` | string | ✅ Sim | Título em negrito no topo |
+| `footerText` | string | ✅ Sim | Texto do rodapé |
 | `delay` | int32 | ❌ Não | Delay em milissegundos antes de enviar |
-| `mentionedJid` | string | ❌ Não | JID do usuário a mencionar |
+| `mentionedJid` | string[] | ❌ Não | Lista de JIDs a mencionar |
 | `mentionAll` | bool | ❌ Não | Mencionar todos (apenas grupos) |
 | `formatJid` | bool | ❌ Não | Formatar número automaticamente |
 | `quoted` | object | ❌ Não | Mensagem a ser citada |
@@ -357,7 +357,7 @@ apikey: SUA-CHAVE-API
 | `number` | string | ✅ Sim | Número do destinatário |
 | `cards` | array | ✅ Sim | Array de cards (mínimo 2, máximo ~10) |
 | `body` | string | ❌ Não | Texto do corpo principal (acima dos cards) |
-| `footer` | string | ❌ Não | Rodapé principal |
+| `footer` | string | ✅ Sim | Rodapé principal |
 | `delay` | int32 | ❌ Não | Delay em milissegundos antes de enviar |
 | `formatJid` | bool | ❌ Não | Formatar número automaticamente |
 | `quoted` | object | ❌ Não | Mensagem a ser citada |
@@ -372,7 +372,7 @@ apikey: SUA-CHAVE-API
 | `header.imageUrl` | string | ✅ Sim* | URL da imagem do card |
 | `header.videoUrl` | string | ❌ Não | URL de vídeo (alternativa à imagem) |
 | `body` | string | ✅ Sim | Texto do corpo do card |
-| `footer` | string | ❌ Não | Rodapé do card |
+| `footer` | string | ✅ Sim | Rodapé do card |
 | `buttons` | array | ❌ Não | Array de botões do card |
 
 > ⚠️ **Importante**: Todos os cards **devem** ter imagem (`imageUrl`) para o carrossel renderizar corretamente em todos os dispositivos. As imagens recebem thumbnail JPEG automaticamente para carregamento instantâneo.

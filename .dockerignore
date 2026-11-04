@@ -21,6 +21,9 @@ Thumbs.db
 # Build artifacts
 server
 build/
+**/node_modules/
+evolution-go-manager/dist/
+**/*.tsbuildinfo
 
 # Docker
 Dockerfile

@@ -36,8 +36,10 @@ type userHandler struct {
 // @Produce json
 // @Param message body user_service.CheckUserStruct true "User data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/info [post]
 func (u *userHandler) GetUser(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -77,8 +79,10 @@ func (u *userHandler) GetUser(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.CheckUserStruct true "User data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/check [post]
 func (u *userHandler) CheckUser(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -118,8 +122,10 @@ func (u *userHandler) CheckUser(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.GetAvatarStruct true "Avatar data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/avatar [post]
 func (u *userHandler) GetAvatar(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -163,7 +169,9 @@ func (u *userHandler) GetAvatar(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/contacts [get]
 func (u *userHandler) GetContacts(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -190,7 +198,9 @@ func (u *userHandler) GetContacts(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/privacy [get]
 func (u *userHandler) GetPrivacy(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -218,7 +228,10 @@ func (u *userHandler) GetPrivacy(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.PrivacyStruct true "Privacy data"
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Failure 400 {object} gin.H{error=string} "Invalid request"
 // @Router /user/privacy [post]
 func (u *userHandler) SetPrivacy(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -288,8 +301,10 @@ func (u *userHandler) SetPrivacy(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.BlockStruct true "Block data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/block [post]
 func (u *userHandler) BlockContact(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -334,8 +349,10 @@ func (u *userHandler) BlockContact(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.BlockStruct true "Block data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/unblock [post]
 func (u *userHandler) UnblockContact(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -379,7 +396,9 @@ func (u *userHandler) UnblockContact(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/blocklist [get]
 func (u *userHandler) GetBlockList(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -407,8 +426,10 @@ func (u *userHandler) GetBlockList(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.SetProfilePictureStruct true "Profile picture data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/profilePicture [post]
 func (u *userHandler) SetProfilePicture(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -455,8 +476,10 @@ func (u *userHandler) SetProfilePicture(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.SetProfilePictureStruct true "Profile name data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/profileName [post]
 func (u *userHandler) SetProfileName(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -503,8 +526,10 @@ func (u *userHandler) SetProfileName(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.SetProfilePictureStruct true "Profile status data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/profileStatus [post]
 func (u *userHandler) SetProfileStatus(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -551,8 +576,10 @@ func (u *userHandler) SetProfileStatus(ctx *gin.Context) {
 // @Produce json
 // @Param message body user_service.ResolveLidStruct true "Lid data"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /user/lid [post]
 func (u *userHandler) ResolveLid(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")

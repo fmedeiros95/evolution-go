@@ -28,7 +28,7 @@ type newsletterService struct {
 }
 
 type CreateNewsletterStruct struct {
-	Name        string `json:"name"`
+	Name        string `json:"name" validate:"required"`
 	Description string `json:"description"`
 }
 
@@ -37,7 +37,7 @@ type GetNewsletterStruct struct {
 }
 
 type GetNewsletterInviteStruct struct {
-	Key string `json:"key"`
+	Key string `json:"key" validate:"required"`
 }
 
 type GetNewsletterMessagesStruct struct {

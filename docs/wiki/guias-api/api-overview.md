@@ -10,7 +10,7 @@ http://localhost:4000
 
 ## Autenticação
 
-Todas as requisições precisam do header `apikey`:
+As rotas protegidas precisam do header `apikey`. `/server/ok` é público, assim como Manager, arquivos estáticos e Swagger.
 
 ```bash
 curl -H "apikey: SUA-CHAVE-API" http://localhost:4000/endpoint
@@ -98,6 +98,13 @@ Enviar e gerenciar mensagens
 - `POST /send/poll` - Enquete
 - `POST /send/button` - Botões interativos
 - `POST /send/list` - Lista de opções
+- `POST /send/carousel` - Carrossel interativo
+- `POST /send/status/text` - Status de texto
+- `POST /send/status/media` - Status com imagem ou vídeo
+
+### Resolver LID
+
+`POST /user/lid` exige o token da instância e um JSON com `lid`; `groupJid` é opcional. A resposta de sucesso contém `data.lid`, `data.phoneNumber` e `data.jid`.
 
 ### Gerenciar Mensagens
 Interagir com mensagens enviadas/recebidas

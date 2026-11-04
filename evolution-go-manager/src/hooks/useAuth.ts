@@ -14,15 +14,12 @@ function useAuth() {
     isAuthenticated: authStore.isAuthenticated,
     apiUrl: authStore.apiUrl,
     apiKey: authStore.apiKey,
-    licenseState: authStore.licenseState,
 
     // Methods
     login: authStore.login,
     logout: authStore.logout,
     setApiUrl: authStore.setApiUrl,
     setApiKey: authStore.setApiKey,
-    setLicenseState: authStore.setLicenseState,
-    checkLicense: authStore.checkLicense,
   };
 }
 

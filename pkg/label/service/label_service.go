@@ -32,19 +32,19 @@ type labelService struct {
 }
 
 type ChatLabelStruct struct {
-	JID     string `json:"jid"`
-	LabelID string `json:"labelId"`
+	JID     string `json:"jid" validate:"required"`
+	LabelID string `json:"labelId" validate:"required"`
 }
 
 type MessageLabelStruct struct {
-	JID       string `json:"jid"`
-	LabelID   string `json:"labelId"`
-	MessageID string `json:"messageId"`
+	JID       string `json:"jid" validate:"required"`
+	LabelID   string `json:"labelId" validate:"required"`
+	MessageID string `json:"messageId" validate:"required"`
 }
 
 type EditLabelStruct struct {
-	LabelID string `json:"labelId"`
-	Name    string `json:"name"`
+	LabelID string `json:"labelId" validate:"required"`
+	Name    string `json:"name" validate:"required"`
 	Color   int    `json:"color"`
 	Deleted bool   `json:"deleted"`
 }

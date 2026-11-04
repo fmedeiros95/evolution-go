@@ -24,7 +24,10 @@ type callHandler struct {
 // @Produce json
 // @Param message body call_service.RejectCallStruct true "Call data"
 // @Success 200 {object} gin.H "success"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Failure 400 {object} gin.H{error=string} "Invalid request"
 // @Router /call/reject [post]
 func (g *callHandler) RejectCall(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")

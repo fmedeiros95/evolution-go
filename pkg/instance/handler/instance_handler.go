@@ -45,8 +45,10 @@ type instanceHandler struct {
 // @Produce json
 // @Param instance body instance_service.CreateStruct true "Instance data with optional advanced settings"
 // @Success 200 {object} gin.H "Instance created successfully"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/create [post]
 func (i *instanceHandler) Create(ctx *gin.Context) {
 	var data *instance_service.CreateStruct
@@ -114,8 +116,10 @@ func (i *instanceHandler) Create(ctx *gin.Context) {
 // @Produce json
 // @Param instance body instance_service.ConnectStruct true "Instance data"
 // @Success 200 {object} gin.H "Instance connected successfully"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/connect [post]
 func (i *instanceHandler) Connect(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -157,7 +161,9 @@ func (i *instanceHandler) Connect(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "Instance reconnected successfully"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/reconnect [post]
 func (i *instanceHandler) Reconnect(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -184,7 +190,9 @@ func (i *instanceHandler) Reconnect(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "Instance disconnected successfully"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/disconnect [post]
 func (i *instanceHandler) Disconnect(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -213,7 +221,10 @@ func (i *instanceHandler) Disconnect(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "Instance logged out successfully"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Failure 400 {object} gin.H{error=string} "Invalid request"
 // @Router /instance/logout [delete]
 func (i *instanceHandler) Logout(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -242,7 +253,10 @@ func (i *instanceHandler) Logout(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "Instance status"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Failure 400 {object} gin.H{error=string} "Invalid request"
 // @Router /instance/status [get]
 func (i *instanceHandler) Status(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -269,7 +283,10 @@ func (i *instanceHandler) Status(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "Instance QR code"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Failure 400 {object} gin.H{error=string} "Invalid request"
 // @Router /instance/qr [get]
 func (i *instanceHandler) Qr(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -297,8 +314,10 @@ func (i *instanceHandler) Qr(ctx *gin.Context) {
 // @Produce json
 // @Param instance body instance_service.PairStruct true "Instance data"
 // @Success 200 {object} gin.H "Pairing code"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/pair [post]
 func (i *instanceHandler) Pair(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -337,7 +356,9 @@ func (i *instanceHandler) Pair(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} gin.H "All instances"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/all [get]
 func (i *instanceHandler) All(ctx *gin.Context) {
 	instances, err := i.instanceService.GetAll()
@@ -357,9 +378,11 @@ func (i *instanceHandler) All(ctx *gin.Context) {
 // @Produce json
 // @Param instanceId path string true "Instance Id"
 // @Success 200 {object} gin.H "Instance"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
-// @Router /instance/get/{instanceId} [get]
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Router /instance/info/{instanceId} [get]
 func (i *instanceHandler) Info(ctx *gin.Context) {
 	instanceId := ctx.Param("instanceId")
 
@@ -385,8 +408,10 @@ func (i *instanceHandler) Info(ctx *gin.Context) {
 // @Produce json
 // @Param instanceId path string true "Instance Id"
 // @Success 200 {object} gin.H "Instance deleted successfully"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/delete/{instanceId} [delete]
 func (i *instanceHandler) Delete(ctx *gin.Context) {
 	instanceId := ctx.Param("instanceId")
@@ -414,8 +439,10 @@ func (i *instanceHandler) Delete(ctx *gin.Context) {
 // @Param instanceId path string true "Instance id"
 // @Param proxy body instance_service.SetProxyStruct true "Proxy configuration"
 // @Success 200 {object} gin.H "Proxy set successfully"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/proxy/{instanceId} [post]
 func (i *instanceHandler) SetProxy(ctx *gin.Context) {
 	instanceId := ctx.Param("instanceId")
@@ -467,8 +494,10 @@ func (i *instanceHandler) SetProxy(ctx *gin.Context) {
 // @Produce json
 // @Param instanceId path string true "Instance id"
 // @Success 200 {object} gin.H "Proxy deleted successfully"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/proxy/{instanceId} [delete]
 func (i *instanceHandler) DeleteProxy(ctx *gin.Context) {
 	instanceId := ctx.Param("instanceId")
@@ -496,8 +525,10 @@ func (i *instanceHandler) DeleteProxy(ctx *gin.Context) {
 // @Param instanceId path string true "Instance Id"
 // @Param instance body instance_service.ForceReconnectStruct true "Instance data"
 // @Success 200 {object} gin.H "Instance force reconnected successfully"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security AdminApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/forcereconnect/{instanceId} [post]
 func (i *instanceHandler) ForceReconnect(ctx *gin.Context) {
 	instanceId := ctx.Param("instanceId")
@@ -538,6 +569,21 @@ type GetLogsQuery struct {
 	Limit     int    `form:"limit"`
 }
 
+// GetLogs returns persisted instance logs.
+// @Summary Get instance logs
+// @Tags Instance
+// @Produce json
+// @Param instanceId path string true "Instance ID"
+// @Param start_date query string false "Start date (YYYY-MM-DD); defaults to seven days ago"
+// @Param end_date query string false "End date (YYYY-MM-DD); defaults to today"
+// @Param level query string false "Log level filter"
+// @Param limit query int false "Maximum records; defaults to 100" default(100)
+// @Security AdminApiKey
+// @Success 200 {array} gin.H{timestamp=string,level=string,instance_id=string,message=string,metadata=object}
+// @Failure 400 {object} gin.H{error=string} "Invalid query"
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid admin API key"
+// @Failure 500 {object} gin.H{error=string} "Could not read logs"
+// @Router /instance/logs/{instanceId} [get]
 func (h *instanceHandler) GetLogs(c *gin.Context) {
 	instanceId := c.Param("instanceId")
 
@@ -581,9 +627,11 @@ func (h *instanceHandler) GetLogs(c *gin.Context) {
 // @Produce json
 // @Param instanceId path string true "Instance ID"
 // @Success 200 {object} instance_model.AdvancedSettings "Advanced settings retrieved successfully"
-// @Failure 400 {object} gin.H "Invalid instance ID"
-// @Failure 404 {object} gin.H "Instance not found"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Invalid instance ID"
+// @Failure 404 {object} gin.H{error=string} "Instance not found"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/{instanceId}/advanced-settings [get]
 func (h *instanceHandler) GetAdvancedSettings(c *gin.Context) {
 	instanceId := c.Param("instanceId")
@@ -611,9 +659,11 @@ func (h *instanceHandler) GetAdvancedSettings(c *gin.Context) {
 // @Param instanceId path string true "Instance ID"
 // @Param settings body instance_model.AdvancedSettings true "Advanced settings data"
 // @Success 200 {object} gin.H "Advanced settings updated successfully"
-// @Failure 400 {object} gin.H "Invalid request data"
-// @Failure 404 {object} gin.H "Instance not found"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Invalid request data"
+// @Failure 404 {object} gin.H{error=string} "Instance not found"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /instance/{instanceId}/advanced-settings [put]
 func (h *instanceHandler) UpdateAdvancedSettings(c *gin.Context) {
 	instanceId := c.Param("instanceId")

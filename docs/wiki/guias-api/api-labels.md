@@ -266,7 +266,7 @@ curl -X POST http://localhost:4000/unlabel/message \
 
 Obtém todas as labels da instância.
 
-**Endpoint**: `GET /label`
+**Endpoint**: `GET /label/list`
 
 **Headers**:
 ```
@@ -308,7 +308,7 @@ apikey: SUA-CHAVE-API
 
 **Exemplo cURL**:
 ```bash
-curl -X GET http://localhost:4000/label \
+curl -X GET http://localhost:4000/label/list \
   -H "apikey: SUA-CHAVE-API"
 ```
 
@@ -320,7 +320,7 @@ curl -X GET http://localhost:4000/label \
 
 ```bash
 # 1. Listar labels existentes
-LABELS=$(curl -s -X GET http://localhost:4000/label \
+LABELS=$(curl -s -X GET http://localhost:4000/label/list \
   -H "apikey: SUA-CHAVE-API")
 
 echo $LABELS | jq '.'
@@ -494,7 +494,7 @@ Limite-se a **10-15 labels** no máximo. Muitas labels dificultam a organizaçã
 Periodicamente, revise e delete labels não utilizadas:
 ```bash
 # Listar todas
-curl -s http://localhost:4000/label -H "apikey: KEY" | jq '.'
+curl -s http://localhost:4000/label/list -H "apikey: KEY" | jq '.'
 
 # Deletar obsoletas
 curl -X POST http://localhost:4000/label/edit \

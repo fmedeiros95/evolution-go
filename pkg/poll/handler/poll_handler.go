@@ -35,9 +35,11 @@ func NewPollHandler(pollService poll_service.PollService, loggerWrapper *logger_
 // @Produce json
 // @Param pollMessageId path string true "ID da mensagem da enquete"
 // @Success 200 {object} poll_model.PollResults
-// @Failure 400 {object} gin.H
-// @Failure 404 {object} gin.H
-// @Failure 500 {object} gin.H
+// @Failure 400 {object} gin.H{error=string}
+// @Failure 404 {object} gin.H{error=string}
+// @Failure 500 {object} gin.H{error=string}
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /polls/{pollMessageId}/results [get]
 func (h *PollHandler) GetPollResults(c *gin.Context) {
 	pollMessageID := c.Param("pollMessageId")

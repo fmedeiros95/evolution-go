@@ -30,8 +30,10 @@ type chatHandler struct {
 // @Produce json
 // @Param message body chat_service.BodyStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /chat/pin [post]
 func (c *chatHandler) ChatPin(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -75,8 +77,10 @@ func (c *chatHandler) ChatPin(ctx *gin.Context) {
 // @Produce json
 // @Param message body chat_service.BodyStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /chat/unpin [post]
 func (c *chatHandler) ChatUnpin(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -120,8 +124,10 @@ func (c *chatHandler) ChatUnpin(ctx *gin.Context) {
 // @Produce json
 // @Param message body chat_service.BodyStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /chat/archive [post]
 func (c *chatHandler) ChatArchive(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -165,8 +171,10 @@ func (c *chatHandler) ChatArchive(ctx *gin.Context) {
 // @Produce json
 // @Param message body chat_service.BodyStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /chat/unarchive [post]
 func (c *chatHandler) ChatUnarchive(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -210,8 +218,10 @@ func (c *chatHandler) ChatUnarchive(ctx *gin.Context) {
 // @Produce json
 // @Param message body chat_service.BodyStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /chat/mute [post]
 func (c *chatHandler) ChatMute(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -255,8 +265,10 @@ func (c *chatHandler) ChatMute(ctx *gin.Context) {
 // @Produce json
 // @Param message body chat_service.BodyStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
 // @Router /chat/unmute [post]
 func (c *chatHandler) ChatUnmute(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
@@ -300,9 +312,11 @@ func (c *chatHandler) ChatUnmute(ctx *gin.Context) {
 // @Produce json
 // @Param message body chat_service.HistorySyncRequestStruct true "Chat"
 // @Success 200 {object} gin.H "success"
-// @Failure 400 {object} gin.H "Error on validation"
-// @Failure 500 {object} gin.H "Internal server error"
-// @Router /chat/history-sync-request [post]
+// @Failure 400 {object} gin.H{error=string} "Error on validation"
+// @Failure 500 {object} gin.H{error=string} "Internal server error"
+// @Security InstanceApiKey
+// @Failure 401 {object} gin.H{error=string} "Missing or invalid API key"
+// @Router /chat/history-sync [post]
 func (c *chatHandler) HistorySyncRequest(ctx *gin.Context) {
 	getInstance := ctx.MustGet("instance")
 
