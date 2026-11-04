@@ -314,10 +314,7 @@ func (i instances) Disconnect(instance *instance_model.Instance) (*instance_mode
 			i.loggerWrapper.GetLogger(instance.Id).LogInfo("[%s] Disconnection successful", instance.Id)
 			i.killChannel[instance.Id] <- true
 
-			instance.Events = ""
-
-			err := i.instanceRepository.Update(instance)
-			if err != nil {
+			if err := markDisconnected(instance, i.instanceRepository.UpdateConnected); err != nil {
 				return instance, err
 			}
 

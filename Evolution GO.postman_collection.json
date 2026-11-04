@@ -420,7 +420,8 @@
                 "instance",
                 "disconnect"
               ]
-            }
+            },
+            "description": "Disconnects the session while preserving event subscriptions, webhook and producer settings."
           },
           "response": []
         },

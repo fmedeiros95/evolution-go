@@ -873,3 +873,7 @@ curl "http://localhost:4000/instance/status" \
 ## Consulta de QR e sessões existentes
 
 `GET /instance/qr` não reinicia uma sessão autenticada: retorna o erro `session already logged in`. Se o cliente já está conectado e aguardando pareamento, a consulta mantém esse cliente. Somente a ausência de cliente ou um cliente desconectado sem sessão autenticada pode iniciar a geração de QR. Consultar repetidamente o QR após parear não deve derrubar a sessão.
+
+## Desconectar sem perder inscrições
+
+`POST /instance/disconnect` marca a conexão como inativa e registra o motivo, preservando `subscribe`, webhook e produtores. Depois de reconectar, as inscrições existentes continuam disponíveis; não é necessário reenviá-las apenas porque a conexão foi encerrada.
