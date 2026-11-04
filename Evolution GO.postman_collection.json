@@ -1620,7 +1620,8 @@
                 "chat",
                 "history-sync"
               ]
-            }
+            },
+            "description": "Sends a peer request to the account own primary device. messageInfo.Chat identifies the requested conversation inside the payload. History arrives asynchronously through HistorySync events; subscribe to HISTORY_SYNC."
           },
           "response": []
         }

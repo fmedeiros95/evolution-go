@@ -465,3 +465,7 @@ curl -X POST http://localhost:4000/chat/pin ...
 ---
 
 **Documentação gerada para Evolution GO v1.0**
+
+## Destino da sincronização de histórico
+
+`POST /chat/history-sync` envia a solicitação como mensagem peer ao dispositivo principal da própria conta. O chat solicitado permanece no payload criado por `BuildHistorySyncRequest`; ele não é o destinatário do envio de controle. O contexto HTTP é propagado para permitir cancelamento. A resposta confirma o envio da solicitação, não a conclusão do backfill; acompanhe os eventos `HistorySync` com a inscrição `HISTORY_SYNC`.
