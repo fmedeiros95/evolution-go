@@ -151,3 +151,7 @@ socket.onmessage = ({ data }) => {
 Verifique, nesta ordem: token da instância, `subscribe`, transporte habilitado, destino acessível e logs de entrega. Os logs administrativos estão em `GET /instance/logs/:instanceId` e exigem `GLOBAL_API_KEY` no header `apikey`.
 
 Um exemplo neste guia descreve o formato do emissor; não substitui um teste integrado com WhatsApp, destino HTTP ou broker real.
+
+## Arquivamento de conversas
+
+A categoria `CHAT_PRESENCE` inclui o evento `Archive`. Seu `data` contém `JID`, `Timestamp`, `Action` e `FromFullSync`. A sincronização inicial também pode produzir esses eventos; o servidor monta o payload a partir de `events.Archive`, sem converter o ponteiro do evento diretamente para um mapa.
