@@ -389,6 +389,10 @@ func (w whatsmeowService) StartClient(cd *ClientData) {
 		}
 	}
 
+	if applyHandshakeVersion(version) {
+		w.loggerWrapper.GetLogger(cd.Instance.Id).LogInfo("[%s] Applied WhatsApp handshake version %d.%d.%d", cd.Instance.Id, version.Major, version.Minor, version.Patch)
+	}
+
 	// 🔒 FIX: Sempre criar logger, mesmo que WaDebug esteja vazio
 	// Usar "INFO" como nível mínimo para garantir que logs importantes apareçam
 	minLevel := w.config.WaDebug

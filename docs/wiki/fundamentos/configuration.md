@@ -556,3 +556,7 @@ EVENT_IGNORE_STATUS=true
 ---
 
 **Documentação Evolution GO v1.0**
+
+### Versão usada na conexão
+
+A versão obtida do WhatsApp Web, ou configurada por `WHATSAPP_VERSION_MAJOR`, `WHATSAPP_VERSION_MINOR` e `WHATSAPP_VERSION_PATCH`, é aplicada também ao handshake com `store.SetWAVersion`. Alterar apenas `DeviceProps.Version` não atualiza esse payload. Se a consulta falhar e não houver uma versão completa válida, o servidor mantém a versão da biblioteca; não fixa uma versão antiga como fallback. Um erro 405 ainda pode exigir atualizar a biblioteca ou a configuração.
