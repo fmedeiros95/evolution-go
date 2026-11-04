@@ -769,5 +769,29 @@ Após setup completo:
 
 **Dica**: Use `make help` para ver todos os comandos disponíveis!
 
+## Releases do fork
+
+O workflow `Sync Releases` publica em **fmedeiros95/evolution-go**, na área
+[Releases](https://github.com/fmedeiros95/evolution-go/releases). Ele executa
+somente nesse fork, após pushes na `develop` ou `main`, com o `GITHUB_TOKEN`
+automático. Não é necessário configurar `RELEASE_TOKEN`.
+
+- `develop`: pré-release `v<VERSION>-beta.<12 primeiros caracteres do commit>`.
+- `main`: release estável `v<VERSION>`. Incremente `VERSION` para uma nova release.
+- Tags existentes são preservadas: reexecutar o workflow não move tags nem
+  substitui arquivos publicados. O pacote também fica nos artefatos da execução
+  por 14 dias, inclusive quando a tag já existe.
+
+Antes de publicar, o workflow compila o Manager, roda os testes Go, `vet` e a
+conferência da documentação, e verifica a compilação do pacote de distribuição.
+O anexo `.tar.gz` contém os arquivos versionados, o Manager compilado e o código
+do `whatsmeow-lib` no commit fixado pelo submódulo. O arquivo `SHA256SUMS` permite
+verificar a integridade do download. Prefira esse anexo aos arquivos automáticos
+de código-fonte do GitHub, que não incluem o conteúdo dos submódulos.
+
+A publicação usa a API de Releases do próprio fork; não sincroniza árvores de
+código para outros repositórios e não publica imagens Docker. Os scripts antigos
+em `tools/build-dist/` não são usados por esse workflow.
+
 **Mantido por**: Equipe EvoAI Services  
 **Versão**: 1.0.0

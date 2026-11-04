@@ -2,144 +2,142 @@ name: Sync Releases
 
 on:
   push:
-    branches:
-      - main
-      - develop
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: releases-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  sync:
-    name: Build and Sync
+  build:
+    name: Build release package
+    if: github.repository == 'fmedeiros95/evolution-go'
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.release.outputs.tag }}
+      prerelease: ${{ steps.release.outputs.prerelease }}
     steps:
-      - name: Checkout dev repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
+      - uses: actions/setup-go@v5
         with:
-          go-version: '1.24'
+          go-version-file: go.mod
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - name: Set release target
-        id: target
-        run: |
-          if [ "${{ github.ref_name }}" = "main" ]; then
-            echo "repo=EvolutionAPI/evolution-go" >> $GITHUB_OUTPUT
-            echo "dir=dist/release" >> $GITHUB_OUTPUT
-            echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
-          else
-            echo "repo=EvolutionAPI/evolution-go-beta" >> $GITHUB_OUTPUT
-            echo "dir=dist/beta" >> $GITHUB_OUTPUT
-            echo "version=$(cat VERSION)-beta" >> $GITHUB_OUTPUT
-          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: evolution-go-manager/pnpm-lock.yaml
 
-      - name: Clone target repo
+      - name: Set release version
+        id: release
+        env:
+          RELEASE_BRANCH: ${{ github.ref_name }}
+        shell: bash
         run: |
-          git clone https://x-access-token:${{ secrets.RELEASE_TOKEN }}@github.com/${{ steps.target.outputs.repo }}.git ${{ steps.target.outputs.dir }}
-          cd ${{ steps.target.outputs.dir }}
-          find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
+          set -euo pipefail
+          version=$(tr -d '\r\n' < VERSION)
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          if [[ "$RELEASE_BRANCH" == develop ]]; then
+            version="${version}-beta.${GITHUB_SHA:0:12}"
+            echo 'prerelease=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'prerelease=false' >> "$GITHUB_OUTPUT"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
 
       - name: Build manager
+        working-directory: evolution-go-manager
         run: |
-          cd evolution-go-manager
-          pnpm install --frozen-lockfile 2>/dev/null || pnpm install
+          pnpm install --frozen-lockfile
           pnpm build
-          rm -rf ${{ github.workspace }}/manager/dist
-          mkdir -p ${{ github.workspace }}/manager/dist
-          cp -r dist/* ${{ github.workspace }}/manager/dist/
 
-      - name: Copy files
+      - name: Test application
         run: |
-          TARGET="${{ steps.target.outputs.dir }}"
+          go test ./...
+          go vet ./...
+          go run ./tools/check-api-docs
 
-          # Root files
-          for f in README.md LICENSE NOTICE TRADEMARKS.md CHANGELOG.md COMMANDS.md .env.example .dockerignore Dockerfile Makefile; do
-            [ -f "$f" ] && cp "$f" "$TARGET/"
-          done
-
-          echo "${{ steps.target.outputs.version }}" > "$TARGET/VERSION"
-          cp go.mod go.sum "$TARGET/"
-
-          cat > "$TARGET/.gitignore" << 'EOF'
-          .env
-          logs/*
-          build/
-          *.prof
-          coverage.*
-          .air.toml
-          .idea/
-          .vscode/
-          .DS_Store
-          EOF
-
-          # Directories
-          for dir in docker docs public; do
-            [ -d "$dir" ] && cp -r "$dir" "$TARGET/"
-          done
-
-          # GitHub Actions
-          [ -d "tools/build-dist/templates/.github" ] && cp -r tools/build-dist/templates/.github "$TARGET/"
-
-          # Manager
-          [ -d "manager/dist" ] && mkdir -p "$TARGET/manager" && cp -r manager/dist "$TARGET/manager/"
-
-          # cmd
-          mkdir -p "$TARGET/cmd/evolution-go"
-          cp cmd/evolution-go/main.go "$TARGET/cmd/evolution-go/"
-
-          # Application source
-          find pkg -name "*.go" | while read f; do
-            mkdir -p "$TARGET/$(dirname "$f")"
-            cp "$f" "$TARGET/$f"
-          done
-
-      - name: Setup whatsmeow-lib
+      - name: Package tracked source and pinned whatsmeow
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        shell: bash
         run: |
-          WHATSMEOW_SHA=$(cd ${{ github.workspace }}/whatsmeow-lib && git rev-parse HEAD)
-          echo "Pinning whatsmeow-lib to $WHATSMEOW_SHA (from dev repo)"
-          cd ${{ steps.target.outputs.dir }}
-          git rm -rf whatsmeow-lib 2>/dev/null || true
-          rm -rf whatsmeow-lib .gitmodules
-          : > .gitmodules
-          git add .gitmodules
-          git submodule add -f https://github.com/EvolutionAPI/whatsmeow.git whatsmeow-lib
-          cd whatsmeow-lib
-          git checkout "$WHATSMEOW_SHA"
-          cd ..
-          git add .gitmodules whatsmeow-lib
+          set -euo pipefail
+          package="evolution-go-${RELEASE_VERSION}"
+          stage="$RUNNER_TEMP/release/$package"
+          mkdir -p "$stage/whatsmeow-lib" dist
+          git archive HEAD | tar -x -C "$stage"
+          git -C whatsmeow-lib archive HEAD | tar -x -C "$stage/whatsmeow-lib"
+          # Ship the freshly built manager and embedded dependency, without Git metadata.
+          rm -rf "$stage/manager/dist"
+          rm -f "$stage/.gitmodules"
+          mkdir -p "$stage/manager"
+          cp -R evolution-go-manager/dist "$stage/manager/dist"
+          printf '%s\n' "$RELEASE_VERSION" > "$stage/VERSION"
+          (cd "$stage" && go build -ldflags "-X main.version=$RELEASE_VERSION" -o "$RUNNER_TEMP/release-check" ./cmd/evolution-go)
+          tar -czf "dist/$package.tar.gz" -C "$RUNNER_TEMP/release" "$package"
+          (cd dist && sha256sum "$package.tar.gz" > SHA256SUMS)
 
-      - name: Clean artifacts
-        run: |
-          TARGET="${{ steps.target.outputs.dir }}"
-          rm -rf "$TARGET/manager/dist/dist" "$TARGET/tools" "$TARGET/scripts" "$TARGET/CLAUDE.md" 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.release.outputs.tag }}
+          path: |
+            dist/*.tar.gz
+            dist/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 14
 
-      - name: Verify build
-        run: |
-          cd ${{ steps.target.outputs.dir }}
-          go build ./cmd/evolution-go/
+  publish:
+    name: Publish to fork releases
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Push to target repo
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.tag }}
+          path: dist
+
+      - name: Publish immutable release in this repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ needs.build.outputs.tag }}
+          PRERELEASE: ${{ needs.build.outputs.prerelease }}
+        shell: bash
         run: |
-          cd ${{ steps.target.outputs.dir }}
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          VERSION="${{ steps.target.outputs.version }}"
-          git add -A
-          git diff --staged --quiet && echo "No changes" && exit 0
-          git commit -m "sync: ${VERSION} from ${{ github.ref_name }} (${{ github.sha }})"
-          git tag -d "${VERSION}" 2>/dev/null || true
-          git push origin :refs/tags/${VERSION} 2>/dev/null || true
-          git tag -a "${VERSION}" -m "Release ${VERSION}"
-          git push origin main --tags
+          set -euo pipefail
+          # Re-runs never move tags or replace assets. Main needs a VERSION bump
+          # for another release; develop has one unique beta tag per commit.
+          if git show-ref --verify --quiet "refs/tags/$RELEASE_TAG"; then
+            echo "::notice::Tag $RELEASE_TAG already exists; keeping the published version."
+            exit 0
+          fi
+          (cd dist && sha256sum -c SHA256SUMS)
+          flags=(--latest)
+          if [[ "$PRERELEASE" == true ]]; then
+            flags=(--prerelease --latest=false)
+          fi
+          printf 'Source: %s/tree/%s\n\nIncludes the built Manager and the pinned whatsmeow source.\n' \
+            "$GITHUB_SERVER_URL/$GH_REPO" "$GITHUB_SHA" > "$RUNNER_TEMP/release-notes.md"
+          gh release create "$RELEASE_TAG" dist/*.tar.gz dist/SHA256SUMS \
+            --repo "$GH_REPO" --target "$GITHUB_SHA" --title "$RELEASE_TAG" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" "${flags[@]}"
